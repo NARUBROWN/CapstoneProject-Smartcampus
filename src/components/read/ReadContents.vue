@@ -12,7 +12,7 @@
     </dl>
     <p>
       {{ component.contents }}
-      <img v-bind:src="component.img" alt="본문">
+      <img v-bind:src="component.img" alt="본문 첨부 사진">
     </p>
   </div>
 </template>
@@ -24,19 +24,23 @@ export default {
   name: "ReadContents",
   data() {
     return {
+      // axios 를 통해 res.data 받은 객체를 대입 받을 곳
       contents: []
     };
   },
   mounted: function () {
     axios
-        .get("http://localhost:3000/content_data")
+        // 이전 페이지에서 받아온 code Parameter 와 함께 Server 에 요청을 보냄
+        // Express 에는 이미 해당 url 이 정의되어있음
+        .get("http://localhost:3000/" + this.$route.query.number + "/notice")
         .then(res => {
+          // data 에 정의된 contents 객체에 data 를 대입
           this.contents = res.data;
         })
         .catch(err => {
           console.log(err);
         });
-  }
+  },
 }
 </script>
 

@@ -5,27 +5,27 @@
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
     </div>
   </header>
-  <!--라우트 돠는 부분-->
+  <!--라우트 되는 부분-->
   <router-view/>
 </template>
 
 <style>
 
 :root {
-  --page-color: #f4f4f4;
-  --blue-card: #7cb3ff;
+  --page-color: #F2F2F7;
+  --blue-card: #0A84FF;
   --blue-card-shadow: #0054c9;
   --blue-card-hr: white;
   --blue-card-text: white;
   --text-color: #454545;
   --card: white;
-  --notice-list-background: #fcfcfc;
+  --notice-list-background: #F2F2F7;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --page-color: #212121;
-    --blue-card: #57aeff;
+    --blue-card: #0A84FF;
     --blue-card-shadow: #0054c9;
     --blue-card-hr: white;
     --blue-card-text: white;
