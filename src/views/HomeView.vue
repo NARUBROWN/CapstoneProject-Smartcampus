@@ -3,10 +3,6 @@
   <NoticeSection></NoticeSection>
   <ShortCut></ShortCut>
   <AllServiceList></AllServiceList>
-  <footer>
-    <p>Copyright © 2022 NARUBROWN. All right reserved</p>
-    <p>JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
-  </footer>
 </template>
 
 <script>
@@ -22,6 +18,9 @@ export default {
     NoticeSection,
     ShortCut,
     AllServiceList,
+  },
+  created() {
+    localStorage.clear();
   }
 }
 </script>

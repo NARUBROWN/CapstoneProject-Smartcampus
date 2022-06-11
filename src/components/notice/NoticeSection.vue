@@ -11,8 +11,14 @@
         </dt>
         <dd>{{ notice.writeday }}</dd>
       </div>
-      <a @click="plus()">{{ plusRs }}</a>
     </dl>
+  </div>
+  <div class="underButtonsArea">
+    <div class="underButtons">
+      <button @click="first()" v-if="pageNumLocal > 1">첫 페이지</button>
+      <button @click="back()" v-if="pageNumLocal > 1">이전 페이지</button>
+      <button @click="plus()">다음 페이지</button>
+    </div>
   </div>
 </template>
 
@@ -24,12 +30,27 @@ export default {
   data() {
     return {
       new_notices: [],
-      plusRs: 1
+      pageNumLocal: JSON.parse(localStorage.getItem("pageNum"))
     };
   },
-  //mounted 이벤트 어쩌고 저쩌고...
+  // 첫 페이지 로드
+  created() {
+    axios.get('http://localhost:3000/all_board')
+        .then(res => {
+          // 요청 성공 코드 출력
+          console.log(`status code: ${res.status}`);
+          this.new_notices = res.data;
+        })
+        .catch(err => {
+          // 오류 코드 출력
+          console.log(err);
+        })
+
+  },
+  //쿼리로 넘어온 페이지로 넘겨줌
   mounted: function () {
     axios
+        // 쿼리로 넘어온 페이지 넘버를 받음
         .get("http://localhost:3000/all_board/" + this.$route.query.pageNum + "/board")
         .then(res => {
           this.new_notices = res.data;
@@ -39,11 +60,12 @@ export default {
         });
   },
   methods: {
+
+    // 글 불러오는 기능
     // inValues 함수를 정의 Parameter 로 code를 받아 게시판 code 정보를 가지고 옴
     inValues(a) {
       // data 에 정의된 number 에 a를 대입
       this.number = a;
-
       // axios 를 통해 GET 요청을 보냄
       // con 에 parameter 로 게시판 code 를 담아서 보냄
       // 이제 express 에서 parameter 를 받아 사용자가 요청한 게시판을 크롤링해줌
@@ -59,26 +81,58 @@ export default {
             console.log(err);
           })
     },
-    plus() {
-      this.plusRs = this.plusRs + 1;
-      let pageNum = this.plusRs;
 
+    // 액션시 새로운 페이지를 불러오는 기능
+    plus() {
+      // pageNum 에 더해진 값을 사용하기
+      // 첫 페이지가 두번 나오는 걸 방지하기 위해서 값이 null 일 경우에는 2를 더해줌
+      let pageNum
+      if (this.pageNumLocal === null) {
+        pageNum = 2;
+      } else {
+        pageNum = this.pageNumLocal + 1;
+      }
+
+      // 서버에 새로운 페이지 목록을 요청보내기
       axios.get('http://localhost:3000/all_board/' + pageNum)
           .then(res => {
             // 요청 성공 코드 출력
             console.log(`status code: ${res.status}`);
             // 요청 성공시 /read-contents 페이지로 Parameter 로 게시판 code 와 함께 이동시킴
             this.$router.push('/notice?pageNum=' + pageNum);
-            location.reload();
-
+            this.$router.go();
             // 값이 새로고침 할때 유지되지 않는 부분 수정해야 함.
             // 메인화면에서 이 페이지로 올때 값이 없어서 페이지를 못 불러오는 문제도 해결해야 함
+            localStorage.setItem("pageNum", JSON.stringify(pageNum));
           })
           .catch(err => {
             // 오류 코드 출력
             console.log(err);
           })
+    },
+
+    // 뒤로가는 기능
+    back() {
+      // 브라우저 스토리지에 저장된 pageNumLocal 을 -1
+      let backPage = this.pageNumLocal - 1;
+      this.$router.push('/notice?pageNum=' + backPage);
+      // 브라우저 스토리지에 -1된 값을 저장
+      localStorage.setItem("pageNum", JSON.stringify(backPage));
+      // 새로고침
+      this.$router.go();
+    },
+
+    // 처음 목록으로 가는 기능
+    first() {
+      // 브라우저 스토리지에 저장된 pageNumLocal 을 1로 변경해주
+      let firstPage = 1;
+      this.$router.push('/notice?pageNum=' + firstPage);
+      // 브라우저 스토리지에 1 값을 저장
+      localStorage.setItem("pageNum", JSON.stringify(firstPage));
+      // 새로고침
+      this.$router.go();
     }
+
   },
 }
 </script>
@@ -149,6 +203,25 @@ export default {
 .card > dl > .listDeco > dd {
   margin: 1px 0 0 40px;
   font-size: 9pt;
+}
+
+.underButtonsArea {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.underButtons > button {
+  margin: 10px 5px 0 5px;
+  width: 27%;
+  height: 30px;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+  color: var(--blue-card-text);
+  background: var(--blue-card);
+  font-weight: bolder;
+  font-size: 13px;
 }
 
 

@@ -7,6 +7,10 @@
   </header>
   <!--라우트 되는 부분-->
   <router-view/>
+  <footer>
+    <p>Copyright © 2022 김원정(NARUBROWN). All right reserved <br><br>
+      JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
+  </footer>
 </template>
 
 <style>
@@ -67,4 +71,18 @@ header {
   width: 15%;
 }
 
+footer {
+  margin: 30px 0 0 0;
+  padding: 30px 0 30px 0;
+  text-align: center;
+  color: var(--text-color);
+  background: #212121;
+}
+
+footer > p {
+  padding: 30px 0 20px 0;
+  color: var(--blue-card-text);
+  font-weight: bolder;
+  font-size: 10pt;
+}
 </style>

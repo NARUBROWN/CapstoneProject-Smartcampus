@@ -6,14 +6,24 @@
       <h3>{{ component.date }}</h3>
     </div>
     <dl>
-      <div class="listDeco">
-        <dt><a v-bind:href="component.fileLink">{{ component.fileName }}</a></dt>
+      <!-- component.fileLink 가 https://jeiu.ac.kr/undefined 일 경우 태그를 표시하지 않음 -->
+      <div class="listDeco" v-if="component.fileLink !== 'https://jeiu.ac.krundefined'">
+        <dt><a v-bind:href="component.fileLink">첨부파일 : {{ component.fileName }}</a></dt>
       </div>
     </dl>
+    <br>
     <p>
       {{ component.contents }}
-      <img v-bind:src="component.img" alt="본문 첨부 사진">
     </p>
+    <div class="imgBox">
+      <!-- component.img 가 https://jeiu.ac.kr/undefined 일 경우 태그를 표시하지 않음 -->
+      <img v-if="component.img !== 'https://jeiu.ac.krundefined'" v-bind:src="component.img" alt="본문 첨부 사진">
+    </div>
+  </div>
+  <div class="underButtonsArea">
+    <div class="underButtons">
+      <button @click="back()">뒤로가기</button>
+    </div>
   </div>
 </template>
 
@@ -41,6 +51,11 @@ export default {
           console.log(err);
         });
   },
+  methods: {
+    back() {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 
@@ -102,11 +117,40 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 10pt;
+  padding: 0 0 0 15px;
 }
 
 .card > dl > .listDeco > dd {
   margin: 1px 0 0 40px;
   font-size: 9pt;
+}
+
+.imgBox {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.imgBox > img {
+  width: 80%;
+}
+
+.underButtonsArea {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.underButtons > button {
+  margin: 10px 5px 0 5px;
+  width: 27%;
+  height: 30px;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+  color: var(--blue-card-text);
+  background: var(--blue-card);
+  font-weight: bolder;
+  font-size: 13px;
 }
 
 </style>
