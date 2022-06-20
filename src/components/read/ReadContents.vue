@@ -42,7 +42,7 @@ export default {
     axios
         // 이전 페이지에서 받아온 code Parameter 와 함께 Server 에 요청을 보냄
         // Express 에는 이미 해당 url 이 정의되어있음
-        .get("http://localhost:3000/" + this.$route.query.number + "/notice")
+        .get(process.env.VUE_APP_IP + "/" + this.$route.query.number + "/notice")
         .then(res => {
           // data 에 정의된 contents 객체에 data 를 대입
           this.contents = res.data;

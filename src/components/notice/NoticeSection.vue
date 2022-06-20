@@ -35,7 +35,7 @@ export default {
   },
   // 첫 페이지 로드
   created() {
-    axios.get('http://localhost:3000/all_board')
+    axios.get(process.env.VUE_APP_IP + '/all_board')
         .then(res => {
           // 요청 성공 코드 출력
           console.log(`status code: ${res.status}`);
@@ -51,7 +51,7 @@ export default {
   mounted: function () {
     axios
         // 쿼리로 넘어온 페이지 넘버를 받음
-        .get("http://localhost:3000/all_board/" + this.$route.query.pageNum + "/board")
+        .get(process.env.VUE_APP_IP + "/all_board/" + this.$route.query.pageNum + "/board")
         .then(res => {
           this.new_notices = res.data;
         })
@@ -69,7 +69,7 @@ export default {
       // axios 를 통해 GET 요청을 보냄
       // con 에 parameter 로 게시판 code 를 담아서 보냄
       // 이제 express 에서 parameter 를 받아 사용자가 요청한 게시판을 크롤링해줌
-      axios.get('http://localhost:3000/con/' + a)
+      axios.get(process.env.VUE_APP_IP + '/con/' + a)
           .then(res => {
             // 요청 성공 코드 출력
             console.log(`status code: ${res.status}`);
@@ -94,7 +94,7 @@ export default {
       }
 
       // 서버에 새로운 페이지 목록을 요청보내기
-      axios.get('http://localhost:3000/all_board/' + pageNum)
+      axios.get(process.env.VUE_APP_IP + '/all_board/' + pageNum)
           .then(res => {
             // 요청 성공 코드 출력
             console.log(`status code: ${res.status}`);

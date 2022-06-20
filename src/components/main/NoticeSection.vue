@@ -32,12 +32,12 @@ export default {
   mounted:
       function () {
         axios
-            .get("http://localhost:3000/board")
+            .get(process.env.VUE_APP_IP + "/board")
             .then(res => {
               this.notices = res.data;
             })
             .catch(err => {
-              console.log(err);
+              console.log(err + "게시판 목록 불러오기 실패");
             });
       },
   methods: {
@@ -49,7 +49,7 @@ export default {
       // axios 를 통해 GET 요청을 보냄
       // con 에 parameter 로 게시판 code 를 담아서 보냄
       // 이제 express 에서 parameter 를 받아 사용자가 요청한 게시판을 크롤링해줌
-      axios.get('http://localhost:3000/con/' + a)
+      axios.get(process.env.VUE_APP_IP + '/con/' + a)
           .then(res => {
             // 요청 성공 코드 출력
             console.log(`status code: ${res.status}`);
@@ -58,7 +58,7 @@ export default {
           })
           .catch(err => {
             // 오류 코드 출력
-            console.log(err);
+            console.log(err + " main/noticeSection ");
           })
     }
   },
