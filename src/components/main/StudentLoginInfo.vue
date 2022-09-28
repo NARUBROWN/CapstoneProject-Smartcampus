@@ -1,7 +1,7 @@
 <template>
   <router-link to="/student-information">
-    <div class="loginInfo">
-      <h1>김원정</h1>
+    <div class="loginInfo" v-for="user in user_data" v-bind:key="user">
+      <h1>{{ user.author }}</h1>
       <h2>학생</h2>
       <hr>
       <p>IT학부 AI컴퓨터정보과</p>
@@ -12,8 +12,32 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "StudentLoginInfo"
+  name: "StudentLoginInfo",
+  data() {
+    return {
+      user_data: []
+    };
+  },
+  created() {
+    this.req_data();
+  },
+  methods: {
+    // 백엔드에 데이터 요청하는 메소드
+    async req_data() {
+      try {
+        // 백엔드에 요청된 데이터를 가져오기
+        let user = await axios.get(process.env.VUE_APP_IP + "/proflie");
+        console.log('user 데이터를 요청하였습니다. ');
+        this.user_data = user.data;
+        console.log(this.user_data)
+      } catch (e) {
+        console.log("새로운 데이터를 불러오지 못했습니다. " + e);
+      }
+    }
+  }
 }
 </script>
 

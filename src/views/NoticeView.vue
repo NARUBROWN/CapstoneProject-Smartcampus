@@ -1,9 +1,8 @@
 <template>
   <div>
     <h1>공지사항</h1>
-
   </div>
-  <NoticeSection></NoticeSection>
+    <NoticeSection></NoticeSection>
 </template>
 
 <script>
@@ -13,8 +12,13 @@ export default {
   name: "NoticeView",
   components: {
     NoticeSection
-  }
+  },
+  data() {
+    return {}
+  },
+  methods: {}
 }
+
 </script>
 
 <style scoped>

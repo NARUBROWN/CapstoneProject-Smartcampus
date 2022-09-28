@@ -37,7 +37,7 @@ export default {
               this.notices = res.data;
             })
             .catch(err => {
-              console.log(err + "게시판 목록 불러오기 실패");
+              console.log(err + " 게시판 목록 불러오기 실패");
             });
       },
   methods: {

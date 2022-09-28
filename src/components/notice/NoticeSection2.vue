@@ -1,6 +1,7 @@
 <template>
   <div class="card">
-    <h1>{{ pageNumLocal }}번째 페이지</h1>
+    <h1>전체</h1>
+    <a>{{ pageNumLocal }}페이지</a>
     <dl>
       <!-- JSON 객체를 받아와서 v-for 로 데이터를 씌워줌-->
       <div class="listDeco" v-for="notice in new_notices" v-bind:key="notice">

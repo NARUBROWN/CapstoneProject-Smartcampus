@@ -86,6 +86,7 @@ export default {
   margin: 0 auto;
   width: 90%;
   padding: 0 0 3% 0;
+  white-space: pre-line;
 }
 
 .articleType > a {
@@ -131,7 +132,7 @@ export default {
 }
 
 .imgBox > img {
-  width: 80%;
+  width: 90%;
 }
 
 .underButtonsArea {
