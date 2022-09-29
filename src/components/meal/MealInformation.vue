@@ -1,26 +1,47 @@
 <template>
   <div class="card">
-    <h1>오늘의 식단</h1>
+    <h1>캠퍼스 구분</h1>
+    <div class="ButtonsContent">
+      <div class="ButtonsArea">
+        <div class="Buttons">
+          <button>송림캠퍼스</button>
+          <button>송도캠퍼스</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mealAlert">
+    <p>
+      ⚠ 식당은 오후 한시까지 운영됩니다.
+    </p>
+  </div>
+
+  <div class="card">
+    <h1>오늘의 점심</h1>
+    <div class="articleType"><img src="../../assets/meal/main.png" alt="main"></div>
     <dl>
       <div class="listDeco">
-        <div class="articleType" style="background: #FF3F14;"><a>학사</a></div>
-        <dt><a href="#">재학생 및 복학예정자 등록금 3차 납부 안내</a></dt>
-        <dd>2022/03/07</dd>
+        <dt>순살돈가스</dt>
+        <dd>돈육, 닭: 국내산</dd>
       </div>
+    </dl>
+    <div class="articleType"><img src="../../assets/meal/tea.png" alt="main"></div>
+    <dl>
       <div class="listDeco">
-        <div class="articleType" style="background: #F2B705;"><a>인사</a></div>
-        <dt>2022학년도 1학기 겸임교원 및 강사 초빙 공고(2차)</dt>
-        <dd>2022/02/09</dd>
+        <dt>숭늉</dt>
+        <dd>쌀: 국산</dd>
       </div>
+    </dl>
+    <div class="articleType"><img src="../../assets/meal/noodle.png" alt="main"></div>
+    <dl>
       <div class="listDeco">
-        <div class="articleType" style="background: #FF3F14;"><a>학사</a></div>
-        <dt>코로나19 확산 방지 안내</dt>
-        <dd>2022/05/12</dd>
-      </div>
-      <div class="listDeco">
-        <div class="articleType" style="background: #67C904;"><a>시설</a></div>
-        <dt>교내 Wifi 서비스 안내</dt>
-        <dd>2022/03/07</dd>
+        <dt>쇠소기 미역국</dt>
+        <dd>소고기: 호주산, 미역: 국내산</dd>
+        <dt>배추김치</dt>
+        <dd>배추, 고춧가루: 국내</dd>
+        <dt>쌀밥</dt>
+        <dd>쌀: 국내산</dd>
       </div>
     </dl>
   </div>
@@ -50,11 +71,40 @@ export default {
   font-weight: bold;
 }
 
+.ButtonsArea {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.Buttons > button {
+  margin: 10px 5px 0 5px;
+  width: 37.5%;
+  height: 35px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--blue-card-text);
+  background: var(--blue-card);
+  font-weight: bolder;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.mealAlert{
+  text-align: center;
+}
+
+p{
+  color: var(--text-color);
+  font-size: 10pt;
+  font-weight: normal;
+}
+
 .articleType {
   float: left;
   border-radius: 10px;
   margin: 0 3% 0 3%;
-  padding: 5px 0 5px 0;
+  padding: 15px 45px 5px 10px;
   width: 30px;
   height: 20px;
   text-align: center;
@@ -68,15 +118,18 @@ export default {
   font-weight: bold;
 }
 
+.articleType img{
+  width: 30px;
+}
+
 .card > dl {
-  margin: 0 auto;
-  width: 90%;
+  margin-left: 70px;
+  width: 75%;
   text-decoration-color: #454545;
   font-weight: normal;
 }
 
 .card > dl > .listDeco {
-  margin: 5px;
   padding: 3% 0 3% 0;
   border-radius: 10px;
   background: var(--notice-list-background);
@@ -84,16 +137,14 @@ export default {
 
 .card > dl > .listDeco > dt {
   width: 80%;
-  margin: 2px 0 0 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 10pt;
+  margin: 2px 0 0 41px;
+  font-size: 12pt;
+  font-weight: bold;
 }
 
 .card > dl > .listDeco > dd {
-  margin: 1px 0 0 40px;
-  font-size: 9pt;
+  font-size: 6pt;
+  margin-right: 40px;
 }
 
 </style>
