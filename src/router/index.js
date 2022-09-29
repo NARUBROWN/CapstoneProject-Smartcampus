@@ -5,6 +5,9 @@ import NoticeView from "@/views/NoticeView";
 import StudentInformationView from "@/views/StudentInformationView";
 import MealInformationView from "@/views/MealInformationView";
 import ReadView from "@/views/ReadView";
+import SchoolIntroductionView from "@/views/SchoolIntroductionView";
+import AcademicScheduleView from "@/views/AcademicScheduleView";
+import BusScheduleView from "@/views/BusScheduleView";
 
 const routes = [
   {
@@ -39,6 +42,21 @@ const routes = [
     path: '/read-contents',
     name: 'read-contents',
     component: ReadView
+  },
+  {
+    path: '/introduction',
+    name: 'introduction',
+    component: SchoolIntroductionView
+  },
+  {
+    path: '/academic-schedule',
+    name: 'academic-schedule',
+    component: AcademicScheduleView
+  },
+  {
+    path: '/bus-schedule',
+    name: 'bus-schedule',
+    component: BusScheduleView
   }
 ]
 

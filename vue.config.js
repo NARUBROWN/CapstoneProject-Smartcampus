@@ -7,3 +7,15 @@ module.exports = defineConfig({
 module.exports = {
   outputDir: path.resolve(__dirname, "../jeiu_express/public")
 } */
+
+module.exports = {
+  css : {
+      loaderOptions : {
+          sass : {
+              additionalData: `
+                @import "@/assets/scss/reset.scss";
+              `
+          }
+      }
+  }
+}

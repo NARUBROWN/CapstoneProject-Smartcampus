@@ -4,7 +4,7 @@
     <table class="shortCutTable">
       <tr>
         <td class="shortCut">
-          <router-link to="/"><h2>학교소개</h2><h6>About University</h6></router-link>
+          <router-link to="/introduction"><h2>학교소개</h2><h6>About University</h6></router-link>
         </td>
         <td class="shortCut">
           <router-link to="/meal-information"><h2>교내식당</h2><h6>Cafeteria</h6></router-link>
@@ -12,10 +12,10 @@
       </tr>
       <tr>
         <td class="shortCut">
-          <router-link to="/"><h2>학사 일정</h2><h6>Academic Schedule</h6></router-link>
+          <router-link to="/academic-schedule"><h2>학사 일정</h2><h6>Academic Schedule</h6></router-link>
         </td>
         <td class="shortCut">
-          <router-link to="/"><h2>버스 시간표</h2><h6>Bus Schedule</h6></router-link>
+          <router-link to="/bus-schedule"><h2>버스 시간표</h2><h6>Bus Schedule</h6></router-link>
         </td>
       </tr>
     </table>
