@@ -35,7 +35,14 @@ export default {
   data() {
     return {
       // axios 를 통해 res.data 받은 객체를 대입 받을 곳
-      contents: []
+      contents: [{
+        title: "",
+        view: 0,
+        date: "",
+        fileName: "",
+        contents: "",
+        img: ""
+      }]
     };
   },
   mounted: function () {

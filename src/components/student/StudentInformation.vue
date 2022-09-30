@@ -1,17 +1,18 @@
 <template>
-  <div class="stuCard">
+  <div class="stuCard" v-for="user in user_data" v-bind:key="user">
     <div>
-      <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필">
+      <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
+      <br>
     </div>
-    <h1>김원정</h1>
-    <h2>학생</h2>
+    <h1>{{ user.name }}</h1>
+    <h2>{{ user.rank }}</h2>
     <hr>
-    <p>IT학부 AI컴퓨터정보과</p>
+    <p>{{ user.department }}</p>
     <a><img class="stuImg" src="@/assets/student/stuIcon.png" alt="학생증 아이콘"></a>
     <h3>학생카드</h3>
     <div>
-      <img class="barcode" src="@/assets/student/barcode.png" alt="바코드">
-      <h3>2018141009</h3>
+      <!-- <img class="barcode" src="@/assets/student/barcode.png" alt="바코드"> -->
+      <h3>{{ user.stu_number }}</h3>
     </div>
     <div>
       <img class="jeiuLogo" src="@/assets/student/logoWhite.png" alt="학교 로고">
@@ -20,8 +21,37 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "StudentInformation"
+  name: "StudentInformation",
+  data() {
+    return {
+      user_data: [{
+        name: "",
+        rank: "",
+        department: "",
+        stu_number: ""
+      }]
+    };
+  },
+  created() {
+    this.req_data();
+  },
+  methods: {
+    // 백엔드에 데이터 요청하는 메소드
+    async req_data() {
+      try {
+        // 백엔드에 요청된 데이터를 가져오기
+        let user = await axios.get(process.env.VUE_APP_IP + "/proflie");
+        console.log('user 데이터를 요청하였습니다. ');
+        this.user_data = user.data;
+        console.log(this.user_data)
+      } catch (e) {
+        console.log("새로운 데이터를 불러오지 못했습니다. " + e);
+      }
+    }
+  }
 }
 </script>
 

@@ -28,25 +28,37 @@
       </tr>
       <tr>
         <td class="allServiceIcon">
-          <router-link to="/"><img src="@/assets/main/service_icon/resume.png" alt="자소서작성시스템"></router-link>
+          <router-link to="/"></router-link>
         </td>
         <td class="allServiceIcon">
-          <router-link to="/"><img src="@/assets/main/service_icon/vision.png" alt="2030비전"></router-link>
+          <router-link to="/"></router-link>
         </td>
         <td class="allServiceIcon">
-          <router-link to="/"><img src="@/assets/main/service_icon/scholarship.png" alt="장학제도"></router-link>
+          <router-link to="/"></router-link>
         </td>
         <td class="allServiceIcon">
-          <router-link to="/"><img src="@/assets/main/service_icon/guideMap.png" alt="오시는 길"></router-link>
+          <router-link to="/"></router-link>
         </td>
-      </tr>
-      <tr>
-        <td class="allServiceName"><h5>자소서 작성<br>시스템</h5></td>
-        <td class="allServiceName"><h5>비전 2030</h5></td>
-        <td class="allServiceName"><h5>장학제도</h5></td>
-        <td class="allServiceName"><h5>오시는 길</h5></td>
       </tr>
     </table>
+    <div class="list">
+      <div class="shortCut">
+        <img class="listImg" src="@/assets/main/service_icon/resume.png" alt="자소서작성시스템">
+        <router-link to="/"><h2>자소서 작성 시스템</h2></router-link>
+      </div>
+      <div class="shortCut">
+        <img class="listImg" src="@/assets/main/service_icon/vision.png" alt="2030비전">
+        <router-link to="/"><h2>비전 2030</h2></router-link>
+      </div>
+      <div class="shortCut">
+        <img class="listImg" src="@/assets/main/service_icon/scholarship.png" alt="장학제도">
+        <router-link to="/"><h2>장학제도</h2></router-link>
+      </div>
+      <div class="shortCut">
+        <img class="listImg" src="@/assets/main/service_icon/guideMap.png" alt="오시는 길">
+        <router-link to="/"><h2>오시는 길</h2></router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -99,6 +111,32 @@ img {
   margin: 0 0 10px 0;
   font-size: 8pt;
   font-weight: normal;
+}
+
+.list {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.shortCut {
+  margin: 0 5px 5px 0;
+  border-radius: 10px;
+  width: 100%;
+  height: 10%;
+  background: var(--blue-card);
+  color: var(--blue-card-text);
+  display: flex;
+}
+
+.listImg {
+  margin: 10px 20px 10px 10px;
+  width: 6%;
+}
+
+.shortCut > a > h2 {
+  font-size: 10pt;
+  width: 100px;
+  padding-top: 8px;
 }
 
 </style>

@@ -1,14 +1,18 @@
 <template>
-  <router-link to="/student-information">
+  <router-link to="/student-information" v-if="serverState">
     <div class="loginInfo" v-for="user in user_data" v-bind:key="user">
-      <h1>{{ user.author }}</h1>
-      <h2>학생</h2>
+      <h1>{{ user.name }}</h1>
+      <h2>{{ user.rank }}</h2>
       <hr>
-      <p>IT학부 AI컴퓨터정보과</p>
+      <p>{{ user.department }}</p>
       <img src="@/assets/main/student/stuIcon.png" alt="학생증 아이콘">
       <h3>학생카드</h3>
     </div>
   </router-link>
+  <div class="errorCard" v-if="errorComponent">
+    <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
+  </div>
+
 </template>
 
 <script>
@@ -18,7 +22,9 @@ export default {
   name: "StudentLoginInfo",
   data() {
     return {
-      user_data: []
+      user_data: [],
+      serverState: true,
+      errorComponent: false,
     };
   },
   created() {
@@ -33,8 +39,9 @@ export default {
         console.log('user 데이터를 요청하였습니다. ');
         this.user_data = user.data;
         console.log(this.user_data)
-      } catch (e) {
-        console.log("새로운 데이터를 불러오지 못했습니다. " + e);
+      } catch {
+        this.serverState = false;
+        this.errorComponent = true;
       }
     }
   }
@@ -42,6 +49,22 @@ export default {
 </script>
 
 <style scoped>
+
+.card {
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 95.56%;
+  padding: 10px 0 10px 0;
+  background-color: var(--card);
+  color: var(--text-color);
+}
+
+.card > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
+}
 
 .loginInfo {
   margin: 10px auto;
@@ -94,4 +117,21 @@ export default {
   font-weight: bold;
   color: var(--blue-card-text);
 }
+
+.errorCard {
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 95.56%;
+  padding: 10px 0 10px 0;
+  background-color: #FF3B30;
+}
+
+.errorCard > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
+  color: #ffffff;
+}
+
 </style>
