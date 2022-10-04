@@ -24,6 +24,9 @@
   --text-color: #454545;
   --card: white;
   --notice-list-background: #F2F2F7;
+  --line: gray;
+  --time-box: #EAEAEA;
+  --time-text: #454545;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,6 +39,9 @@
     --text-color: white;
     --card: #363636;
     --notice-list-background: #4a4a4a;
+    --line: white;
+    --time-box: gray;
+    --time-text: white;
   }
 }
 

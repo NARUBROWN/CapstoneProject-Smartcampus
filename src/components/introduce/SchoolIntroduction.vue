@@ -114,15 +114,18 @@ export default {
 .menu h1{
     font-size: 20pt;
     color: white;
-    margin-top: 60px;
+    margin-top: 80px;
     margin-left: 20px;
     font-weight: 500;
+    line-height: 20px;
     position: absolute;
+    font-weight: bold;
 }
 .menu h1 p{
     font-size: 10pt;
     line-height: 0px;
     margin-left: 5px;
+    font-weight: normal;
 }
 .menu h2{
     font-size: 24pt;
