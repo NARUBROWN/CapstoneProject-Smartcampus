@@ -3,9 +3,8 @@
     <div class="loginInfo" v-for="user in user_data" v-bind:key="user">
       <h1>{{ user.name }}</h1>
       <h2>{{ user.rank }}</h2>
-      <hr>
       <p>{{ user.department }}</p>
-      <img src="@/assets/main/student/stuIcon.png" alt="학생증 아이콘">
+      <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
       <h3>학생카드</h3>
     </div>
   </router-link>
@@ -23,8 +22,8 @@ export default {
   data() {
     return {
       user_data: [],
-      serverState: true,
-      errorComponent: false,
+      serverState: false,
+      errorComponent: true,
     };
   },
   created() {
@@ -39,6 +38,8 @@ export default {
         console.log('user 데이터를 요청하였습니다. ');
         this.user_data = user.data;
         console.log(this.user_data)
+        this.serverState = true;
+        this.errorComponent = false;
       } catch {
         this.serverState = false;
         this.errorComponent = true;
@@ -67,9 +68,10 @@ export default {
 }
 
 .loginInfo {
-  margin: 10px auto;
-  border-radius: 10px;
-  width: 95.56%;
+  margin: 10px auto 0;
+  border-radius: 10px 10px 0 0;
+  width: 85.56%;
+  height: 40px;
   padding: 2px 0 2px 0;
   background-color: var(--blue-card);
 }
@@ -82,7 +84,7 @@ export default {
 
 .loginInfo > h1 {
   float: left;
-  margin: 20px 0 0 0;
+  margin: 10px 0 0 0;
   padding: 0 5px 0 25px;
   font-size: 15pt;
   font-weight: bold;
@@ -90,7 +92,7 @@ export default {
 }
 
 .loginInfo > h2 {
-  margin: 20px 0 5px 0;
+  margin: 10px 0 5px 0;
   font-size: 15pt;
   font-weight: bold;
   color: var(--blue-card-text);
@@ -105,9 +107,9 @@ export default {
 
 .loginInfo > img {
   float: right;
-  margin: -66px 25px 0 0;
+  margin: -73px 15px 0 0;
   padding: 0;
-  width: 12%;
+  width: 17%;
 }
 
 .loginInfo > h3 {

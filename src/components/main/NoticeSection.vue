@@ -27,10 +27,15 @@ export default {
   name: "NoticeSection",
   data() {
     return {
-      notices: [],
+      notices: [{
+        tag: "",
+        title: "",
+        code: 0,
+        writeday: ""
+      }],
       number: 0,
-      serverState: true,
-      errorComponent: false,
+      serverState: false,
+      errorComponent: true,
     };
   },
   // 게시판 목록 데이터를 먼저 가지고 옴
@@ -40,6 +45,8 @@ export default {
             .get(process.env.VUE_APP_IP + "/board")
             .then(res => {
               this.notices = res.data;
+              this.serverState = true;
+              this.errorComponent = false;
             })
             .catch(err => {
               console.log(err + " 게시판 목록 불러오기 실패");
@@ -77,7 +84,7 @@ export default {
 <style scoped>
 
 .card {
-  margin: 10px auto;
+  margin: 0 auto;
   border-radius: 10px;
   width: 95.56%;
   padding: 10px 0 10px 0;

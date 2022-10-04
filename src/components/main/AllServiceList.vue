@@ -123,9 +123,9 @@ img {
   border-radius: 10px;
   width: 100%;
   height: 10%;
-  background: var(--blue-card);
-  color: var(--blue-card-text);
+  color: var(--text-color);
   display: flex;
+  background: var(--notice-list-background);
 }
 
 .listImg {
@@ -136,7 +136,7 @@ img {
 .shortCut > a > h2 {
   font-size: 10pt;
   width: 100px;
-  padding-top: 8px;
+  padding-top: 6px;
 }
 
 </style>

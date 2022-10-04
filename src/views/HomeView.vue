@@ -1,5 +1,4 @@
 <template>
-  <MainBanner></MainBanner>
   <StudentLoginInfo></StudentLoginInfo>
   <NoticeSection></NoticeSection>
   <ShortCut></ShortCut>
@@ -12,8 +11,6 @@ import NoticeSection from "@/components/main/NoticeSection";
 import ShortCut from "@/components/main/ShortCut";
 import AllServiceList from "@/components/main/AllServiceList";
 
-import MainBanner from "@/components/main/MainBanner";
-
 export default {
   name: 'HomeView',
   components: {
@@ -21,7 +18,6 @@ export default {
     NoticeSection,
     ShortCut,
     AllServiceList,
-    MainBanner
   },
   created() {
     localStorage.clear();

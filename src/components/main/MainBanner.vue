@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div v-for="atr in link" v-bind:key="atr">
-      <img v-bind:src="atr.link" alt="배너">
+      <img v-bind:src="atr.bg_link" alt="배너">
     </div>
   </div>
 </template>
@@ -13,7 +13,9 @@ export default {
   name: "MainBanner",
   data() {
     return {
-      link: ""
+      link: [{
+        bg_link: ""
+      }]
     }
   },
   created() {
@@ -45,7 +47,8 @@ export default {
 }
 
 img {
-  margin: -50px 0 0 0;
+  margin: -70px 0 0 0;
   width: 100%;
+  background: red;
 }
 </style>

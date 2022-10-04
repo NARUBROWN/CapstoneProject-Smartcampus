@@ -15,7 +15,9 @@
       <h3>{{ user.stu_number }}</h3>
     </div>
     <div>
-      <img class="jeiuLogo" src="@/assets/student/logoWhite.png" alt="학교 로고">
+      <div class="blackBox">
+        <img class="jeiuLogo" src="@/assets/student/logoWhite.png" alt="학교 로고">
+      </div>
     </div>
   </div>
 </template>
@@ -61,7 +63,7 @@ export default {
   margin: 10% auto;
   border-radius: 10px;
   width: 80.56%;
-  padding: 10px 0 20px 0;
+  padding: 10px 0 0 0;
   background-color: var(--blue-card);
   color: var(--blue-card-text);
 }
@@ -129,11 +131,17 @@ export default {
   border-radius: 10px;
 }
 
-.stuCard > div > .jeiuLogo {
+.stuCard > div > .blackBox {
+  background: black;
+  border-radius: 0 0 10px 10px;
+  padding: 20px 20px;
+}
+
+.stuCard > div > .blackBox > .jeiuLogo {
   width: 17%;
 }
 
-.stuCard > div > .barcode {
+.stuCard > div > .blackBox > .barcode {
   width: 70%;
   margin: 10px;
   border-radius: 5px;
