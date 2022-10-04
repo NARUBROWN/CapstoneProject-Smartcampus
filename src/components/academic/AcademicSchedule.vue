@@ -6,7 +6,6 @@
         <div class="Buttons">
           <button>정규학과</button>
           <button>재직자단계</button>
-          <button>재학생단계</button>
         </div>
       </div>
     </div>
@@ -158,7 +157,7 @@ export default {
 
 .ButtonsArea {
   margin: 0 auto;
-  margin-left: 40px;
+  text-align: center;
   width: 100%;
 }
 

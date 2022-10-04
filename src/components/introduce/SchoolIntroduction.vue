@@ -1,99 +1,99 @@
 <template>
-  <div @click="test" class="menu">
+  <div class="menu" @click="handler">
     <span>
       <h1>캠퍼스 소개<p>About Campus</p></h1>
     </span>
-    <ul class="sub">
-      <li>
-        <a href="#"> 
-          <h2>송림캠퍼스 소개</h2>
-          <div class="uImg">
-            <div class="adBtn">주소</div>
-            <div class="deBar">
-              <p>22573 인천광역시 동구 재능로 178(송림동 122번지)</p>
-            </div>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <h2>송도캠퍼스 소개</h2>
-          <div class="uImg2">
-            <div class="adBtn">주소</div>
-            <div class="deBar">
-              <p>21987 인천 연수구 송도교육로 111-15(송도동 196-1)</p>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+  </div>
+  <div class="card" v-if="isShow">
+    <h1>송림캠퍼스 소개</h1>
+    <div class="uContent" id="songlim">
+      <div class="addArea">
+        <div class="add">주소</div>
+        <p class="detailAdd">22573 인천광역시 동구 재능로 178(송림동 122번지)</p>
+      </div>
+    </div>
+  </div>
+  <div class="card" v-if="isShow">
+    <h1>송도캠퍼스 소개</h1>
+    <div class="uContent" id="songdo">
+      <div class="addArea">
+        <div class="add">주소</div>
+        <p class="detailAdd">21987 인천 연수구 송도교육로 111-15(송도동 196-1)</p>
+      </div>
+    </div>
   </div>
 
-  <div @click="test" class="menu">
+  <div class="menu" id="menu2" @click="handler2">
     <span>
       <h1>이사장 소개<p>About Board President</p></h1>
     </span>
-    <ul class="sub">
-      <li>
-        <a href="#"> 
-          <h2>송림캠퍼스 소개</h2>
-          <div class="uImg">
-            <div class="adBtn">주소</div>
-            <div class="deBar">
-              <p>22573 인천광역시 동구 재능로 178(송림동 122번지)</p>
-            </div>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <h2>송도캠퍼스 소개</h2>
-          <div class="uImg2">
-            <div class="adBtn">주소</div>
-            <div class="deBar">
-              <p>21987 인천 연수구 송도교육로 111-15(송도동 196-1)</p>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+  </div>
+  <div class="card" v-if="isShow2">
+    <h1>송림캠퍼스 소개</h1>
+    <div class="uContent" id="songlim">
+      <div class="addArea">
+        <div class="add">주소</div>
+        <p class="detailAdd">22573 인천광역시 동구 재능로 178(송림동 122번지)</p>
+      </div>
+    </div>
+  </div>
+  <div class="card" v-if="isShow2">
+    <h1>송도캠퍼스 소개</h1>
+    <div class="uContent" id="songdo">
+      <div class="addArea">
+        <div class="add">주소</div>
+        <p class="detailAdd">21987 인천 연수구 송도교육로 111-15(송도동 196-1)</p>
+      </div>
+    </div>
   </div>
 
-  <div @click="test" class="menu">
+  <div class="menu" id="menu3" @click="handler3">
     <span>
       <h1>총장 소개<p>About President</p></h1>
     </span>
-    <ul class="sub">
-      <li>
-        <a href="#"> 
-          <h2>송림캠퍼스 소개</h2>
-          <div class="uImg">
-            <div class="adBtn">주소</div>
-            <div class="deBar">
-              <p>22573 인천광역시 동구 재능로 178(송림동 122번지)</p>
-            </div>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <h2>송도캠퍼스 소개</h2>
-          <div class="uImg2">
-            <div class="adBtn">주소</div>
-            <div class="deBar">
-              <p>21987 인천 연수구 송도교육로 111-15(송도동 196-1)</p>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+  </div>
+  <div class="card" v-if="isShow3">
+    <h1>송림캠퍼스 소개</h1>
+    <div class="uContent" id="songlim">
+      <div class="addArea">
+        <div class="add">주소</div>
+        <p class="detailAdd">22573 인천광역시 동구 재능로 178(송림동 122번지)</p>
+      </div>
+    </div>
+  </div>
+  <div class="card" v-if="isShow3">
+    <h1>송도캠퍼스 소개</h1>
+    <div class="uContent" id="songdo">
+      <div class="addArea">
+        <div class="add">주소</div>
+        <p class="detailAdd">21987 인천 연수구 송도교육로 111-15(송도동 196-1)</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "SchoolIntroduction",
-}
+  data() {
+    return {
+      isShow: false,
+      isShow2: false,
+      isShow3: false, // true : 새로고침 시 바로 보임, false : 새로고침 시 클릭해야 보임!
+    };
+  },
+  methods: {
+    handler() {
+      this.isShow = !this.isShow;
+    },
+    handler2() {
+      this.isShow2 = !this.isShow2;
+    },
+    handler3() {
+      this.isShow3 = !this.isShow3;
+    },
+  },
+  };
 </script>
 
 <style scoped>
@@ -104,13 +104,19 @@ export default {
     border-radius: 20px;
     background-size: cover;
     background-image: url(@/assets/introduce/test1.png);
+    position: relative;
 }
-.menu:nth-of-type(3){
+
+#menu2{
     background-image: url(@/assets/introduce/test2.png);
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
-.menu:nth-of-type(4){
+
+#menu3{
     background-image: url(@/assets/introduce/test3.png);
 }
+
 .menu h1{
     font-size: 20pt;
     color: white;
@@ -121,78 +127,73 @@ export default {
     position: absolute;
     font-weight: bold;
 }
+
 .menu h1 p{
     font-size: 10pt;
     line-height: 0px;
     margin-left: 5px;
     font-weight: normal;
 }
-.menu h2{
-    font-size: 24pt;
-    font-weight: bold;
-    margin-top: 7%;
-    margin-right: 55%;
+
+.card {
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 90%;
+  padding: 10px 0 10px 0;
+  background-color: var(--card);
+  color: var(--text-color);
 }
-.menu .uImg{
-    width: 80%;
-    height: 500px;
-    margin: 5% auto;
-    border-radius: 15px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
+
+.card > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
 }
-.menu .uImg2{
-    width: 80%;
-    height: 500px;
-    margin: 5% auto;
-    border-radius: 15px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
+
+.uContent{
+  margin: 20px auto;
+  text-align: center;
+  width: 85%;
+  height: 300px;
+  border-radius: 10px;
+  background-image: url(@/assets/introduce/songlim.png);
+  background-size: cover;
 }
-.menu>.sub{
-    position: relative;
-    height:0;
-    list-style:none;
-    overflow:hidden;
-    transition:height ease-out 1s 0s;
+
+#songdo{
+  background-image: url(@/assets/introduce/songdo.png);
 }
-.menu>.sub li{
-    background-color: whitesmoke;
-    border-top:1px white solid;
-    border-radius: 25px;
-    height: 700px;
-    margin-top: 20px;
+
+.addArea {
+  margin: 0 auto;
+  text-align: center;
+  width: 76.5%;
+  height: 50px;
+  background-color: rgba(50,50,50,0.7);
+  color: white;
+  border-radius: 0 0 10px 10px;
+  margin-top: 250px;
+  position: absolute;
 }
-.menu>.sub li>a{
-    text-decoration:none;
-    color:black;
+
+.add{
+  width: 38px;
+  line-height: 25px;
+  border-radius: 8px;
+  font-size: 10pt;
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 10px;
+  font-weight: bold;
+  background-color: red;
 }
-.menu>.sub .deBar{
-    background-color: rgba(50,50,50,0.7);
-    width: 100%;
-    height: 50px;
-    color: white;
-    position: absolute;
-    margin-top: 410px;
-    border-radius: 0 0 20px 20px;
-    padding-top: 40px;
-}
-.menu>.sub .deBar p{
-    font-size: 14pt;
-    margin-left: 50px;
-}
-.menu>.sub .adBtn{
-    background-color: red;
-    width: 60px;
-    height: 40px;
-    border-radius: 10px;
-    position: absolute;
-    color: white;
-    line-height: 40px;
-    margin-top: 440px;
-    margin-left: 40px;
-    z-index: 1;
+
+.detailAdd{
+  width: 100%;
+  font-size: 8pt;
+  margin-left: 20px;
+  margin-top: 18px;
+  font-weight: bold;
 }
 </style>
