@@ -3,14 +3,16 @@
   <header>
     <div class="top">
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
+      <router-link to="/login"><a>로그인</a></router-link>
+      <router-link to="/signup"><a>회원가입</a></router-link>
     </div>
   </header>
   <!--라우트 되는 부분-->
   <router-view/>
-  <footer>
+  <!--<footer>
     <p>Copyright © 2022 김원정(NARUBROWN). All right reserved <br><br>
       JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
-  </footer>
+  </footer>-->
 </template>
 
 <style>

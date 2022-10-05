@@ -5,7 +5,7 @@
       <br>
     </div>
     <h1>{{ user.name }}</h1>
-    <h2>{{ user.rank }}</h2>
+    <h2>{{ user.stu_rank }}</h2>
     <hr>
     <p>{{ user.department }}</p>
     <a><img class="stuImg" src="@/assets/student/stuIcon.png" alt="학생증 아이콘"></a>

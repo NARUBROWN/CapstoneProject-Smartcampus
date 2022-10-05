@@ -8,6 +8,8 @@ import ReadView from "@/views/ReadView";
 import SchoolIntroductionView from "@/views/SchoolIntroductionView";
 import AcademicScheduleView from "@/views/AcademicScheduleView";
 import BusScheduleView from "@/views/BusScheduleView";
+import LoginView from "@/views/LoginView";
+import SignUpView from "@/views/SignUpView";
 
 const routes = [
   {
@@ -57,6 +59,16 @@ const routes = [
     path: '/bus-schedule',
     name: 'bus-schedule',
     component: BusScheduleView
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignUpView
   }
 ]
 

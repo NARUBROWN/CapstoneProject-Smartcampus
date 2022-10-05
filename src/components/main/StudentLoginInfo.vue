@@ -2,7 +2,7 @@
   <router-link to="/student-information" v-if="serverState">
     <div class="loginInfo" v-for="user in user_data" v-bind:key="user">
       <h1>{{ user.name }}</h1>
-      <h2>{{ user.rank }}</h2>
+      <h2>{{ user.stu_rank }}</h2>
       <p>{{ user.department }}</p>
       <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
       <h3>학생카드</h3>
