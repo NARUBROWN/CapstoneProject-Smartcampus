@@ -17,7 +17,7 @@
           placeholder="비밀번호를 입력해주세요"
       />
     </div>
-    <button @click="sendPost">로그인</button>
+    <button>로그인</button>
   </form>
 </template>
 
@@ -29,24 +29,33 @@ export default {
   data() {
     return {
       stu_num: '',
-      password: ''
+      password: '',
+      user_data: [{
+        id: '',
+        department: '',
+        name: '',
+        stu_number: 0,
+        stu_rank: "",
+        massage: ""
+      }]
     }
   },
   methods: {
-    sendPost() {
-      axios({
-        method: "post", // 요청 방식
-        url: "http://172.16.0.100:3000/post/login", // 요청 주소
-        data: {
-          stu_num: "2018141009",
-          password: "1234"
-        }
-      }).then(function (res) {
-        console.log(res + "끝")
-      })
-          .catch(function (err) {
-            console.log(err); // 에러 처리 내용
-          });
+    async sendPost() {
+      try {
+        // 백엔드에 요청된 데이터를 가져오기
+        let user = await axios({
+          method: "post",
+          url: process.env.VUE_APP_IP + "/post/login",
+          data: {
+            stu_num: this.stu_num,
+            password: this.password
+          }
+        })
+        this.user_data = user.data;
+      } catch (e) {
+        console.log("새로운 데이터를 불러오지 못했습니다. " + e);
+      }
     }
   }
 }
