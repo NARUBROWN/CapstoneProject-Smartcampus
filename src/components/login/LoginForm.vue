@@ -1,24 +1,38 @@
 <template>
-  <form @submit.prevent="sendPost">
-    <div>
-      <label>Name</label>
-      <input type="text"
-             v-model="stu_num"
-             name="stu_num"
-             placeholder="학번을 입력해주세요"
-      />
+  <div class="login_card">
+    <div class="login_wrap">
+      <form @submit.prevent="sendPost">
+        <div class="row">
+          <input type="text"
+                v-model="stu_num"
+                name="stu_num"
+                placeholder="학번을 입력해 주세요."
+          />
+          <label class="header">학번</label>
+          <div class="highLight"></div>
+        </div>
+        <div class="row">
+          <input
+              type="password"
+              v-model="password"
+              name="password"
+              placeholder="비밀번호를 입력해 주세요."
+          />
+          <label class="header">비밀번호</label>
+          <div class="highLight"></div>
+        </div>
+        <div class="forget">
+          <a href="#">비밀번호 찾기</a>
+        </div>
+        <div class="row">
+          <button type="submit">로그인</button>
+        </div>
+        <div class="join">
+          <p>회원이 아니신가요?<router-link to="/signup"><a class="joinUs" href="#">회원가입 하기</a></router-link></p>
+        </div>
+      </form>
     </div>
-    <div>
-      <label>Age</label>
-      <input
-          type="text"
-          v-model="password"
-          name="password"
-          placeholder="비밀번호를 입력해주세요"
-      />
-    </div>
-    <button>로그인</button>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -62,5 +76,76 @@ export default {
 </script>
 
 <style scoped>
-
+.login_card{
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 95.56%;
+  height: 330px;
+  padding: 20px 0 10px 0;
+  background-color: var(--card);
+}
+.login_card > .login_wrap > form > .row{
+  margin: 1em 0;
+  position: relative;
+}
+.login_card > .login_wrap > form > .row > .header{
+  font-size: 11pt;
+  font-weight: bold;
+  color: #007AFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 37px;
+}
+.login_card > .login_wrap > form > .row > .highLight{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 0.1em;
+  background: #D4D4D4;
+  width: 80%;
+  margin: 0 auto;
+}
+.login_card > .login_wrap > form > .row >  input,
+.login_card > .login_wrap > form > .row >  button[type=submit]{
+  width: 80%;
+  font: inherit;
+  padding: 12px 0;
+  font-weight: bold;
+  outline: none;
+  border: 0;
+  margin-left: 37px;
+  margin-top: 15px;
+}
+.login_card > .login_wrap > form > .row >  input{
+  font-size: 11pt;
+  background: var(--card);
+}
+.login_card > .login_wrap > form > .row >  input::placeholder{
+  color: #A4A4A4;
+}
+.login_card > .login_wrap > form > .row >  button[type=submit]{
+  border-radius: 10px;
+  border: none;
+  font-size: 14pt;
+  color: #F4F4F4;
+  cursor: pointer;
+  background-color: #007AFF;
+}
+.login_card > .login_wrap > form > .forget{
+  font-size: 9pt;
+  margin-left: 260px;
+  color: #A4A4A4;
+}
+.login_card > .login_wrap > form > .join{
+  color: #A4A4A4;
+  font-size: 9pt;
+  text-align: center;
+}
+.login_card > .login_wrap > form > .join a{
+  color: #007AFF;
+  border-bottom: 1px solid #007AFF;
+  margin: 0 3px;
+}
 </style>
