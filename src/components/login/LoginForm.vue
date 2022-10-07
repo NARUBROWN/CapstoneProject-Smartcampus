@@ -3,21 +3,43 @@
     <div class="login_wrap">
       <form @submit.prevent="sendPost">
         <div class="row">
+
           <input type="text"
-                v-model="stu_num"
-                name="stu_num"
-                placeholder="학번을 입력해 주세요."
+                 v-model="stu_num"
+                 name="stu_num"
+                 placeholder="학번을 입력해 주세요."
+                 v-if="user_data['code'] === 0 || user_data['code'] === 2"
+          />
+
+          <input type="text"
+                 v-model="stu_num"
+                 name="stu_num"
+                 style="color: red"
+                 v-bind:placeholder="this.user_data['massage']"
+                 v-if="user_data['code'] === 1"
           />
           <label class="header">학번</label>
           <div class="highLight"></div>
         </div>
         <div class="row">
+
           <input
               type="password"
               v-model="password"
               name="password"
               placeholder="비밀번호를 입력해 주세요."
+              v-if="user_data['code'] === 0 || user_data['code'] === 1"
           />
+
+          <input
+              type="password"
+              v-model="password"
+              name="password"
+              style="color: red"
+              v-bind:placeholder="this.user_data['massage']"
+              v-if="user_data['code'] === 2"
+          />
+
           <label class="header">비밀번호</label>
           <div class="highLight"></div>
         </div>
@@ -50,9 +72,13 @@ export default {
         name: '',
         stu_number: 0,
         stu_rank: "",
-        massage: ""
+        massage: "",
+        code: 0
       }]
     }
+  },
+  created() {
+    this.user_data['code'] = 0
   },
   methods: {
     async sendPost() {
@@ -67,8 +93,24 @@ export default {
           }
         })
         this.user_data = user.data;
+        //로그인 로직 수행
+        this.loginLogic()
       } catch (e) {
         console.log("새로운 데이터를 불러오지 못했습니다. " + e);
+      }
+    },
+    loginLogic() {
+      if (this.user_data['code'] === 0) {
+        console.log("아무것도 없음");
+      } else if (this.user_data['code'] === 1) {
+        this.user_data['stu_num'] = ""
+        console.log("존재하지 않는 학번");
+      } else if (this.user_data['code'] === 2) {
+        this.user_data['stu_num'] = ""
+        console.log("비밀번호 확인");
+      } else if (this.user_data['code'] === 3) {
+        // 로그인 성공
+        this.$router.push('/');
       }
     }
   }
