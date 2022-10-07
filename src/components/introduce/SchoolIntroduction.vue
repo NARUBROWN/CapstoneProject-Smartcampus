@@ -4,6 +4,7 @@
       <h1>캠퍼스 소개<p>About Campus</p></h1>
     </span>
   </div>
+  <transition name="slide-fade">
     <div class="card" v-if="isShow">
       <h1>송림캠퍼스 소개</h1>
       <div class="uContent" id="songlim">
@@ -13,6 +14,8 @@
         </div>
       </div>
     </div>
+  </transition>
+  <transition name="slide-fade">
     <div class="card" v-if="isShow">
       <h1>송도캠퍼스 소개</h1>
       <div class="uContent" id="songdo">
@@ -22,6 +25,7 @@
         </div>
       </div>
     </div>
+  </transition>
 
   <div class="menu" id="menu2" @click="handler2">
     <span>
@@ -195,5 +199,19 @@ export default {
   margin-left: 20px;
   margin-top: 18px;
   font-weight: bold;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.4s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
 }
 </style>
