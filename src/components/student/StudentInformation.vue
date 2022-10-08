@@ -1,18 +1,18 @@
 <template>
-  <div class="stuCard" v-for="user in user_data" v-bind:key="user">
+  <div class="stuCard">
     <div>
       <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
       <br>
     </div>
-    <h1>{{ user.name }}</h1>
-    <h2>{{ user.stu_rank }}</h2>
+    <h1>{{ veux_userdata['name'] }}</h1>
+    <h2>{{ veux_userdata['stu_rank'] }}</h2>
     <hr>
-    <p>{{ user.department }}</p>
+    <p>{{ veux_userdata['department'] }}</p>
     <a><img class="stuImg" src="@/assets/student/stuIcon.png" alt="학생증 아이콘"></a>
     <h3>학생카드</h3>
     <div>
       <!-- <img class="barcode" src="@/assets/student/barcode.png" alt="바코드"> -->
-      <h3>{{ user.stu_number }}</h3>
+      <h3>{{ veux_userdata['stu_number"'] }}</h3>
     </div>
     <div>
       <div class="blackBox">
@@ -23,25 +23,27 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 
 export default {
   name: "StudentInformation",
   data() {
     return {
-      user_data: [{
+      /*user_data: [{
         name: "",
         rank: "",
         department: "",
         stu_number: ""
-      }]
+      }]*/
     };
   },
-  created() {
-    this.req_data();
+  computed: {
+    veux_userdata() {
+      return this.$store.state.user_data
+    }
   },
   methods: {
-    // 백엔드에 데이터 요청하는 메소드
+    /*// 백엔드에 데이터 요청하는 메소드
     async req_data() {
       try {
         // 백엔드에 요청된 데이터를 가져오기
@@ -52,7 +54,7 @@ export default {
       } catch (e) {
         console.log("새로운 데이터를 불러오지 못했습니다. " + e);
       }
-    }
+    }*/
   }
 }
 </script>

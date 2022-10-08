@@ -20,7 +20,6 @@ export default {
     AllServiceList,
   },
   created() {
-    localStorage.clear();
   }
 }
 </script>

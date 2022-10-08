@@ -44,7 +44,7 @@
       <option selected>학생</option>
       <option>관리자</option>
     </select>
-    <button @click="sendPost">가입</button>
+    <button>가입</button>
   </form>
 </template>
 
@@ -66,7 +66,7 @@ export default {
     sendPost() {
       axios({
         method: "post", // 요청 방식
-        url: "http://172.16.0.100:3000/post/signup", // 요청 주소
+        url: process.env.VUE_APP_IP + "/post/signup", // 요청 주소
         data: {
           name: this.name,
           stu_num: this.stu_num,
@@ -75,7 +75,9 @@ export default {
           rank: this.rank
         }
       }).then(function (res) {
-        console.log(res + "끝")
+        // 회원가입 성공
+        console.log("회원가입 성공" + res);
+        this.$router.push('/login');
       })
           .catch(function (err) {
             console.log(err); // 에러 처리 내용

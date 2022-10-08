@@ -1,4 +1,5 @@
 <template>
+  {{ veux_userdata }}
   <div class="login_card">
     <div class="login_wrap">
       <form @submit.prevent="sendPost">
@@ -55,6 +56,7 @@
       </form>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -67,7 +69,7 @@ export default {
       stu_num: '',
       password: '',
       user_data: [{
-        id: '',
+        id: 0,
         department: '',
         name: '',
         stu_number: 0,
@@ -79,6 +81,15 @@ export default {
   },
   created() {
     this.user_data['code'] = 0
+  },
+  computed: {
+    userLogin() {
+      // 상태 데이터를 vuex에 저장
+      return this.$store.commit('login', this.user_data)
+    },
+    veux_userdata() {
+      return this.$store.state.user_data
+    }
   },
   methods: {
     async sendPost() {
@@ -110,6 +121,8 @@ export default {
         console.log("비밀번호 확인");
       } else if (this.user_data['code'] === 3) {
         // 로그인 성공
+        // 로그인 정보를 Vuex에 저장하여 상태관리
+        this.userLogin
         this.$router.push('/');
       }
     }

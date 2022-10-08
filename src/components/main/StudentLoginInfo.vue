@@ -1,36 +1,43 @@
 <template>
-  <router-link to="/student-information" v-if="serverState">
-    <div class="loginInfo" v-for="user in user_data" v-bind:key="user">
-      <h1>{{ user.name }}</h1>
-      <h2>{{ user.stu_rank }}</h2>
-      <p>{{ user.department }}</p>
+  <router-link to="/student-information" v-if="veux_userdata['login_state']">
+    <div class="loginInfo">
+      <h1>{{ veux_userdata['name'] }}</h1>
+      <h2>{{ veux_userdata['stu_rank'] }}</h2>
+      <p>더미 데이터</p>
       <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
       <h3>학생카드</h3>
     </div>
   </router-link>
-  <div class="errorCard" v-if="errorComponent">
-    <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
-  </div>
-
+  <router-link to="/login" v-if="!veux_userdata['login_state']">
+    <div class="loginInfo">
+      <h1>JEIUe에</h1>
+      <h2>로그인 하기</h2>
+      <p>더미 데이터</p>
+      <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
+      <h3>학생카드</h3>
+    </div>
+  </router-link>
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 
 export default {
   name: "StudentLoginInfo",
   data() {
     return {
-      user_data: [],
+      /*user_data: [],
       serverState: false,
-      errorComponent: true,
+      errorComponent: true,*/
     };
   },
-  created() {
-    this.req_data();
+  computed: {
+    veux_userdata() {
+      return this.$store.state.user_data
+    }
   },
   methods: {
-    // 백엔드에 데이터 요청하는 메소드
+    /*// 백엔드에 데이터 요청하는 메소드
     async req_data() {
       try {
         // 백엔드에 요청된 데이터를 가져오기
@@ -44,7 +51,7 @@ export default {
         this.serverState = false;
         this.errorComponent = true;
       }
-    }
+    }*/
   }
 }
 </script>

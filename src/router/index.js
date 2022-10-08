@@ -10,6 +10,7 @@ import AcademicScheduleView from "@/views/AcademicScheduleView";
 import BusScheduleView from "@/views/BusScheduleView";
 import LoginView from "@/views/LoginView";
 import SignUpView from "@/views/SignUpView";
+import VuexTest from "@/views/VuexTest";
 
 const routes = [
   {
@@ -69,6 +70,11 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: SignUpView
+  },
+  {
+    path: '/vuex',
+    name: 'vuex',
+    component: VuexTest
   }
 ]
 
