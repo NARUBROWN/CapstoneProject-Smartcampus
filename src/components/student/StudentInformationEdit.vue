@@ -4,24 +4,25 @@
       <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
       <br>
     </div>
+    {{ user_data }}
     <form @submit.prevent="updateProfile">
       <input type="text"
-             v-model="name"
+             v-model="user_data['name']"
              name="name"
              v-bind:placeholder="veux_userdata['name']"
       />
       <input type="text"
-             v-model="rank"
+             v-model="user_data['stu_rank']"
              name="rank"
              v-bind:placeholder="veux_userdata['stu_rank']"
       />
       <input type="text"
-             v-model="department"
+             v-model="user_data['department']"
              name="department"
              v-bind:placeholder="veux_userdata['department']"
       />
       <input type="text"
-             v-model="password"
+             v-model="user_data['password']"
              name="password"
              v-bind:placeholder="veux_userdata['password']"
       />
@@ -57,11 +58,13 @@ export default {
   name: "StudentInformation",
   data() {
     return {
-      name: '',
-      stu_num: '',
-      department: '',
-      password: '',
-      rank: ''
+      user_data: {
+        name: '',
+        stu_num: '',
+        department: '',
+        password: '',
+        stu_rank: ''
+      }
     };
   },
   computed: {
@@ -76,24 +79,22 @@ export default {
         url: process.env.VUE_APP_IP + "/post/profile_update", // 요청 주소
         data: {
           id: this.$store.state.user_data['id'],
-          name: this.name,
-          department: this.department,
-          password: this.password,
-          rank: this.rank
+          name: this.user_data['name'],
+          department: this.user_data['department'],
+          password: this.user_data['password'],
+          rank: this.user_data['stu_rank']
         }
       }).then((res) => {
-        // 회원가입 성공
+        // 회원정보 수정
         console.log("수정 성공" + res.data);
+
+        // 수정된 정보를 Vuex Store에 저장하기
+        this.$store.commit('login', this.user_data)
 
         this.$toast.success('계정을 성공적으로 수정했습니다.', {
           position: 'bottom'
         });
 
-        // 저장소 초기화
-        this.$store.commit('logout')
-
-        //메인화면으로 이동
-        this.$router.push('/');
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용
