@@ -5,14 +5,14 @@ import createPersistedState from 'vuex-persistedstate';
 export const store = createStore({
     state() {
         return {
-            count: 1,
             user_data: {
                 login_state: false,
                 id: 0,
                 name: "",
                 stu_number: 0,
                 department: "",
-                stu_rank: ""
+                stu_rank: "",
+                password: ""
             }
         }
     },
@@ -25,6 +25,7 @@ export const store = createStore({
             state.user_data["stu_number"] = user_info["stu_number"]
             state.user_data["department"] = user_info["department"]
             state.user_data["stu_rank"] = user_info["stu_rank"]
+            state.user_data["password"] = user_info["password"]
         },
         logout(state) {
             state.user_data["login_state"] = false
@@ -33,6 +34,7 @@ export const store = createStore({
             state.user_data["stu_number"] = 0
             state.user_data["department"] = ""
             state.user_data["stu_rank"] = ""
+            state.user_data["password"] = ""
         }
     },
     actions: {

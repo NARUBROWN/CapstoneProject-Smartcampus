@@ -4,6 +4,29 @@
       <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
       <br>
     </div>
+    <form @submit.prevent="updateProfile">
+      <input type="text"
+             v-model="name"
+             name="name"
+             v-bind:placeholder="veux_userdata['name']"
+      />
+      <input type="text"
+             v-model="rank"
+             name="rank"
+             v-bind:placeholder="veux_userdata['stu_rank']"
+      />
+      <input type="text"
+             v-model="department"
+             name="department"
+             v-bind:placeholder="veux_userdata['department']"
+      />
+      <input type="text"
+             v-model="password"
+             name="password"
+             v-bind:placeholder="veux_userdata['password']"
+      />
+      <button>확인</button>
+    </form>
     <h1>{{ veux_userdata['name'] }}</h1>
     <h2>{{ veux_userdata['stu_rank'] }}</h2>
     <hr>
@@ -22,10 +45,7 @@
   </div>
   <div class="underButtonsArea">
     <div class="underButtons">
-      <button>
-        <router-link to="/student-information-edit">프로필 수정</router-link>
-      </button>
-      <button @click="deleteProfile">회원 탈퇴</button>
+      <button @click="updateProfile">확인</button>
     </div>
   </div>
 </template>
@@ -37,12 +57,11 @@ export default {
   name: "StudentInformation",
   data() {
     return {
-      /*user_data: [{
-        name: "",
-        rank: "",
-        department: "",
-        stu_number: ""
-      }]*/
+      name: '',
+      stu_num: '',
+      department: '',
+      password: '',
+      rank: ''
     };
   },
   computed: {
@@ -51,30 +70,22 @@ export default {
     }
   },
   methods: {
-    /*// 백엔드에 데이터 요청하는 메소드
-    async req_data() {
-      try {
-        // 백엔드에 요청된 데이터를 가져오기
-        let user = await axios.get(process.env.VUE_APP_IP + "/proflie");
-        console.log('user 데이터를 요청하였습니다. ');
-        this.user_data = user.data;
-        console.log(this.user_data)
-      } catch (e) {
-        console.log("새로운 데이터를 불러오지 못했습니다. " + e);
-      }
-    }*/
-    deleteProfile() {
+    updateProfile() {
       axios({
         method: "post", // 요청 방식
-        url: process.env.VUE_APP_IP + "/post/profile_delete", // 요청 주소
+        url: process.env.VUE_APP_IP + "/post/profile_update", // 요청 주소
         data: {
-          id: this.$store.state.user_data['id']
+          id: this.$store.state.user_data['id'],
+          name: this.name,
+          department: this.department,
+          password: this.password,
+          rank: this.rank
         }
       }).then((res) => {
         // 회원가입 성공
-        console.log("삭제 성공" + res.data);
+        console.log("수정 성공" + res.data);
 
-        this.$toast.success('계정을 성공적으로 삭제했습니다.', {
+        this.$toast.success('계정을 성공적으로 수정했습니다.', {
           position: 'bottom'
         });
 
@@ -86,11 +97,11 @@ export default {
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용
-          });
 
-      this.$toast.error('알 수 없는 오류가 발생했습니다.', {
-        position: 'bottom'
-      });
+            this.$toast.error('알 수 없는 오류가 발생했습니다.', {
+              position: 'bottom'
+            });
+          });
     }
   }
 }

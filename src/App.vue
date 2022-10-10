@@ -3,9 +3,8 @@
   <header>
     <div class="top">
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
-      <router-link to="/login"><a>로그인</a></router-link>
-      <router-link to="/signup"><a>회원가입</a></router-link>
-      <router-link to="/vuex"><a>vuex</a></router-link>
+      <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
+      <a @click="this.$store.commit('logout')" v-if="this.$store.state.user_data['login_state']"><a>로그아웃</a></a>
     </div>
   </header>
   <!--라우트 되는 부분-->

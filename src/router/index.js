@@ -11,6 +11,7 @@ import BusScheduleView from "@/views/BusScheduleView";
 import LoginView from "@/views/LoginView";
 import SignUpView from "@/views/SignUpView";
 import VuexTest from "@/views/VuexTest";
+import studentInformationEditView from "@/views/StudentInformationEditView";
 
 const routes = [
   {
@@ -35,6 +36,11 @@ const routes = [
     path: '/student-information',
     name: 'student-information',
     component: StudentInformationView
+  },
+  {
+    path: '/student-information-edit',
+    name: 'student-information-edit',
+    component: studentInformationEditView
   },
   {
     path: '/meal-information',

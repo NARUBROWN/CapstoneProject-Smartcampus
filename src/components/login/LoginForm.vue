@@ -66,8 +66,8 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      stu_num: '',
-      password: '',
+      stu_num: "",
+      password: "",
       user_data: [{
         id: 0,
         department: '',
@@ -75,6 +75,7 @@ export default {
         stu_number: 0,
         stu_rank: "",
         massage: "",
+        password: "",
         code: 0
       }]
     }
@@ -108,17 +109,36 @@ export default {
         this.loginLogic()
       } catch (e) {
         console.log("새로운 데이터를 불러오지 못했습니다. " + e);
+
+        this.$toast.error('서버에 연결되지 않았습니다.', {
+          position: 'bottom'
+        });
+
       }
     },
     loginLogic() {
       if (this.user_data['code'] === 0) {
         console.log("아무것도 없음");
+
+        this.$toast.warning('아무것도 입력되지 않았습니다.', {
+          position: 'bottom'
+        });
+
       } else if (this.user_data['code'] === 1) {
         this.user_data['stu_num'] = ""
         console.log("존재하지 않는 학번");
+
+        this.$toast.warning('존재하지 않는 학번입니다.', {
+          position: 'bottom'
+        });
+
       } else if (this.user_data['code'] === 2) {
         this.user_data['stu_num'] = ""
         console.log("비밀번호 확인");
+
+        this.$toast.warning('비밀번호를 확인해주세요', {
+          position: 'bottom'
+        });
       } else if (this.user_data['code'] === 3) {
         // 로그인 성공
         // 로그인 정보를 Vuex에 저장하여 상태관리
