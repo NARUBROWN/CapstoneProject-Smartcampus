@@ -26,7 +26,6 @@
              name="password"
              v-bind:placeholder="veux_userdata['password']"
       />
-      <button>확인</button>
     </form>
     <h1>{{ veux_userdata['name'] }}</h1>
     <h2>{{ veux_userdata['stu_rank'] }}</h2>
@@ -94,6 +93,8 @@ export default {
         this.$toast.success('계정을 성공적으로 수정했습니다.', {
           position: 'bottom'
         });
+
+        this.$router.push('/student-information');
 
       })
           .catch((err) => {

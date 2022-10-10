@@ -4,7 +4,7 @@
     <div class="top">
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
       <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
-      <a @click="this.$store.commit('logout')" v-if="this.$store.state.user_data['login_state']"><a>로그아웃</a></a>
+      <a @click="logout" v-if="this.$store.state.user_data['login_state']"><a>로그아웃</a></a>
     </div>
   </header>
   <!--라우트 되는 부분-->
@@ -14,6 +14,19 @@
       JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
   </footer>-->
 </template>
+
+<script>
+
+export default {
+  name: "App",
+  methods: {
+    logout() {
+      this.$store.commit('logout')
+      this.$router.push('/');
+    }
+  }
+}
+</script>
 
 <style>
 
