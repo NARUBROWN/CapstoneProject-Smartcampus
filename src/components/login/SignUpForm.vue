@@ -5,8 +5,8 @@
   {{ password }}
   {{ passwordCheck }}
   {{ rank }}
-  <div class="login_card">
-    <div class="login_wrap">
+  <div class="signUp_card">
+    <div class="signUp_wrap">
       <form @submit.prevent="sendPost">
         <div class="row">
           <input type="text"
@@ -39,6 +39,8 @@
           <label class="header">비밀번호</label>
           <div class="highLight"></div>
         </div>
+        <div class="pwValid">⚠ 대문자 1개, 8자 이상 16자 이하</div>
+        <div class="pw" v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div>
         <div class="row">
           <input
               type="password"
@@ -51,8 +53,7 @@
           <label class="header">비밀번호 재확인</label>
           <div class="highLight"></div>
         </div>
-        <div class="pw" v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div>
-        <div class="pw" v-if="!passwordCheckFlag">비밀번호가 일치하지 않습니다.</div>
+        <div class="pwCheck" v-if="!passwordCheckFlag">비밀번호가 일치하지 않습니다.</div>
         <div class="row">
           <select class="depart" v-model="department">
             <option value="" disabled selected>소속학과를 선택해 주세요.</option>
@@ -73,7 +74,7 @@
           <label class="header">권한</label>
         </div>
         <div class="row">
-          <button type="submit">회원가입</button>
+          <button type="submit">확인</button>
         </div>
       </form>
     </div>
@@ -84,7 +85,7 @@
 import axios from "axios";
 
 export default {
-  name: "LoginForm",
+  name: "SignUpForm",
   data() {
     return {
       name: '',
@@ -137,7 +138,7 @@ export default {
 </script>
 
 <style scoped>
-.login_card{
+.signUp_card{
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
@@ -145,11 +146,11 @@ export default {
   padding: 20px 0 10px 0;
   background-color: var(--card);
 }
-.login_card > .login_wrap > form > .row{
+.signUp_card > .signUp_wrap > form > .row{
   margin: 1em 0;
   position: relative;
 }
-.login_card > .login_wrap > form > .row > .header{
+.signUp_card > .signUp_wrap > form > .row > .header{
   font-size: 11pt;
   font-weight: bold;
   color: #007AFF;
@@ -158,7 +159,7 @@ export default {
   top: 0;
   margin-left: 37px;
 }
-.login_card > .login_wrap > form > .row > .highLight{
+.signUp_card > .signUp_wrap > form > .row > .highLight{
   position: absolute;
   left: 0;
   bottom: 0;
@@ -168,28 +169,29 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
-.login_card > .login_wrap > form > .row >  input,
-.login_card > .login_wrap > form > .row >  button[type=submit]{
+.signUp_card > .signUp_wrap > form > .row >  input,
+.signUp_card > .signUp_wrap > form > .row >  button[type=submit]{
   width: 80%;
   font: inherit;
   padding: 12px 0;
-  font-weight: bold;
+  font-weight: normal;
   outline: none;
   border: 0;
   margin-left: 37px;
   margin-top: 15px;
 }
-.login_card > .login_wrap > form > .row >  input{
+.signUp_card > .signUp_wrap > form > .row >  input{
   font-size: 11pt;
   background: var(--card);
 }
-.login_card > .login_wrap > form > .row >  input::placeholder{
+.signUp_card > .signUp_wrap > form > .row >  input::placeholder{
   color: #A4A4A4;
 }
-.login_card > .login_wrap > form > .row >  button[type=submit]{
+.signUp_card > .signUp_wrap > form > .row >  button[type=submit]{
   border-radius: 10px;
   border: none;
   font-size: 14pt;
+  font-weight: bold;
   color: #F4F4F4;
   cursor: pointer;
   background-color: #007AFF;
@@ -201,7 +203,7 @@ export default {
   margin-left: 40px;
   border: none;
   border-bottom: 1px solid #A4A4A4;
-  font-weight: bold;
+  font-weight: normal;
 }
 .select {
     padding: 35px 0px 10px 0px;
@@ -218,23 +220,37 @@ export default {
     border: 1px solid #A4A4A4;
     line-height: 24px;
     text-align: center;
-    font-weight:bold;
+    font-weight:normal;
     font-size:14px;
     padding-top: 10px;
-}
-.select input[type=radio]+label{
     background-color: #fff;
     color: #A4A4A4;
 }
+.select input[type=radio]+label:first-of-type{
+    border-radius: 10px 0 0 10px;
+}
+.select input[type=radio]+label:nth-of-type(2){
+  border-radius: 0 10px 10px 0;
+}
 .select input[type=radio]:checked+label{
-    background-color: rgba(0, 122, 255);
+    background-color: rgba(0, 122, 255, 0.5);
     color: #FFFFFF;
 }
 .pw{
   font-size: 9pt;
   color: #FF3B30;
   margin-left: 37px;
+  margin-top: 0px;
+}
+.pwCheck{
+  font-size: 9pt;
+  color: #FF3B30;
+  margin-left: 37px;
   margin-top: -10px;
-  margin-bottom: 10px;
+}
+.pwValid{
+  font-size: 9pt;
+  margin-left: 37px;
+  margin-top: -10px;
 }
 </style>

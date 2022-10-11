@@ -187,7 +187,7 @@ export default {
   width: 80%;
   font: inherit;
   padding: 12px 0;
-  font-weight: bold;
+  font-weight: normal;
   outline: none;
   border: 0;
   margin-left: 37px;
@@ -204,13 +204,14 @@ export default {
   border-radius: 10px;
   border: none;
   font-size: 14pt;
+  font-weight: bold;
   color: #F4F4F4;
   cursor: pointer;
   background-color: #007AFF;
 }
 .login_card > .login_wrap > form > .forget{
   font-size: 9pt;
-  margin-left: 260px;
+  margin-left: 270px;
   color: #A4A4A4;
 }
 .login_card > .login_wrap > form > .join{
