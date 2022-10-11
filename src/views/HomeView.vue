@@ -1,6 +1,7 @@
 <template>
   <StudentLoginInfo></StudentLoginInfo>
   <NoticeSection></NoticeSection>
+  <PlayGround></PlayGround>
   <ShortCut></ShortCut>
   <AllServiceList></AllServiceList>
 </template>
@@ -8,6 +9,7 @@
 <script>
 import StudentLoginInfo from "@/components/main/StudentLoginInfo";
 import NoticeSection from "@/components/main/NoticeSection";
+import PlayGround from "@/components/main/PlayGround.vue";
 import ShortCut from "@/components/main/ShortCut";
 import AllServiceList from "@/components/main/AllServiceList";
 
@@ -18,7 +20,8 @@ export default {
     NoticeSection,
     ShortCut,
     AllServiceList,
-  },
+    PlayGround,
+},
   created() {
   }
 }
