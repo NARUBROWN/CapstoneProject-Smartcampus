@@ -7,7 +7,7 @@
             <div class="top">
                 <img class="jeiu" src="@/assets/main/shortcut/icon/1.png">
             </div>
-            <router-link to="/"><h2>캠퍼스 길잡이</h2><h6>About University</h6></router-link>
+            <router-link to="/campus-navigator"><h2>캠퍼스 길잡이</h2><h6>About University</h6></router-link>
           </td>
         </tr>
         <tr>

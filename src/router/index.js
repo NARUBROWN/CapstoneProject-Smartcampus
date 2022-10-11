@@ -12,6 +12,7 @@ import LoginView from "@/views/LoginView";
 import SignUpView from "@/views/SignUpView";
 import VuexTest from "@/views/VuexTest";
 import studentInformationEditView from "@/views/StudentInformationEditView";
+import CampusNavigatorView from "@/views/CampusNavigatorView";
 
 const routes = [
   {
@@ -76,6 +77,11 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: SignUpView
+  },
+  {
+    path: '/campus-navigator',
+    name: 'campus-navigator',
+    component: CampusNavigatorView
   },
   {
     path: '/vuex',
