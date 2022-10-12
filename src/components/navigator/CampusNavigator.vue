@@ -1,15 +1,16 @@
 <template>
   <button @click="test">테스트 정보 주입</button>
   <div class="card">
+    <h1>사진 업로드</h1>
     <div class="ButtonsContent">
       <div class="ButtonsArea">
         <!-- 파일 업로드 부분 -->
         <form @submit.prevent="sendImg()">
           <div class="file">
-            <label for="file">파일 선택</label>
+            <label for="file">{{ fileSelectMessage }}</label>
             <div class="zzz"></div>
-            <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)">
-            <label for="submit">제출</label>
+            <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)" class="test">
+            <label for="submit">업로드</label>
             <input type="submit" id="submit">
           </div>
         </form>
@@ -17,14 +18,14 @@
     </div>
   </div>
 
-  <div class="card2">
+  <div class="card2" v-if="resultCard">
     <div class="result">
       <h1>결과</h1>
       <!-- 출력 부분 -->
       <h2><a>{{ this.result.department }}</a>
-      <a>{{ this.result.name }}</a></h2>
+        <a>{{ this.result.name }}</a></h2>
       <h3><a>{{ this.result.location }}</a>
-      <a>{{ this.result.building }}</a></h3>
+        <a>{{ this.result.building }}</a></h3>
       <img v-bind:src="this.result.img">
       <p><a>{{ this.result.description }}</a></p>
     </div>
@@ -38,6 +39,8 @@ export default {
   name: "CampusNavigator",
   data() {
     return {
+      fileSelectMessage: '파일 선택',
+      resultCard: false,
       input: {
         image: ''
       },
@@ -55,6 +58,7 @@ export default {
     fileSelect(event) {
       this.input.image = event.target.files[0];
     },
+    // 파일 전송
     async sendImg() {
       const formData = new FormData();
       formData.append('file', this.input.image);
@@ -69,6 +73,7 @@ export default {
           url: process.env.VUE_APP_PYTHON + "/file_upload",
           data: formData
         })
+
         this.$toast.success('사진을 서버에 업로드 했습니다.', {
           position: 'bottom'
         });
@@ -78,6 +83,12 @@ export default {
 
         const path = user.data[0]['img'];
         this.result.img = require(`../../assets/campus_navigator/${path}.png`);
+
+        //결과창 출력
+        this.resultCard = true
+
+        //파일 업로드 버튼 재 활성화
+        this.fileSelectMessage = "파일 선택"
 
       } catch (e) {
         console.log("새로운 데이터를 불러오지 못했습니다. " + e);
@@ -112,12 +123,21 @@ export default {
   background-color: var(--card);
   color: var(--text-color);
 }
+
+.card > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
 .card > .result > h1 {
   margin: 10px 0 15px 0;
   padding: 0 0 0 20px;
   font-size: 10pt;
   font-weight: bold;
 }
+
 .card2 {
   margin: 10px auto;
   border-radius: 10px;
@@ -204,15 +224,21 @@ input[type="submit"]{
   margin-left: 40px;
   margin-top: -20px;
 }
-.result > h3 > a{
+
+.result > h3 > a {
   border-bottom: 1px solid var(--line);
 }
-.result > p{
+
+.result > p {
   font-size: 11pt;
   font-weight: bold;
   color: var(--line);
   margin-left: 40px;
   margin-top: 350px;
+}
+
+.test {
+  display: none;
 }
 
 </style>

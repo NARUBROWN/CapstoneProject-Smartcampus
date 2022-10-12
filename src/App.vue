@@ -9,10 +9,10 @@
   </header>
   <!--라우트 되는 부분-->
   <router-view/>
-  <!--<footer>
+  <footer>
     <p>Copyright © 2022 김원정(NARUBROWN). All right reserved <br><br>
       JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
-  </footer>-->
+  </footer>
 </template>
 
 <script>

@@ -23,7 +23,7 @@ export default {
         name: "김원정",
         stu_number: 2018141009,
         department: "인공지능컴퓨터정보과",
-        stu_rank: "학생",
+        stu_rank: "관리자",
         password: "1234"
       }
     }

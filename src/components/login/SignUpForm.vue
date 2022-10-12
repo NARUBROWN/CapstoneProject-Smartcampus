@@ -39,7 +39,7 @@
           <label class="header">비밀번호</label>
           <div class="highLight"></div>
         </div>
-        <div class="pwValid">⚠ 대문자 1개, 8자 이상 16자 이하</div>
+        <div class="pwValid">⚠ 대소문자 1개, 8자 이상 16자 이하</div>
         <div class="pw" v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div>
         <div class="row">
           <input
@@ -66,7 +66,7 @@
           </select>
           <label class="header">소속 학과</label>
         </div>
-        <div class="row">
+        <div class="row" v-if="this.$store.state.user_data['stu_rank'] === '관리자'">
           <div class="select">
             <input v-model="rank" type="radio" id="select" name="shop" value="학생"><label for="select">학생</label>
             <input v-model="rank" type="radio" id="select2" name="shop" value="관리자"><label for="select2">관리자</label>
@@ -92,21 +92,26 @@ export default {
       stu_num: '',
       department: '',
       password: '',
-      passwordCheck:'',
-      rank: '',
+      passwordCheck: '',
+      rank: '학생',
       passwordValidFlag: true,
       passwordCheckFlag: true,
     }
   },
+  computed: {
+    vuex_userdata() {
+      return this.$store.state.user_data
+    }
+  },
   methods: {
-    passwordValid(){
+    passwordValid() {
       if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
         this.passwordValidFlag = true
       } else {
         this.passwordValidFlag = false
       }
     },
-    passwordCheckValid () {
+    passwordCheckValid() {
       if (this.password === this.passwordCheck) {
         this.passwordCheckFlag = true
       } else {
@@ -212,19 +217,18 @@ export default {
 .select input[type=radio]{
     display: none;
 }
-.select input[type=radio]+label{
-    display: inline-block;
-    cursor: pointer;
-    height: 35px;
-    width: 43.8%;
-    border: 1px solid #A4A4A4;
-    line-height: 24px;
-    text-align: center;
-    font-weight:normal;
-    font-size:14px;
-    padding-top: 10px;
-    background-color: #fff;
-    color: #A4A4A4;
+.select input[type=radio]+label {
+  display: inline-block;
+  cursor: pointer;
+  height: 35px;
+  width: 43.8%;
+  line-height: 24px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  padding-top: 10px;
+  background-color: rgba(0, 122, 255, 0.5);
+  color: #ffffff;
 }
 .select input[type=radio]+label:first-of-type{
     border-radius: 10px 0 0 10px;
@@ -232,9 +236,9 @@ export default {
 .select input[type=radio]+label:nth-of-type(2){
   border-radius: 0 10px 10px 0;
 }
-.select input[type=radio]:checked+label{
-    background-color: rgba(0, 122, 255, 0.5);
-    color: #FFFFFF;
+.select input[type=radio]:checked+label {
+  background-color: #007AFF;
+  color: #FFFFFF;
 }
 .pw{
   font-size: 9pt;
