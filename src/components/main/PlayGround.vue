@@ -1,19 +1,19 @@
 <template>
     <div class="card">
       <h1>플레이그라운드</h1>
-      <table class="shortCutTable">
+      <table class="playGroundTable">
         <tr>
-          <td class="shortCut1">
+          <td class="playGround1">
             <div class="top">
-                <img class="jeiu" src="@/assets/main/shortcut/icon/1.png">
+                <img class="jeiu" src="@/assets/main/playground/1.png">
             </div>
             <router-link to="/campus-navigator"><h2>캠퍼스 길잡이</h2><h6>About University</h6></router-link>
           </td>
         </tr>
         <tr>
-          <td class="shortCut2">
+          <td class="playGround2">
             <div class="top">
-                <img class="jeiu" src="@/assets/main/shortcut/icon/1.png">
+                <img class="jeiu" src="@/assets/main/playground/1.png">
             </div>
             <router-link to="/"><h2>학과 커뮤니티</h2><h6>Academic Schedule</h6></router-link>
           </td>
@@ -24,7 +24,7 @@
   
   <script>
   export default {
-    name: "ShortCut"
+    name: "playGround"
   }
   </script>
   
@@ -46,14 +46,14 @@
     font-weight: bold;
   }
   
-  .shortCutTable {
+  .playGroundTable {
     margin: 0 auto;
     width: 90%;
     border-collapse: initial;
     border-spacing: 5px;
   }
   
-  .shortCut1 {
+  .playGround1 {
     border-radius: 10px;
     width: 50%;
     height: 90px;
@@ -61,7 +61,7 @@
     color: var(--blue-card-text);
   }
   
-  .shortCut2 {
+  .playGround2 {
     border-radius: 10px;
     width: 50%;
     height: 90px;

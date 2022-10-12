@@ -1,18 +1,34 @@
 <template>
   <button @click="test">테스트 정보 주입</button>
+  <div class="card">
+    <div class="ButtonsContent">
+      <div class="ButtonsArea">
+        <!-- 파일 업로드 부분 -->
+        <form @submit.prevent="sendImg()">
+          <div class="file">
+            <label for="file">파일 선택</label>
+            <div class="zzz"></div>
+            <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)">
+            <label for="submit">제출</label>
+            <input type="submit" id="submit">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-  <!-- 파일 업로드 부분 -->
-  <form @submit.prevent="sendImg()">
-    <input type="file" name="file" ref="user_img" v-on:change="fileSelect($event)">
-    <input type="submit">
-  </form>
-  <!-- 출력 부분 -->
-  <a>{{ this.result.location }}</a><br>
-  <a>{{ this.result.building }}</a><br>
-  <a>{{ this.result.department }}</a><br>
-  <a>{{ this.result.name }}</a><br>
-  <a>{{ this.result.description }}</a><br>
-  <img v-bind:src="this.result.img">
+  <div class="card2">
+    <div class="result">
+      <h1>결과</h1>
+      <!-- 출력 부분 -->
+      <h2><a>{{ this.result.department }}</a>
+      <a>{{ this.result.name }}</a></h2>
+      <h3><a>{{ this.result.location }}</a>
+      <a>{{ this.result.building }}</a></h3>
+      <img v-bind:src="this.result.img">
+      <p><a>{{ this.result.description }}</a></p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -88,112 +104,115 @@ export default {
 </script>
 
 <style scoped>
-
-.stuCard {
-  margin: 10% auto;
+.card {
+  margin: 10px auto;
   border-radius: 10px;
-  width: 80.56%;
-  padding: 10px 0 0 0;
-  background-color: var(--blue-card);
-  color: var(--blue-card-text);
+  width: 95.56%;
+  padding: 10px 0 10px 0;
+  background-color: var(--card);
+  color: var(--text-color);
 }
-
-.stuCard > hr {
-  margin: 0 0 0 25px;
-  width: 50%;
-  border: var(--blue-card-hr) solid 0.5px;
-}
-
-.stuCard > h1 {
-  float: left;
-  margin: 20px 0 0 0;
-  padding: 0 5px 0 25px;
-  font-size: 15pt;
+.card > .result > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
   font-weight: bold;
-  color: var(--blue-card-text);
 }
-
-.stuCard > h2 {
-  margin: 20px 0 5px 0;
-  font-size: 15pt;
-  font-weight: bold;
-  color: var(--blue-card-text);
-}
-
-.stuCard > div > h3 {
-  margin: 0 0 5px 0;
-  font-size: 15pt;
-  font-weight: bold;
-  color: var(--blue-card-text);
-}
-
-.stuCard > p {
-  margin: 7px 0 20px 0;
-  padding: 0 0 0 25px;
-  font-size: 9pt;
-  color: var(--blue-card-text);
-}
-
-.stuCard > a > .stuImg {
-  float: right;
-  margin: -66px 25px 0 0;
-  padding: 0;
-  width: 12%;
-}
-
-.stuCard > h3 {
-  float: right;
-  margin: -30px 28px 0 0;
-  font-size: 8pt;
-  font-weight: bold;
-  color: var(--blue-card-text);
-}
-
-.stuCard > div {
-  text-align: center;
-  margin: 20px 0 0 0;
-}
-
-.stuCard > div > .profilePhoto {
-  width: 132px;
-  height: 170px;
-  background-color: var(--text-color);
+.card2 {
+  margin: 10px auto;
   border-radius: 10px;
+  width: 95.56%;
+  height: 500px;
+  padding: 10px 0 10px 0;
+  background-color: var(--card);
+  color: var(--text-color);
 }
-
-.stuCard > div > .blackBox {
-  background: black;
-  border-radius: 0 0 10px 10px;
-  padding: 20px 20px;
+.card2 > .result > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
 }
-
-.stuCard > div > .blackBox > .jeiuLogo {
-  width: 17%;
-}
-
-.stuCard > div > .blackBox > .barcode {
-  width: 70%;
-  margin: 10px;
-  border-radius: 5px;
-}
-
-.underButtonsArea {
+.ButtonsArea {
   margin: 0 auto;
   text-align: center;
   width: 100%;
+  height: 100px;
 }
-
-.underButtons > button {
+.Buttons {
   margin: 10px 5px 0 5px;
-  width: 27%;
-  height: 30px;
+  width: 37.5%;
+  height: 35px;
   border: 0;
-  outline: 0;
   border-radius: 8px;
   color: var(--blue-card-text);
   background: var(--blue-card);
   font-weight: bolder;
-  font-size: 13px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.file label,
+input[type="submit"]{
+  margin: 10px 5px 0 5px;
+  display: inline-block;
+  width: 37.5%;
+  height: 35px;
+  background-color: var(--blue-card);
+  color: var(--blue-card-text);
+  cursor: pointer;
+  line-height: 35px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+.file input[type="file"]{
+  position: absolute;
+  margin-top: 65px;
+  margin-left: -47%;
+}
+#submit{
+  display: none;
+}
+.zzz{
+  position: absolute;
+  width: 70px;
+  height: 30px;
+  /* background-color: var(--card); */
+  z-index: 1;
+  margin-left: 0px;
+  margin-top: 5px;
+}
+.result > img{
+  position: absolute;
+  width: 320px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+.result > h2{
+  font-size: 20pt;
+  margin-left: 40px;
+  margin-top: -5px;
+  font-weight: bold;
+}
+.result > h3{
+  font-size: 11pt;
+  font-weight: bold;
+  color: var(--line);
+  margin-left: 40px;
+  margin-top: -20px;
+}
+.result > h3 > a{
+  border-bottom: 1px solid var(--line);
+}
+.result > p{
+  font-size: 11pt;
+  font-weight: bold;
+  color: var(--line);
+  margin-left: 40px;
+  margin-top: 350px;
 }
 
 </style>

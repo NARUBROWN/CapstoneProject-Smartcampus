@@ -1,60 +1,67 @@
 <template>
-  <div class="stuCard">
     <div>
       <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
       <br>
     </div>
     {{ user_data }}
-    <form @submit.prevent="updateProfile">
-      <input type="text"
-             v-model="user_data['name']"
-             name="name"
-             v-bind:placeholder="veux_userdata['name']"
-      />
-      <input type="text"
-             v-model="user_data['stu_rank']"
-             name="rank"
-             v-bind:placeholder="veux_userdata['stu_rank']"
-      />
-      <input type="text"
-             v-model="user_data['department']"
-             name="department"
-             v-bind:placeholder="veux_userdata['department']"
-      />
-      <input type="text"
-             v-model="user_data['password']"
-             name="password"
-             v-bind:placeholder="veux_userdata['password']"
-      />
-    </form>
-    <h1>{{ veux_userdata['name'] }}</h1>
-    <h2>{{ veux_userdata['stu_rank'] }}</h2>
-    <hr>
-    <p>{{ veux_userdata['department'] }}</p>
-    <a><img class="stuImg" src="@/assets/student/stuIcon.png" alt="학생증 아이콘"></a>
-    <h3>학생카드</h3>
-    <div>
-      <!-- <img class="barcode" src="@/assets/student/barcode.png" alt="바코드"> -->
-      <h3>{{ veux_userdata['stu_number"'] }}</h3>
-    </div>
-    <div>
-      <div class="blackBox">
-        <img class="jeiuLogo" src="@/assets/student/logoWhite.png" alt="학교 로고">
+    <div class="signUp_card">
+      <div class="signUp_wrap"> 
+        <form @submit.prevent="updateProfile">
+          <div class="row">
+            <input 
+                  type="text"
+                  v-model="user_data['name']"
+                  name="name"
+                  v-bind:placeholder="veux_userdata['name']"
+            />
+            <label class="header">이름</label>
+            <div class="highLight"></div>
+          </div>
+          <div class="row">
+            <input
+                  type="text"
+                  v-model="user_data['password']"
+                  name="password"
+                  maxlength="16"
+                  @blur="passwordValid"
+                  v-bind:placeholder="veux_userdata['password']"
+            />
+            <label class="header">비밀번호</label>
+            <div class="highLight"></div>
+          </div>
+          <!-- <div class="pw" v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div> -->
+          <div class="row">
+            <select class="depart" v-model="user_data['department']" v-bind:placeholder="veux_userdata['department']">
+              <option value="" disabled selected>소속학과를 선택해 주세요.</option>
+              <option>AI컴퓨터정보과</option>
+              <option>AI정보통신과</option>
+              <option>유아교육과</option>
+              <option>사회복지과</option>
+              <option>실내건축과</option>
+              <option>간호학과</option>
+            </select>
+            <label class="header">소속 학과</label>
+          </div>
+          <div class="row">
+            <div class="select">
+              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio" id="select" name="shop" value="학생"><label for="select">학생</label>
+              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio" id="select2" name="shop" value="관리자"><label for="select2">관리자</label>
+            </div>
+            <label class="header">권한</label>
+          </div>
+          <div class="row">
+            <button type="submit">확인</button>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
-  <div class="underButtonsArea">
-    <div class="underButtons">
-      <button @click="updateProfile">확인</button>
-    </div>
-  </div>
 </template>
 
 <script>
 import axios from "axios";
 
 export default {
-  name: "StudentInformation",
+  name: "StudentInformationEdit",
   data() {
     return {
       user_data: {
@@ -62,7 +69,8 @@ export default {
         stu_num: '',
         department: '',
         password: '',
-        stu_rank: ''
+        stu_rank: '',
+        passwordValidFlag: true,
       }
     };
   },
@@ -72,6 +80,13 @@ export default {
     }
   },
   methods: {
+    passwordValid(){
+      if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
+        this.passwordValidFlag = true
+      } else {
+        this.passwordValidFlag = false
+      }
+    },
     updateProfile() {
       axios({
         method: "post", // 요청 방식
@@ -95,7 +110,6 @@ export default {
         });
 
         this.$router.push('/student-information');
-
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용
@@ -111,111 +125,109 @@ export default {
 
 <style scoped>
 
-.stuCard {
-  margin: 10% auto;
+.signUp_card{
+  margin: 10px auto;
   border-radius: 10px;
-  width: 80.56%;
-  padding: 10px 0 0 0;
-  background-color: var(--blue-card);
-  color: var(--blue-card-text);
+  width: 95.56%;
+  height: 500px;
+  padding: 20px 0 10px 0;
+  background-color: var(--card);
 }
-
-.stuCard > hr {
-  margin: 0 0 0 25px;
-  width: 50%;
-  border: var(--blue-card-hr) solid 0.5px;
+.signUp_card > .signUp_wrap > form > .row{
+  margin: 1em 0;
+  position: relative;
 }
-
-.stuCard > h1 {
-  float: left;
-  margin: 20px 0 0 0;
-  padding: 0 5px 0 25px;
-  font-size: 15pt;
+.signUp_card > .signUp_wrap > form > .row > .header{
+  font-size: 11pt;
   font-weight: bold;
-  color: var(--blue-card-text);
+  color: #007AFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 37px;
 }
-
-.stuCard > h2 {
-  margin: 20px 0 5px 0;
-  font-size: 15pt;
-  font-weight: bold;
-  color: var(--blue-card-text);
-}
-
-.stuCard > div > h3 {
-  margin: 0 0 5px 0;
-  font-size: 15pt;
-  font-weight: bold;
-  color: var(--blue-card-text);
-}
-
-.stuCard > p {
-  margin: 7px 0 20px 0;
-  padding: 0 0 0 25px;
-  font-size: 9pt;
-  color: var(--blue-card-text);
-}
-
-.stuCard > a > .stuImg {
-  float: right;
-  margin: -66px 25px 0 0;
-  padding: 0;
-  width: 12%;
-}
-
-.stuCard > h3 {
-  float: right;
-  margin: -30px 28px 0 0;
-  font-size: 8pt;
-  font-weight: bold;
-  color: var(--blue-card-text);
-}
-
-.stuCard > div {
-  text-align: center;
-  margin: 20px 0 0 0;
-}
-
-.stuCard > div > .profilePhoto {
-  width: 132px;
-  height: 170px;
-  background-color: var(--text-color);
-  border-radius: 10px;
-}
-
-.stuCard > div > .blackBox {
-  background: black;
-  border-radius: 0 0 10px 10px;
-  padding: 20px 20px;
-}
-
-.stuCard > div > .blackBox > .jeiuLogo {
-  width: 17%;
-}
-
-.stuCard > div > .blackBox > .barcode {
-  width: 70%;
-  margin: 10px;
-  border-radius: 5px;
-}
-
-.underButtonsArea {
+.signUp_card > .signUp_wrap > form > .row > .highLight{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 0.1em;
+  background: #D4D4D4;
+  width: 80%;
   margin: 0 auto;
-  text-align: center;
-  width: 100%;
 }
-
-.underButtons > button {
-  margin: 10px 5px 0 5px;
-  width: 27%;
-  height: 30px;
+.signUp_card > .signUp_wrap > form > .row >  input,
+.signUp_card > .signUp_wrap > form > .row >  button[type=submit]{
+  width: 80%;
+  font: inherit;
+  padding: 12px 0;
+  font-weight: normal;
+  outline: none;
   border: 0;
-  outline: 0;
-  border-radius: 8px;
-  color: var(--blue-card-text);
-  background: var(--blue-card);
-  font-weight: bolder;
-  font-size: 13px;
+  margin-left: 37px;
+  margin-top: 15px;
+}
+.signUp_card > .signUp_wrap > form > .row >  input{
+  font-size: 11pt;
+  background: var(--card);
+}
+.signUp_card > .signUp_wrap > form > .row >  input::placeholder{
+  color: #A4A4A4;
+}
+.signUp_card > .signUp_wrap > form > .row >  button[type=submit]{
+  border-radius: 10px;
+  border: none;
+  font-size: 14pt;
+  font-weight: bold;
+  color: #F4F4F4;
+  cursor: pointer;
+  background-color: #007AFF;
+}
+.depart{
+  width: 80%;
+  height: 45px;
+  margin-top: 30px;
+  margin-left: 40px;
+  border: none;
+  border-bottom: 1px solid #A4A4A4;
+  font-weight: normal;
+}
+.select {
+    padding: 35px 0px 10px 0px;
+    margin-left: 40px;
+}
+.select input[type=radio]{
+    display: none;
+}
+.select input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 35px;
+    width: 43.8%;
+    border: 1px solid #A4A4A4;
+    line-height: 24px;
+    text-align: center;
+    font-weight:normal;
+    font-size:14px;
+    padding-top: 10px;
+    background-color: #fff;
+    color: #A4A4A4;
+}
+.select input[type=radio]+label:first-of-type{
+    border-radius: 10px 0 0 10px;
+}
+.select input[type=radio]+label:nth-of-type(2){
+  border-radius: 0 10px 10px 0;
+}
+.select input[type=radio]:checked+label{
+    background-color: rgba(0, 122, 255, 0.5);
+    color: #FFFFFF;
+}
+.pw{
+  font-size: 9pt;
+  color: #FF3B30;
+  margin-left: 37px;
+  margin-top: -10px;
 }
 
 </style>
