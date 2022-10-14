@@ -42,15 +42,18 @@
             </select>
             <label class="header">소속 학과</label>
           </div>
-          <div class="row">
+          <div class="row" v-if="user_data.stu_rank === '관리자'">
             <div class="select">
-              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio" id="select" name="shop" value="학생"><label for="select">학생</label>
-              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio" id="select2" name="shop" value="관리자"><label for="select2">관리자</label>
+              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio"
+                     id="select" name="shop" value="학생"><label for="select">학생</label>
+              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio"
+                     id="select2" name="shop" value="관리자"><label for="select2">관리자</label>
             </div>
             <label class="header">권한</label>
           </div>
           <div class="row">
             <button type="submit">확인</button>
+            <button @click="this.$router.push('/student-information');">취소</button>
           </div>
         </form>
       </div>
@@ -74,13 +77,20 @@ export default {
       }
     };
   },
+  created() {
+    this.user_data.name = this.$store.state.user_data['name'];
+    this.user_data.stu_num = this.$store.state.user_data['stu_num'];
+    this.user_data.department = this.$store.state.user_data['department'];
+    this.user_data.password = this.$store.state.user_data['password'];
+    this.user_data.stu_rank = this.$store.state.user_data['stu_rank'];
+  },
   computed: {
     veux_userdata() {
       return this.$store.state.user_data
     }
   },
   methods: {
-    passwordValid(){
+    passwordValid() {
       if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
         this.passwordValidFlag = true
       } else {
@@ -200,18 +210,18 @@ export default {
     display: none;
 }
 .select input[type=radio]+label{
-    display: inline-block;
-    cursor: pointer;
-    height: 35px;
-    width: 43.8%;
-    border: 1px solid #A4A4A4;
-    line-height: 24px;
-    text-align: center;
-    font-weight:normal;
-    font-size:14px;
-    padding-top: 10px;
-    background-color: #fff;
-    color: #A4A4A4;
+  display: inline-block;
+  cursor: pointer;
+  height: 35px;
+  width: 43.8%;
+  border: 1px solid #A4A4A4;
+  line-height: 24px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  padding-top: 10px;
+  background-color: #3998FF;
+  color: #FFFFFF;
 }
 .select input[type=radio]+label:first-of-type{
     border-radius: 10px 0 0 10px;
@@ -219,9 +229,9 @@ export default {
 .select input[type=radio]+label:nth-of-type(2){
   border-radius: 0 10px 10px 0;
 }
-.select input[type=radio]:checked+label{
-    background-color: rgba(0, 122, 255, 0.5);
-    color: #FFFFFF;
+.select input[type=radio]:checked+label {
+  background-color: #007AFF;
+  color: #FFFFFF;
 }
 .pw{
   font-size: 9pt;

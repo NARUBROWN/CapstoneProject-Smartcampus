@@ -129,10 +129,15 @@ export default {
           password: this.password,
           rank: this.rank
         }
-      }).then(function (res) {
+      }).then((res) => {
         // 회원가입 성공
         console.log("회원가입 성공" + res);
         this.$router.push('/login');
+
+        this.$toast.success('가입을 환영합니다. 다시 로그인 해주세요', {
+          position: 'bottom'
+        });
+
       })
           .catch(function (err) {
             console.log(err); // 에러 처리 내용
@@ -227,7 +232,7 @@ export default {
   font-weight: normal;
   font-size: 14px;
   padding-top: 10px;
-  background-color: rgba(0, 122, 255, 0.5);
+  background-color: #3998FF;
   color: #ffffff;
 }
 .select input[type=radio]+label:first-of-type{

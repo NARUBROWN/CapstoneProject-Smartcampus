@@ -12,9 +12,7 @@
     <div class="loginInfo">
       <h1>JEIUe에</h1>
       <h2>로그인 하기</h2>
-      <p>더미 데이터</p>
       <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
-      <h3>학생카드</h3>
     </div>
   </router-link>
 </template>

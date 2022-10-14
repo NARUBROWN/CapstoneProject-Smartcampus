@@ -7,17 +7,18 @@
         <!-- 파일 업로드 부분 -->
         <form @submit.prevent="sendImg()">
           <div class="file">
-            <label for="file">{{ fileSelectMessage }}</label>
+            <label for="file" v-if="selectButton" v-on:change="fileSelect($event)">{{ fileSelectMessage }}</label>
             <div class="zzz"></div>
-            <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)" class="test">
-            <label for="submit">업로드</label>
+            <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)"
+                   class="displayNone">
+            <label for="submit" v-if="sendButton">보내기</label>
             <input type="submit" id="submit">
           </div>
         </form>
       </div>
     </div>
   </div>
-
+  <a v-if="load">여기다가 로딩 이미지 넣으면 로딩될때 얘가 보임</a>
   <div class="card2" v-if="resultCard">
     <div class="result">
       <h1>결과</h1>
@@ -25,7 +26,7 @@
       <h2><a>{{ this.result.department }}</a>
         <a>{{ this.result.name }}</a></h2>
       <h3><a>{{ this.result.location }}</a>
-        <a>{{ this.result.building }}</a></h3>
+        <a> {{ this.result.building }}</a></h3>
       <img v-bind:src="this.result.img">
       <p><a>{{ this.result.description }}</a></p>
     </div>
@@ -39,8 +40,11 @@ export default {
   name: "CampusNavigator",
   data() {
     return {
-      fileSelectMessage: '파일 선택',
+      fileSelectMessage: '사진 업로드하기',
       resultCard: false,
+      selectButton: true,
+      sendButton: false,
+      load: false,
       input: {
         image: ''
       },
@@ -56,13 +60,43 @@ export default {
   },
   methods: {
     fileSelect(event) {
-      this.input.image = event.target.files[0];
+      //input file 태그.
+      var file = document.getElementById('file');
+      //파일 경로.
+      var filePath = file.value;
+      //전체경로를 \ 나눔.
+      var filePathSplit = filePath.split('\\');
+      //전체경로를 \로 나눈 길이.
+      var filePathLength = filePathSplit.length;
+      //마지막 경로를 .으로 나눔.
+      var fileNameSplit = filePathSplit[filePathLength - 1].split('.');
+      //파일명 : .으로 나눈 앞부분
+      var fileName = fileNameSplit[0];
+      //파일 확장자 : .으로 나눈 뒷부분
+      var fileExt = fileNameSplit[1];
+
+      if (fileName === "") {
+        console.log("비어있습니다.")
+      } else {
+        if (fileExt !== "jpg") {
+          this.fileSelectMessage = "다시 찍기"
+          this.$toast.error('지원하지 않는 파일 형식입니다.', {
+            position: 'bottom'
+          });
+        } else {
+          this.sendButton = true
+          this.fileSelectMessage = fileName + "." + fileExt
+          this.input.image = event.target.files[0];
+        }
+      }
     },
     // 파일 전송
     async sendImg() {
       const formData = new FormData();
       formData.append('file', this.input.image);
       try {
+        //메소드가 실행되면, 로딩화면 보여주기
+        this.load = true
         // 백엔드에 요청된 데이터를 가져오기
         let user = await axios({
           headers: {
@@ -96,8 +130,9 @@ export default {
         this.$toast.error('서버에 연결되지 않았습니다.', {
           position: 'bottom'
         });
-
       }
+      // 메소드가 끝났으면, 로딩 화면 끄기
+      this.load = false
     },
     test() {
       this.result = {
@@ -109,6 +144,7 @@ export default {
         img: 'ThirdFloor_Lobby'
       }
       this.result.img = require(`../../assets/campus_navigator/ThirdFloor_Lobby.png`);
+      this.resultCard = true
     }
   }
 }
@@ -237,7 +273,7 @@ input[type="submit"]{
   margin-top: 350px;
 }
 
-.test {
+.displayNone {
   display: none;
 }
 
