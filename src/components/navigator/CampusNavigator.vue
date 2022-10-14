@@ -1,7 +1,5 @@
 <template>
   <button @click="test">테스트 정보 주입</button>
-  <div class="card">
-    <h1>사진 업로드</h1>
     <div class="ButtonsContent">
       <div class="ButtonsArea">
         <!-- 파일 업로드 부분 -->
@@ -17,11 +15,11 @@
         </form>
       </div>
     </div>
-  </div>
-  <a v-if="load">여기다가 로딩 이미지 넣으면 로딩될때 얘가 보임</a>
-  <div class="card2" v-if="resultCard">
+  <div class="card2">
     <div class="result">
-      <h1>결과</h1>
+      <h1>탐색 결과</h1>
+      <div>여기에 v-if로 업로드 전 '사진을 업로드 해주세요 이미지 띄우기'</div>
+      <a v-if="load">여기다가 로딩 이미지 넣으면 로딩될때 얘가 보임</a>
       <!-- 출력 부분 -->
       <h2><a>{{ this.result.department }}</a>
         <a>{{ this.result.name }}</a></h2>
@@ -41,7 +39,6 @@ export default {
   data() {
     return {
       fileSelectMessage: '사진 업로드하기',
-      resultCard: false,
       selectButton: true,
       sendButton: false,
       load: false,
@@ -118,9 +115,6 @@ export default {
         const path = user.data[0]['img'];
         this.result.img = require(`../../assets/campus_navigator/${path}.png`);
 
-        //결과창 출력
-        this.resultCard = true
-
         //파일 업로드 버튼 재 활성화
         this.fileSelectMessage = "파일 선택"
 
@@ -144,7 +138,6 @@ export default {
         img: 'ThirdFloor_Lobby'
       }
       this.result.img = require(`../../assets/campus_navigator/ThirdFloor_Lobby.png`);
-      this.resultCard = true
     }
   }
 }
