@@ -139,12 +139,12 @@ export default {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  height: 500px;
+  height: 440px;
   padding: 20px 0 10px 0;
   background-color: var(--card);
 }
 .signUp_card > .signUp_wrap > form > .row{
-  margin: 1em 0;
+  margin: 10px 0;
   position: relative;
 }
 .signUp_card > .signUp_wrap > form > .row > .header{
@@ -231,7 +231,7 @@ export default {
 }
 .select input[type=radio]:checked+label {
   background-color: #007AFF;
-  color: #FFFFFF;
+  color: #FFFFFF; 
 }
 .pw{
   font-size: 9pt;

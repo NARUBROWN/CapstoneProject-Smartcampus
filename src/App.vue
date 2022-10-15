@@ -4,7 +4,15 @@
     <div class="top">
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
       <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
-      <a @click="logout" v-if="this.$store.state.user_data['login_state']"><a>로그아웃</a></a>
+      <img class="logout" src="@/assets/student/profile.png" @click="handler">
+      <transition name="slide-fade">
+        <div v-if="isShow" class="slide_card">
+          <div>학생증</div>
+          <div>마이페이지</div>
+          <div @click="logout" v-if="this.$store.state.user_data['login_state']">로그아웃</div>
+        </div>
+      </transition>
+      <!-- @click="logout" v-if="this.$store.state.user_data['login_state']" -->
     </div>
   </header>
   <!--라우트 되는 부분-->
@@ -19,12 +27,20 @@
 
 export default {
   name: "App",
+  data() {
+    return {
+      isShow: false,
+    };
+  },
   methods: {
     logout() {
       this.$store.commit('logout')
       this.$router.push('/');
-    }
-  }
+    },
+    handler() {
+      this.isShow = !this.isShow;
+    },
+  },
 }
 </script>
 
@@ -85,11 +101,19 @@ header {
 
 .top {
   width: 100%;
+  position: relative;
 }
 
 .logo {
   margin: 13px 0 7px 22px;
   width: 15%;
+}
+
+.logout{
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  margin-left:175px;
 }
 
 footer {
@@ -105,5 +129,40 @@ footer > p {
   color: var(--blue-card-text);
   font-weight: bolder;
   font-size: 10pt;
+}
+
+.slide_card{
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 10px;
+  width: 110px;
+  height: 116px;
+  box-shadow: #c0bfbf 0 0 5px;
+  font-size: 10pt;
+  font-weight: bold;
+  margin-left: 272px;
+}
+
+.slide_card > div{
+  height: 33%;
+  text-align: center;
+}
+
+.slide_card > div:first-of-type{
+  margin-top: 9px;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.4s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
 }
 </style>

@@ -152,12 +152,12 @@ export default {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  height: 650px;
+  height: 490px;
   padding: 20px 0 10px 0;
   background-color: var(--card);
 }
 .signUp_card > .signUp_wrap > form > .row{
-  margin: 1em 0;
+  margin: 10px 0;
   position: relative;
 }
 .signUp_card > .signUp_wrap > form > .row > .header{
