@@ -1,25 +1,36 @@
 <template>
   <button @click="test">테스트 정보 주입</button>
-    <div class="ButtonsContent">
-      <div class="ButtonsArea">
-        <!-- 파일 업로드 부분 -->
-        <form @submit.prevent="sendImg()">
-          <div class="file">
-            <label for="file" v-if="selectButton" v-on:change="fileSelect($event)">{{ fileSelectMessage }}</label>
-            <div class="zzz"></div>
-            <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)"
-                   class="displayNone">
-            <label for="submit" v-if="sendButton">보내기</label>
-            <input type="submit" id="submit">
-          </div>
-        </form>
+
+  <!-- 파일선택 전 -->
+  <div class="firstAction" v-if="selectButton">
+    <form @submit.prevent="sendImg()">
+      <label for="file" v-on:change="fileSelect($event)"><h1>{{ fileSelectMessage }}</h1></label>
+      <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)" class="displayNone">
+    </form>
+    <img src="@/assets/campus_navigator/TakePhoto.svg" alt="사진 업로드">
+  </div>
+
+  <!-- 파일선택 후 -->
+  <div class="secondActionArea" v-if="secondActionArea">
+    <form @submit.prevent="sendImg()">
+      <div class="secondAction">
+        <label for="file" v-on:change="fileSelect($event)"><h1>{{ fileSelectMessage }}</h1></label>
+        <input type="file" name="file" id="file" ref="user_img" v-on:change="fileSelect($event)" class="displayNone">
+        <img src="@/assets/campus_navigator/TakePhoto.svg" alt="전송">
       </div>
-    </div>
-  <div class="card2">
+      <div class="sendAction">
+        <label for="submit"><h1>보내기</h1></label>
+        <input type="submit" id="submit">
+        <img src="@/assets/campus_navigator/Submit.svg" alt="전송">
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
     <div class="result">
-      <h1>탐색 결과</h1>
-      <div>여기에 v-if로 업로드 전 '사진을 업로드 해주세요 이미지 띄우기'</div>
-      <a v-if="load">여기다가 로딩 이미지 넣으면 로딩될때 얘가 보임</a>
+      <h1>결과</h1>
+      <img src="@/assets/campus_navigator/Empty.png" alt="사진을 업로드 해주세요" v-if="emptyImg">
+      <img src="@/assets/campus_navigator/Load.png" alt="사진을 업로드 해주세요" v-if="load">
       <!-- 출력 부분 -->
       <h2><a>{{ this.result.department }}</a>
         <a>{{ this.result.name }}</a></h2>
@@ -40,7 +51,8 @@ export default {
     return {
       fileSelectMessage: '사진 업로드하기',
       selectButton: true,
-      sendButton: false,
+      secondActionArea: false,
+      emptyImg: true,
       load: false,
       input: {
         image: ''
@@ -81,8 +93,9 @@ export default {
             position: 'bottom'
           });
         } else {
-          this.sendButton = true
-          this.fileSelectMessage = fileName + "." + fileExt
+          this.secondActionArea = true
+          this.selectButton = false
+          this.fileSelectMessage = fileName.substr(0, 3) + "." + fileExt
           this.input.image = event.target.files[0];
         }
       }
@@ -91,6 +104,9 @@ export default {
     async sendImg() {
       const formData = new FormData();
       formData.append('file', this.input.image);
+
+      // 기존 결과 값 초기화
+      this.result = []
       try {
         //메소드가 실행되면, 로딩화면 보여주기
         this.load = true
@@ -105,10 +121,6 @@ export default {
           data: formData
         })
 
-        this.$toast.success('사진을 서버에 업로드 했습니다.', {
-          position: 'bottom'
-        });
-
         // 받아온 데이터 저장
         this.result = user.data[0]
 
@@ -116,7 +128,10 @@ export default {
         this.result.img = require(`../../assets/campus_navigator/${path}.png`);
 
         //파일 업로드 버튼 재 활성화
-        this.fileSelectMessage = "파일 선택"
+        this.fileSelectMessage = "재촬영"
+
+        //사진을 업로드 해주세요 사진 비활성화
+        this.emptyImg = false
 
       } catch (e) {
         console.log("새로운 데이터를 불러오지 못했습니다. " + e);
@@ -138,26 +153,22 @@ export default {
         img: 'ThirdFloor_Lobby'
       }
       this.result.img = require(`../../assets/campus_navigator/ThirdFloor_Lobby.png`);
+      this.emptyImg = false
     }
   }
 }
 </script>
 
 <style scoped>
+
 .card {
-  margin: 10px auto;
+  margin: 0 auto;
   border-radius: 10px;
   width: 95.56%;
+  height: 500px;
   padding: 10px 0 10px 0;
   background-color: var(--card);
   color: var(--text-color);
-}
-
-.card > h1 {
-  margin: 10px 0 15px 0;
-  padding: 0 0 0 20px;
-  font-size: 10pt;
-  font-weight: bold;
 }
 
 .card > .result > h1 {
@@ -167,41 +178,8 @@ export default {
   font-weight: bold;
 }
 
-.card2 {
-  margin: 10px auto;
-  border-radius: 10px;
-  width: 95.56%;
-  height: 500px;
-  padding: 10px 0 10px 0;
-  background-color: var(--card);
-  color: var(--text-color);
-}
-.card2 > .result > h1 {
-  margin: 10px 0 15px 0;
-  padding: 0 0 0 20px;
-  font-size: 10pt;
-  font-weight: bold;
-}
-.ButtonsArea {
-  margin: 0 auto;
-  text-align: center;
-  width: 100%;
-  height: 100px;
-}
-.Buttons {
-  margin: 10px 5px 0 5px;
-  width: 37.5%;
-  height: 35px;
-  border: 0;
-  border-radius: 8px;
-  color: var(--blue-card-text);
-  background: var(--blue-card);
-  font-weight: bolder;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
 .file label,
-input[type="submit"]{
+input[type="submit"] {
   margin: 10px 5px 0 5px;
   display: inline-block;
   width: 37.5%;
@@ -223,15 +201,6 @@ input[type="submit"]{
 }
 #submit{
   display: none;
-}
-.zzz{
-  position: absolute;
-  width: 70px;
-  height: 30px;
-  /* background-color: var(--card); */
-  z-index: 1;
-  margin-left: 0px;
-  margin-top: 5px;
 }
 .result > img{
   position: absolute;
@@ -268,6 +237,93 @@ input[type="submit"]{
 
 .displayNone {
   display: none;
+}
+
+.firstAction {
+  margin: 10px auto 0;
+  border-radius: 10px 10px 0 0;
+  width: 85.56%;
+  height: 40px;
+  padding: 2px 0 2px 0;
+  background-color: #FF9500;
+}
+
+.firstAction > form > label > h1 {
+  float: left;
+  margin: 10px 0 0 0;
+  padding: 0 5px 0 25px;
+  font-size: 15pt;
+  font-weight: bold;
+  color: var(--blue-card-text);
+}
+
+.firstAction > img {
+  float: right;
+  margin: 5px 25px 0 0;
+  padding: 0;
+  width: 9%;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
+
+}
+
+.secondAction {
+  border-radius: 10px 10px 0 0;
+  width: 45.78%;
+  height: 40px;
+  padding: 2px 0 2px 0;
+  background-color: #FF9500;
+  display: inline-block;
+  margin: 0 5px 0 8px;
+}
+
+.secondAction > label > h1 {
+  float: left;
+  margin: 10px 0 0 0;
+  padding: 0 5px 0 25px;
+  font-size: 15pt;
+  font-weight: bold;
+  color: var(--blue-card-text);
+}
+
+.secondAction > img {
+  float: right;
+  margin: 5px 25px 0 0;
+  padding: 0;
+  width: 18%;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
+}
+
+.sendAction {
+  border-radius: 10px 10px 0 0;
+  width: 45.78%;
+  height: 40px;
+  padding: 2px 0 2px 0;
+  background-color: #34C759;
+  display: inline-block;
+  margin: 0 5px 0 5px;
+}
+
+.sendAction > label > h1 {
+  float: left;
+  margin: 10px 0 0 0;
+  padding: 0 5px 0 25px;
+  font-size: 15pt;
+  font-weight: bold;
+  color: var(--blue-card-text);
+}
+
+.sendAction > img {
+  float: right;
+  margin: 6px 25px 0 0;
+  padding: 0;
+  width: 19%;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
+}
+
+.secondActionArea {
+  width: 85.56%;
+  height: 40px;
+  margin: 4px auto;
 }
 
 </style>
