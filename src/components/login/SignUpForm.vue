@@ -73,6 +73,7 @@
           </div>
           <label class="header">권한</label>
         </div>
+        <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
         <div class="row">
           <button type="submit">확인</button>
         </div>
@@ -94,8 +95,10 @@ export default {
       password: '',
       passwordCheck: '',
       rank: '학생',
+      image: '',
       passwordValidFlag: true,
       passwordCheckFlag: true,
+      fullFileName: '',
     }
   },
   computed: {
@@ -104,6 +107,28 @@ export default {
     }
   },
   methods: {
+    fileSelect(event) {
+      //input file 태그.
+      var file = document.getElementById('file');
+      //파일 경로.
+      var filePath = file.value;
+      //전체경로를 \ 나눔.
+      var filePathSplit = filePath.split('\\');
+      //전체경로를 \로 나눈 길이.
+      var filePathLength = filePathSplit.length;
+      //마지막 경로를 .으로 나눔.
+      var fileNameSplit = filePathSplit[filePathLength - 1].split('.');
+      //파일명 : .으로 나눈 앞부분
+      var fileName = fileNameSplit[0];
+      //파일 확장자 : .으로 나눈 뒷부분
+      var fileExt = fileNameSplit[1];
+
+      this.secondActionArea = true
+      this.selectButton = false
+      this.fileSelectMessage = fileName.substr(0, 3) + "." + fileExt
+      this.image = event.target.files[0];
+      this.fullFileName = fileName + "." + fileExt
+    },
     passwordValid() {
       if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
         this.passwordValidFlag = true
@@ -119,16 +144,18 @@ export default {
       }
     },
     sendPost() {
+      const formData = new FormData();
+      formData.append('profile_img', this.image);
+      formData.append('name', this.name)
+      formData.append('stu_num', this.stu_num)
+      formData.append('department', this.department)
+      formData.append('password', this.password)
+      formData.append('rank', this.rank)
+
       axios({
         method: "post", // 요청 방식
         url: process.env.VUE_APP_IP + "/post/signup", // 요청 주소
-        data: {
-          name: this.name,
-          stu_num: this.stu_num,
-          department: this.department,
-          password: this.password,
-          rank: this.rank
-        }
+        data: formData
       }).then((res) => {
         // 회원가입 성공
         console.log("회원가입 성공" + res);

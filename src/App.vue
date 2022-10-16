@@ -4,12 +4,15 @@
     <div class="top">
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
       <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
-      <img class="logout" src="@/assets/student/profile.png" @click="handler">
+      <img class="logout" src="@/assets/student/Non_Profile.png"
+           v-if="this.$store.state.user_data['login_state'] === false">
+      <img class="logout" v-bind:src="profile_img" @click="handler"
+           v-if="this.$store.state.user_data['login_state'] === true">
       <transition name="slide-fade">
         <div v-if="isShow" class="slide_card">
           <div>학생증</div>
           <div>마이페이지</div>
-          <div @click="logout" v-if="this.$store.state.user_data['login_state']">로그아웃</div>
+          <div @click="logout">로그아웃</div>
         </div>
       </transition>
       <!-- @click="logout" v-if="this.$store.state.user_data['login_state']" -->
@@ -30,7 +33,15 @@ export default {
   data() {
     return {
       isShow: false,
+      profile_img: ''
     };
+  },
+  created() {
+    if (this.$store.state.user_data['login_state'] === true) {
+      this.profile_img = process.env.VUE_APP_IP + '/profile_img/' + this.$store.state.user_data['img']
+    } else {
+      this.profile_img = ""
+    }
   },
   methods: {
     logout() {
@@ -131,7 +142,7 @@ footer > p {
   font-size: 10pt;
 }
 
-.slide_card{
+.slide_card {
   position: absolute;
   background: #FFFFFF;
   border-radius: 10px;
@@ -139,7 +150,7 @@ footer > p {
   height: 116px;
   box-shadow: #c0bfbf 0 0 5px;
   font-size: 10pt;
-  font-weight: bold;
+  font-weight: normal;
   margin-left: 272px;
 }
 

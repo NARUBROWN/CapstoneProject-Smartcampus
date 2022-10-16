@@ -76,7 +76,8 @@ export default {
         stu_rank: "",
         massage: "",
         password: "",
-        code: 0
+        code: 0,
+        img: ""
       }]
     }
   },

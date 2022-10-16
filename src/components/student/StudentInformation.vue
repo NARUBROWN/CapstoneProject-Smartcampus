@@ -1,14 +1,14 @@
 <template>
   <div class="stuCard">
     <div>
-      <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
+      <img class="profilePhoto" v-bind:src="img" alt="프로필">
       <br>
     </div>
     <h1>{{ veux_userdata['name'] }}</h1>
     <h2>{{ veux_userdata['stu_rank'] }}</h2>
     <hr>
     <p>{{ veux_userdata['department'] }}</p>
-    <a><img class="stuImg" src="@/assets/student/stuIcon.png" alt="학생증 아이콘"></a>
+    <a><img class="stuImg" src="@/assets/main/student/student.png" alt="학생증 아이콘"></a>
     <h3>학생카드</h3>
     <div>
       <!-- <img class="barcode" src="@/assets/student/barcode.png" alt="바코드"> -->
@@ -37,6 +37,7 @@ export default {
   name: "StudentInformation",
   data() {
     return {
+      img: ""
       /*user_data: [{
         name: "",
         rank: "",
@@ -49,6 +50,9 @@ export default {
     veux_userdata() {
       return this.$store.state.user_data
     }
+  },
+  created() {
+    this.img = process.env.VUE_APP_IP + '/profile_img/' + this.$store.state.user_data['img']
   },
   methods: {
     /*// 백엔드에 데이터 요청하는 메소드
@@ -145,9 +149,9 @@ export default {
 
 .stuCard > a > .stuImg {
   float: right;
-  margin: -66px 25px 0 0;
+  margin: -69px 23px 0 0;
   padding: 0;
-  width: 12%;
+  width: 15%;
 }
 
 .stuCard > h3 {

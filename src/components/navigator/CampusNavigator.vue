@@ -107,6 +107,7 @@ export default {
 
       // 기존 결과 값 초기화
       this.result = []
+
       try {
         //메소드가 실행되면, 로딩화면 보여주기
         this.load = true
@@ -165,7 +166,6 @@ export default {
   margin: 0 auto;
   border-radius: 10px;
   width: 95.56%;
-  height: 500px;
   padding: 10px 0 10px 0;
   background-color: var(--card);
   color: var(--text-color);

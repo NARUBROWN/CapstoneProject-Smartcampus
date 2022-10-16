@@ -12,7 +12,8 @@ export const store = createStore({
                 stu_number: 0,
                 department: "",
                 stu_rank: "",
-                password: ""
+                password: "",
+                img: ""
             }
         }
     },
@@ -26,6 +27,8 @@ export const store = createStore({
             state.user_data["department"] = user_info["department"]
             state.user_data["stu_rank"] = user_info["stu_rank"]
             state.user_data["password"] = user_info["password"]
+            state.user_data["img"] = user_info["img"]
+
         },
         logout(state) {
             state.user_data["login_state"] = false
@@ -35,6 +38,7 @@ export const store = createStore({
             state.user_data["department"] = ""
             state.user_data["stu_rank"] = ""
             state.user_data["password"] = ""
+            state.user_data["img"] = ""
         }
     },
     actions: {

@@ -7,6 +7,7 @@
     <div class="signUp_card">
       <div class="signUp_wrap"> 
         <form @submit.prevent="updateProfile">
+          <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
           <div class="row">
             <input 
                   type="text"
@@ -29,7 +30,7 @@
             <label class="header">비밀번호</label>
             <div class="highLight"></div>
           </div>
-          <!-- <div class="pw" v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div> -->
+
           <div class="row">
             <select class="depart" v-model="user_data['department']" v-bind:placeholder="veux_userdata['department']">
               <option value="" disabled selected>소속학과를 선택해 주세요.</option>
@@ -67,6 +68,9 @@ export default {
   name: "StudentInformationEdit",
   data() {
     return {
+      fullLocationImg: '',
+      selectedImg: '',
+      fullFileName: '',
       user_data: {
         name: '',
         stu_num: '',
@@ -74,15 +78,19 @@ export default {
         password: '',
         stu_rank: '',
         passwordValidFlag: true,
+        img: '',
+        id: ''
       }
     };
   },
   created() {
+    this.user_data.id = this.$store.state.user_data['id'];
     this.user_data.name = this.$store.state.user_data['name'];
     this.user_data.stu_num = this.$store.state.user_data['stu_num'];
     this.user_data.department = this.$store.state.user_data['department'];
     this.user_data.password = this.$store.state.user_data['password'];
     this.user_data.stu_rank = this.$store.state.user_data['stu_rank'];
+    this.user_data.img = this.$store.state.user_data['img'];
   },
   computed: {
     veux_userdata() {
@@ -90,6 +98,25 @@ export default {
     }
   },
   methods: {
+    fileSelect(event) {
+      //input file 태그.
+      var file = document.getElementById('file');
+      //파일 경로.
+      var filePath = file.value;
+      //전체경로를 \ 나눔.
+      var filePathSplit = filePath.split('\\');
+      //전체경로를 \로 나눈 길이.
+      var filePathLength = filePathSplit.length;
+      //마지막 경로를 .으로 나눔.
+      var fileNameSplit = filePathSplit[filePathLength - 1].split('.');
+      //파일명 : .으로 나눈 앞부분
+      var fileName = fileNameSplit[0];
+      //파일 확장자 : .으로 나눈 뒷부분
+      var fileExt = fileNameSplit[1];
+
+      this.selectedImg = event.target.files[0];
+      this.user_data.img = fileName + "." + fileExt
+    },
     passwordValid() {
       if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
         this.passwordValidFlag = true
@@ -98,16 +125,19 @@ export default {
       }
     },
     updateProfile() {
+      const formData = new FormData();
+      formData.append('profile_img', this.selectedImg);
+      formData.append('id', this.user_data.id);
+      formData.append('name', this.user_data.name);
+      formData.append('stu_num', this.user_data.stu_num);
+      formData.append('department', this.user_data.department);
+      formData.append('password', this.user_data.password);
+      formData.append('rank', this.user_data.stu_rank);
+
       axios({
         method: "post", // 요청 방식
         url: process.env.VUE_APP_IP + "/post/profile_update", // 요청 주소
-        data: {
-          id: this.$store.state.user_data['id'],
-          name: this.user_data['name'],
-          department: this.user_data['department'],
-          password: this.user_data['password'],
-          rank: this.user_data['stu_rank']
-        }
+        data: formData
       }).then((res) => {
         // 회원정보 수정
         console.log("수정 성공" + res.data);
@@ -118,7 +148,6 @@ export default {
         this.$toast.success('계정을 성공적으로 수정했습니다.', {
           position: 'bottom'
         });
-
         this.$router.push('/student-information');
       })
           .catch((err) => {
@@ -233,11 +262,19 @@ export default {
   background-color: #007AFF;
   color: #FFFFFF; 
 }
-.pw{
+
+.pw {
   font-size: 9pt;
   color: #FF3B30;
   margin-left: 37px;
   margin-top: -10px;
+}
+
+.profilePhoto {
+  width: 132px;
+  height: 170px;
+  background-color: var(--text-color);
+  border-radius: 10px;
 }
 
 </style>

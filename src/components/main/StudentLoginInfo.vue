@@ -3,9 +3,7 @@
     <div class="loginInfo">
       <h1>{{ veux_userdata['name'] }}</h1>
       <h2>{{ veux_userdata['stu_rank'] }}</h2>
-      <p>더미 데이터</p>
       <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
-      <h3>학생카드</h3>
     </div>
   </router-link>
   <router-link to="/login" v-if="!veux_userdata['login_state']">
@@ -24,9 +22,8 @@ export default {
   name: "StudentLoginInfo",
   data() {
     return {
-      /*user_data: [],
       serverState: false,
-      errorComponent: true,*/
+      errorComponent: true,
     };
   },
   computed: {
@@ -112,9 +109,8 @@ export default {
 
 .loginInfo > img {
   float: right;
-  margin: -73px 15px 0 0;
-  padding: 0;
-  width: 17%;
+  margin: -36px 25px 0 0;
+  width: 13%;
 }
 
 .loginInfo > h3 {
@@ -123,22 +119,6 @@ export default {
   font-size: 8pt;
   font-weight: bold;
   color: var(--blue-card-text);
-}
-
-.errorCard {
-  margin: 10px auto;
-  border-radius: 10px;
-  width: 95.56%;
-  padding: 10px 0 10px 0;
-  background-color: #FF3B30;
-}
-
-.errorCard > h1 {
-  margin: 10px 0 15px 0;
-  padding: 0 0 0 20px;
-  font-size: 10pt;
-  font-weight: bold;
-  color: #ffffff;
 }
 
 </style>
