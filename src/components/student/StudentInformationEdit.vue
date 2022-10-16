@@ -100,22 +100,22 @@ export default {
   methods: {
     fileSelect(event) {
       //input file 태그.
-      var file = document.getElementById('file');
+      const file = document.getElementById('file');
       //파일 경로.
-      var filePath = file.value;
+      const filePath = file.value;
       //전체경로를 \ 나눔.
-      var filePathSplit = filePath.split('\\');
+      const filePathSplit = filePath.split('\\');
       //전체경로를 \로 나눈 길이.
-      var filePathLength = filePathSplit.length;
+      const filePathLength = filePathSplit.length;
       //마지막 경로를 .으로 나눔.
-      var fileNameSplit = filePathSplit[filePathLength - 1].split('.');
+      const fileNameSplit = filePathSplit[filePathLength - 1].split('.');
       //파일명 : .으로 나눈 앞부분
-      var fileName = fileNameSplit[0];
+      const fileName = fileNameSplit[0];
       //파일 확장자 : .으로 나눈 뒷부분
-      var fileExt = fileNameSplit[1];
+      const fileExt = fileNameSplit[1];
 
       this.selectedImg = event.target.files[0];
-      this.user_data.img = fileName + "." + fileExt
+      this.user_data.img = fileName + "." + fileExt;
     },
     passwordValid() {
       if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
@@ -140,15 +140,18 @@ export default {
         data: formData
       }).then((res) => {
         // 회원정보 수정
-        console.log("수정 성공" + res.data);
+        console.log("수정 성공" + res.data[0]);
 
         // 수정된 정보를 Vuex Store에 저장하기
-        this.$store.commit('login', this.user_data)
+        //this.$store.commit('login', this.user_data)
 
-        this.$toast.success('계정을 성공적으로 수정했습니다.', {
+        this.$toast.success('계정을 성공적으로 수정했습니다. 다시 로그인 해주세요', {
           position: 'bottom'
         });
-        this.$router.push('/student-information');
+        //로그아웃 및 메인화면 이동
+
+        this.$store.commit('logout')
+        this.$router.push('/login');
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용
