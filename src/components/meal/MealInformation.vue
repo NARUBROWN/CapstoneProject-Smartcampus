@@ -59,7 +59,7 @@ export default {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  padding: 10px 0 10px 0;
+  padding: 10px 0 5px 0;
   background-color: var(--card);
   color: var(--text-color);
 }
