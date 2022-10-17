@@ -19,6 +19,7 @@ import ArtCampusView from "@/views/ArtCampusView"
 import FoundedCampusView from "@/views/FoundedCampusView"
 import HumanitiesCampusView from "@/views/HumanitiesCampusView"
 import NatureCampusView from "@/views/NatureCampusView"
+import ImgEdit from "@/components/student/ImgEdit";
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/student-information-edit',
     name: 'student-information-edit',
     component: studentInformationEditView
+  },
+  {
+    path: '/student-profile-img-edit',
+    name: 'student-profile-img-edit',
+    component: ImgEdit
   },
   {
     path: '/meal-information',
