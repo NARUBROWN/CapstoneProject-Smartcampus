@@ -38,7 +38,7 @@
               <option>유아교육과</option>
               <option>사회복지과</option>
               <option>실내건축과</option>
-              <option>간호학과</option>
+              <option>뷰티케어과</option>
             </select>
             <label class="header">소속 학과</label>
           </div>
@@ -142,16 +142,16 @@ export default {
 
 .signUp_card{
   margin: 10px auto;
-  border-radius: 10px;
+  border-radius: 10px; 
   width: 95.56%;
   padding: 20px 0 10px 0;
   background-color: var(--card);
 }
-.signUp_card > .signUp_wrap > form > .row{
+.signUp_card > .signUp_wrap > .row{
   margin: 10px 0;
   position: relative;
 }
-.signUp_card > .signUp_wrap > form > .row > .header{
+.signUp_card > .signUp_wrap > .row > .header{
   font-size: 11pt;
   font-weight: bold;
   color: #007AFF;
@@ -160,7 +160,7 @@ export default {
   top: 0;
   margin-left: 37px;
 }
-.signUp_card > .signUp_wrap > form > .row > .highLight{
+.signUp_card > .signUp_wrap > .row > .highLight{
   position: absolute;
   left: 0;
   bottom: 0;
@@ -171,8 +171,8 @@ export default {
   margin: 0 auto;
 }
 
-.signUp_card > .signUp_wrap > form > .row > input,
-.signUp_card > .signUp_wrap > form > .row > button {
+.signUp_card > .signUp_wrap > .row > input,
+.signUp_card > .signUp_wrap > .row > button {
   width: 35%;
   font: inherit;
   padding: 12px 0;
@@ -181,19 +181,18 @@ export default {
   border: 0;
   margin-left: 37px;
   margin-top: 15px;
-  margin-bottom: 10px;
 }
 
-.signUp_card > .signUp_wrap > form > .row > input {
+.signUp_card > .signUp_wrap > .row > input {
   font-size: 11pt;
   background: var(--card);
 }
 
-.signUp_card > .signUp_wrap > form > .row > input::placeholder {
+.signUp_card > .signUp_wrap > .row > input::placeholder {
   color: #A4A4A4;
 }
 
-.signUp_card > .signUp_wrap > form > .row > button {
+.signUp_card > .signUp_wrap > .row > button {
   border-radius: 10px;
   border: none;
   font-size: 14pt;
