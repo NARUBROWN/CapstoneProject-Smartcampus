@@ -1,6 +1,4 @@
 <template>
-  <button @click="test">테스트 정보 주입</button>
-
   <!-- 파일선택 전 -->
   <div class="firstAction" v-if="selectButton">
     <form @submit.prevent="sendImg()">
@@ -250,7 +248,7 @@ input[type="submit"] {
 
 .firstAction > form > label > h1 {
   float: left;
-  margin: 10px 0 0 0;
+  margin: 6px 0 0 0;
   padding: 0 5px 0 25px;
   font-size: 15pt;
   font-weight: bold;
@@ -278,7 +276,7 @@ input[type="submit"] {
 
 .secondAction > label > h1 {
   float: left;
-  margin: 10px 0 0 0;
+  margin: 6px 0 0 0;
   padding: 0 5px 0 25px;
   font-size: 15pt;
   font-weight: bold;
@@ -305,7 +303,7 @@ input[type="submit"] {
 
 .sendAction > label > h1 {
   float: left;
-  margin: 10px 0 0 0;
+  margin: 6px 0 0 0;
   padding: 0 5px 0 25px;
   font-size: 15pt;
   font-weight: bold;

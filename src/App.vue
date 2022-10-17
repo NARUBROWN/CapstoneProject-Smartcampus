@@ -51,6 +51,7 @@ export default {
     },
     handler() {
       this.isShow = !this.isShow;
+      
     },
     profile() {
       if (this.$store.state.user_data['login_state'] === true) {
