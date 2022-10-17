@@ -1,5 +1,4 @@
 <template>
-  {{ veux_userdata }}
   <div class="login_card">
     <div class="login_wrap">
       <form @submit.prevent="sendPost">
@@ -88,9 +87,6 @@ export default {
     userLogin() {
       // 상태 데이터를 vuex에 저장
       return this.$store.commit('login', this.user_data)
-    },
-    veux_userdata() {
-      return this.$store.state.user_data
     }
   },
   methods: {

@@ -10,8 +10,12 @@
            v-if="this.$store.state.user_data['login_state'] === true">
       <transition name="slide-fade">
         <div v-if="isShow" class="slide_card">
-          <div>학생증</div>
-          <div>마이페이지</div>
+          <div @click="handler">
+            <router-link to="/">학생증</router-link>
+          </div>
+          <div @click="handler">
+            <router-link to="/">마이페이지</router-link>
+          </div>
           <div @click="logout">로그아웃</div>
         </div>
       </transition>
@@ -37,20 +41,24 @@ export default {
     };
   },
   created() {
-    if (this.$store.state.user_data['login_state'] === true) {
-      this.profile_img = process.env.VUE_APP_IP + '/profile_img/' + this.$store.state.user_data['img']
-    } else {
-      this.profile_img = ""
-    }
+    this.profile()
   },
   methods: {
     logout() {
       this.$store.commit('logout')
       this.$router.push('/');
+      this.isShow = !this.isShow;
     },
     handler() {
       this.isShow = !this.isShow;
     },
+    profile() {
+      if (this.$store.state.user_data['login_state'] === true) {
+        this.profile_img = process.env.VUE_APP_IP + '/profile_img/' + this.$store.state.user_data['img']
+      } else {
+        this.profile_img = ""
+      }
+    }
   },
 }
 </script>
