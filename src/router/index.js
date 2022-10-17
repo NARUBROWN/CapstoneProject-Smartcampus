@@ -15,10 +15,11 @@ import studentInformationEditView from "@/views/StudentInformationEditView";
 import CampusNavigatorView from "@/views/CampusNavigatorView";
 import CampusCommunityView from "@/views/community/CampusCommunityView";
 import AiCampusView from "@/views/community/AiCampusView";
-import ArtCampusView from "@/views/community/ArtCampusView"
-import FoundedCampusView from "@/views/community/FoundedCampusView"
-import HumanitiesCampusView from "@/views/community/HumanitiesCampusView"
-import NatureCampusView from "@/views/community/NatureCampusView"
+import ArtCampusView from "@/views/community/ArtCampusView";
+import FoundedCampusView from "@/views/community/FoundedCampusView";
+import HumanitiesCampusView from "@/views/community/HumanitiesCampusView";
+import NatureCampusView from "@/views/community/NatureCampusView";
+import ImgEdit from "@/components/student/ImgEdit";
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/student-information-edit',
     name: 'student-information-edit',
     component: studentInformationEditView
+  },
+  {
+    path: '/student-profile-img-edit',
+    name: 'student-profile-img-edit',
+    component: ImgEdit
   },
   {
     path: '/meal-information',

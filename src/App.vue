@@ -5,13 +5,17 @@
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
       <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
       <img class="logout" src="@/assets/student/Non_Profile.png"
-           v-if="this.$store.state.user_data['login_state'] === false">
+           v-if="this.$store.state.user_data['login_state'] === false" alt="로그인 되지 않았습니다.">
       <img class="logout" v-bind:src="profile_img" @click="handler"
-           v-if="this.$store.state.user_data['login_state'] === true">
+           v-if="this.$store.state.user_data['login_state'] === true" alt="프로필 사진">
       <transition name="slide-fade">
         <div v-if="isShow" class="slide_card">
-          <div>학생증</div>
-          <div>마이페이지</div>
+          <div @click="handler">
+            <router-link to="/">학생증</router-link>
+          </div>
+          <div @click="handler">
+            <router-link to="/">마이페이지</router-link>
+          </div>
           <div @click="logout">로그아웃</div>
         </div>
       </transition>
@@ -33,26 +37,26 @@ export default {
   data() {
     return {
       isShow: false,
-      profile_img: ''
+      profile_img: null,
     };
   },
   created() {
     if (this.$store.state.user_data['login_state'] === true) {
       this.profile_img = process.env.VUE_APP_IP + '/profile_img/' + this.$store.state.user_data['img']
     } else {
-      this.profile_img = ""
+      this.profile_img = null
     }
   },
   methods: {
     logout() {
       this.$store.commit('logout')
       this.$router.push('/');
+      this.isShow = !this.isShow;
     },
     handler() {
       this.isShow = !this.isShow;
-      
-    },
-  },
+    }
+  }
 }
 </script>
 

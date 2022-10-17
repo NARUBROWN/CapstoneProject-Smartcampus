@@ -3,36 +3,35 @@
       <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
       <br>
     </div>
-    {{ user_data }}
+  <form @submit.prevent="updateProfile">
     <div class="signUp_card">
-      <div class="signUp_wrap"> 
-        <form @submit.prevent="updateProfile">
-          <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
-          <div class="row">
-            <input 
-                  type="text"
-                  v-model="user_data['name']"
-                  name="name"
-                  v-bind:placeholder="veux_userdata['name']"
-            />
+      <div class="signUp_wrap">
+        <router-link to="student-profile-img-edit">프로필 이미지 수정</router-link>
+        <div class="row">
+          <input
+              type="text"
+              v-model="user_data['name']"
+              name="name"
+              v-bind:placeholder="vuex_userdata['name']"
+          />
             <label class="header">이름</label>
             <div class="highLight"></div>
           </div>
           <div class="row">
             <input
-                  type="text"
-                  v-model="user_data['password']"
-                  name="password"
-                  maxlength="16"
-                  @blur="passwordValid"
-                  v-bind:placeholder="veux_userdata['password']"
+                type="text"
+                v-model="user_data['password']"
+                name="password"
+                maxlength="16"
+                @blur="passwordValid"
+                v-bind:placeholder="vuex_userdata['password']"
             />
             <label class="header">비밀번호</label>
             <div class="highLight"></div>
           </div>
 
           <div class="row">
-            <select class="depart" v-model="user_data['department']" v-bind:placeholder="veux_userdata['department']">
+            <select class="depart" v-model="user_data['department']" v-bind:placeholder="vuex_userdata['department']">
               <option value="" disabled selected>소속학과를 선택해 주세요.</option>
               <option>AI컴퓨터정보과</option>
               <option>AI정보통신과</option>
@@ -45,20 +44,22 @@
           </div>
           <div class="row" v-if="user_data.stu_rank === '관리자'">
             <div class="select">
-              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio"
+              <input v-bind:placeholder="vuex_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio"
                      id="select" name="shop" value="학생"><label for="select">학생</label>
-              <input v-bind:placeholder="veux_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio"
+              <input v-bind:placeholder="vuex_userdata['stu_rank']" v-model="user_data['stu_rank']" type="radio"
                      id="select2" name="shop" value="관리자"><label for="select2">관리자</label>
             </div>
             <label class="header">권한</label>
           </div>
-          <div class="row">
-            <button type="submit">확인</button>
-            <button @click="this.$router.push('/student-information');">취소</button>
-          </div>
-        </form>
       </div>
     </div>
+    <div class="underButtonsArea">
+      <div class="underButtons">
+        <button type="submit">확인</button>
+        <button @click="this.$router.push('/student-information');">취소</button>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -68,9 +69,6 @@ export default {
   name: "StudentInformationEdit",
   data() {
     return {
-      fullLocationImg: '',
-      selectedImg: '',
-      fullFileName: '',
       user_data: {
         name: '',
         stu_num: '',
@@ -78,7 +76,6 @@ export default {
         password: '',
         stu_rank: '',
         passwordValidFlag: true,
-        img: '',
         id: ''
       }
     };
@@ -90,43 +87,18 @@ export default {
     this.user_data.department = this.$store.state.user_data['department'];
     this.user_data.password = this.$store.state.user_data['password'];
     this.user_data.stu_rank = this.$store.state.user_data['stu_rank'];
-    this.user_data.img = this.$store.state.user_data['img'];
   },
   computed: {
-    veux_userdata() {
+    vuex_userdata() {
       return this.$store.state.user_data
     }
   },
   methods: {
-    fileSelect(event) {
-      //input file 태그.
-      var file = document.getElementById('file');
-      //파일 경로.
-      var filePath = file.value;
-      //전체경로를 \ 나눔.
-      var filePathSplit = filePath.split('\\');
-      //전체경로를 \로 나눈 길이.
-      var filePathLength = filePathSplit.length;
-      //마지막 경로를 .으로 나눔.
-      var fileNameSplit = filePathSplit[filePathLength - 1].split('.');
-      //파일명 : .으로 나눈 앞부분
-      var fileName = fileNameSplit[0];
-      //파일 확장자 : .으로 나눈 뒷부분
-      var fileExt = fileNameSplit[1];
-
-      this.selectedImg = event.target.files[0];
-      this.user_data.img = fileName + "." + fileExt
-    },
     passwordValid() {
-      if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
-        this.passwordValidFlag = true
-      } else {
-        this.passwordValidFlag = false
-      }
+      this.passwordValidFlag = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password);
     },
     updateProfile() {
       const formData = new FormData();
-      formData.append('profile_img', this.selectedImg);
       formData.append('id', this.user_data.id);
       formData.append('name', this.user_data.name);
       formData.append('stu_num', this.user_data.stu_num);
@@ -140,15 +112,19 @@ export default {
         data: formData
       }).then((res) => {
         // 회원정보 수정
-        console.log("수정 성공" + res.data);
+        console.log("수정 성공" + res.data[0]);
 
         // 수정된 정보를 Vuex Store에 저장하기
-        this.$store.commit('login', this.user_data)
+        //this.$store.commit('login', this.user_data)
 
-        this.$toast.success('계정을 성공적으로 수정했습니다.', {
+        this.$toast.success('계정을 성공적으로 수정했습니다.<br> 다시 로그인 해주세요', {
           position: 'bottom'
         });
-        this.$router.push('/student-information');
+        //로그아웃 및 메인화면 이동
+        this.$store.commit('logout')
+        //컴포넌트 다시 렌더링
+        this.$forceUpdate();
+        this.$router.push('/login');
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용
@@ -168,7 +144,6 @@ export default {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  height: 440px;
   padding: 20px 0 10px 0;
   background-color: var(--card);
 }
@@ -195,9 +170,10 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
-.signUp_card > .signUp_wrap > form > .row >  input,
-.signUp_card > .signUp_wrap > form > .row >  button[type=submit]{
-  width: 80%;
+
+.signUp_card > .signUp_wrap > form > .row > input,
+.signUp_card > .signUp_wrap > form > .row > button {
+  width: 35%;
   font: inherit;
   padding: 12px 0;
   font-weight: normal;
@@ -205,15 +181,19 @@ export default {
   border: 0;
   margin-left: 37px;
   margin-top: 15px;
+  margin-bottom: 10px;
 }
-.signUp_card > .signUp_wrap > form > .row >  input{
+
+.signUp_card > .signUp_wrap > form > .row > input {
   font-size: 11pt;
   background: var(--card);
 }
-.signUp_card > .signUp_wrap > form > .row >  input::placeholder{
+
+.signUp_card > .signUp_wrap > form > .row > input::placeholder {
   color: #A4A4A4;
 }
-.signUp_card > .signUp_wrap > form > .row >  button[type=submit]{
+
+.signUp_card > .signUp_wrap > form > .row > button {
   border-radius: 10px;
   border: none;
   font-size: 14pt;
@@ -222,7 +202,8 @@ export default {
   cursor: pointer;
   background-color: #007AFF;
 }
-.depart{
+
+.depart {
   width: 80%;
   height: 45px;
   margin-top: 30px;
@@ -232,8 +213,8 @@ export default {
   font-weight: normal;
 }
 .select {
-    padding: 35px 0px 10px 0px;
-    margin-left: 40px;
+  padding: 35px 0 10px 0;
+  margin-left: 40px;
 }
 .select input[type=radio]{
     display: none;
@@ -260,7 +241,7 @@ export default {
 }
 .select input[type=radio]:checked+label {
   background-color: #007AFF;
-  color: #FFFFFF; 
+  color: #FFFFFF;
 }
 
 .pw {
@@ -270,11 +251,23 @@ export default {
   margin-top: -10px;
 }
 
-.profilePhoto {
-  width: 132px;
-  height: 170px;
-  background-color: var(--text-color);
-  border-radius: 10px;
+.underButtonsArea {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.underButtons > button {
+  margin: 10px 5px 0 5px;
+  width: 27%;
+  height: 30px;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+  color: var(--blue-card-text);
+  background: var(--blue-card);
+  font-weight: bolder;
+  font-size: 13px;
 }
 
 </style>
