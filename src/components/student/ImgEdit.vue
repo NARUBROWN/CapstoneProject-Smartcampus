@@ -108,12 +108,12 @@ export default {
   background-color: var(--card);
 }
 
-.signUp_card > .signUp_wrap > form > .row {
+.signUp_card > .signUp_wrap > .row {
   margin: 10px 0;
   position: relative;
 }
 
-.signUp_card > .signUp_wrap > form > .row > .header {
+.signUp_card > .signUp_wrap > .row > .header {
   font-size: 11pt;
   font-weight: bold;
   color: #007AFF;
@@ -123,7 +123,7 @@ export default {
   margin-left: 37px;
 }
 
-.signUp_card > .signUp_wrap > form > .row > .highLight {
+.signUp_card > .signUp_wrap > .row > .highLight {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -134,8 +134,8 @@ export default {
   margin: 0 auto;
 }
 
-.signUp_card > .signUp_wrap > form > .row > input,
-.signUp_card > .signUp_wrap > form > .row > button {
+.signUp_card > .signUp_wrap > .row > input,
+.signUp_card > .signUp_wrap > .row > button {
   width: 35%;
   font: inherit;
   padding: 12px 0;
@@ -147,16 +147,16 @@ export default {
   margin-bottom: 10px;
 }
 
-.signUp_card > .signUp_wrap > form > .row > input {
+.signUp_card > .signUp_wrap > .row > input {
   font-size: 11pt;
   background: var(--card);
 }
 
-.signUp_card > .signUp_wrap > form > .row > input::placeholder {
+.signUp_card > .signUp_wrap > .row > input::placeholder {
   color: #A4A4A4;
 }
 
-.signUp_card > .signUp_wrap > form > .row > button {
+.signUp_card > .signUp_wrap > .row > button {
   border-radius: 10px;
   border: none;
   font-size: 14pt;
