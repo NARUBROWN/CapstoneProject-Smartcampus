@@ -38,7 +38,7 @@
               <option>유아교육과</option>
               <option>사회복지과</option>
               <option>실내건축과</option>
-              <option>간호학과</option>
+              <option>뷰티케어과</option>
             </select>
             <label class="header">소속 학과</label>
           </div>
