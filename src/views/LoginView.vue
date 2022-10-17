@@ -7,6 +7,7 @@
 import LoginForm from "@/components/login/LoginForm";
 
 export default {
+  emits: ["event1", "event2"],
   name: "LoginView",
   components: {
     LoginForm
@@ -14,9 +15,7 @@ export default {
   data() {
     return {}
   },
-  mounted() {
-
-  }
+  methods: {}
 }
 </script>
 
