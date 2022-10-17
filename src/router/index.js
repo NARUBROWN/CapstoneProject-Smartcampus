@@ -13,12 +13,12 @@ import SignUpView from "@/views/SignUpView";
 import VuexTest from "@/views/VuexTest";
 import studentInformationEditView from "@/views/StudentInformationEditView";
 import CampusNavigatorView from "@/views/CampusNavigatorView";
-import CampusCommunityView from "@/views/CampusCommunityView";
-import AiCampusView from "@/views/AiCampusView";
-import ArtCampusView from "@/views/ArtCampusView"
-import FoundedCampusView from "@/views/FoundedCampusView"
-import HumanitiesCampusView from "@/views/HumanitiesCampusView"
-import NatureCampusView from "@/views/NatureCampusView"
+import CampusCommunityView from "@/views/community/CampusCommunityView";
+import AiCampusView from "@/views/community/AiCampusView";
+import ArtCampusView from "@/views/community/ArtCampusView"
+import FoundedCampusView from "@/views/community/FoundedCampusView"
+import HumanitiesCampusView from "@/views/community/HumanitiesCampusView"
+import NatureCampusView from "@/views/community/NatureCampusView"
 
 const routes = [
   {
