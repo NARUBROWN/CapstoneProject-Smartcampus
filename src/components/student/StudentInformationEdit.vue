@@ -142,7 +142,7 @@ export default {
 
 .signUp_card{
   margin: 10px auto;
-  border-radius: 10px;
+  border-radius: 10px; 
   width: 95.56%;
   padding: 20px 0 10px 0;
   background-color: var(--card);
