@@ -28,7 +28,6 @@ export const store = createStore({
             state.user_data["stu_rank"] = user_info["stu_rank"]
             state.user_data["password"] = user_info["password"]
             state.user_data["img"] = user_info["img"]
-
         },
         logout(state) {
             state.user_data["login_state"] = false

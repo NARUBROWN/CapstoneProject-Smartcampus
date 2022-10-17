@@ -118,11 +118,7 @@ export default {
       this.user_data.img = fileName + "." + fileExt;
     },
     passwordValid() {
-      if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
-        this.passwordValidFlag = true
-      } else {
-        this.passwordValidFlag = false
-      }
+      this.passwordValidFlag = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password);
     },
     updateProfile() {
       const formData = new FormData();
@@ -149,8 +145,9 @@ export default {
           position: 'bottom'
         });
         //로그아웃 및 메인화면 이동
-
         this.$store.commit('logout')
+        //컴포넌트 다시 렌더링
+        this.$forceUpdate();
         this.$router.push('/login');
       })
           .catch((err) => {
@@ -235,8 +232,8 @@ export default {
   font-weight: normal;
 }
 .select {
-    padding: 35px 0px 10px 0px;
-    margin-left: 40px;
+  padding: 35px 0 10px 0;
+  margin-left: 40px;
 }
 .select input[type=radio]{
     display: none;
@@ -271,13 +268,6 @@ export default {
   color: #FF3B30;
   margin-left: 37px;
   margin-top: -10px;
-}
-
-.profilePhoto {
-  width: 132px;
-  height: 170px;
-  background-color: var(--text-color);
-  border-radius: 10px;
 }
 
 </style>

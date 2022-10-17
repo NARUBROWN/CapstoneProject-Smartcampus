@@ -3,7 +3,6 @@
     <div class="login_wrap">
       <form @submit.prevent="sendPost">
         <div class="row">
-
           <input type="text"
                  v-model="stu_num"
                  name="stu_num"
@@ -82,6 +81,16 @@ export default {
   },
   created() {
     this.user_data['code'] = 0
+
+    // 3. 로컬 스토리지에 있는 값 확인
+    if (localStorage.getItem('loginLogic') === '1') {
+      //  4. 로컬스토리지에 할당해놨던 값 해제
+      localStorage.setItem('loginLogic', '0');
+      // 5. 메인화면으로 이동
+      this.$router.push('/');
+    } else {
+      console.log('loginLogic에 키 값이 없음')
+    }
   },
   computed: {
     userLogin() {
@@ -140,7 +149,11 @@ export default {
         // 로그인 성공
         // 로그인 정보를 Vuex에 저장하여 상태관리
         this.userLogin
-        this.$router.push('/');
+        //페이지 프로필을 새로 고치기 위해서 로컬스토리지에 값을 주고 Create시에 그 값이 확인되면 메인 페이지로 로드
+        // 1. 로컬스토리지에 키 저장
+        localStorage.setItem('loginLogic', '1');
+        // 2. 페이지 새로고침
+        location.reload();
       }
     }
   }
