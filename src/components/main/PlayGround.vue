@@ -5,17 +5,17 @@
         <tr>
           <td class="playGround1">
             <div class="top">
-                <img class="jeiu" src="@/assets/main/playground/1.png">
+                <img class="jeiu" src="@/assets/main/playground/pageview.svg">
             </div>
-            <router-link to="/campus-navigator"><h2>캠퍼스 길잡이</h2><h6>About University</h6></router-link>
+            <router-link to="/campus-navigator"><h2>캠퍼스 길잡이</h2><h6>Campus Navigator</h6></router-link>
           </td>
         </tr>
         <tr>
           <td class="playGround2">
             <div class="top">
-                <img class="jeiu" src="@/assets/main/playground/1.png">
+                <img class="jeiu" src="@/assets/main/playground/groups.svg">
             </div>
-            <router-link to="/"><h2>학과 커뮤니티</h2><h6>Academic Schedule</h6></router-link>
+            <router-link to="/campus-community"><h2>학과 커뮤니티</h2><h6>Campus Community</h6></router-link>
           </td>
         </tr>
       </table>
@@ -87,7 +87,7 @@
     text-align: right;
   }
   .top > .jeiu {
-  width: 20%;
-  padding-right: 0px;
+  width: 10%;
+  padding: 3px 10px 0 0;
 }
   </style>

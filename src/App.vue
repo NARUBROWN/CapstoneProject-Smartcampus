@@ -50,6 +50,7 @@ export default {
     },
     handler() {
       this.isShow = !this.isShow;
+      
     },
   },
 }

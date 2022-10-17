@@ -13,6 +13,12 @@ import SignUpView from "@/views/SignUpView";
 import VuexTest from "@/views/VuexTest";
 import studentInformationEditView from "@/views/StudentInformationEditView";
 import CampusNavigatorView from "@/views/CampusNavigatorView";
+import CampusCommunityView from "@/views/CampusCommunityView";
+import AiCampusView from "@/views/AiCampusView";
+import ArtCampusView from "@/views/ArtCampusView"
+import FoundedCampusView from "@/views/FoundedCampusView"
+import HumanitiesCampusView from "@/views/HumanitiesCampusView"
+import NatureCampusView from "@/views/NatureCampusView"
 
 const routes = [
   {
@@ -82,6 +88,36 @@ const routes = [
     path: '/campus-navigator',
     name: 'campus-navigator',
     component: CampusNavigatorView
+  },
+  {
+    path: '/campus-community',
+    name: 'campus-community',
+    component: CampusCommunityView
+  },
+  {
+    path: '/ai-campus',
+    name: 'ai-campus',
+    component: AiCampusView
+  },
+  {
+    path: '/art-campus',
+    name: 'art-campus',
+    component: ArtCampusView
+  },
+  {
+    path: '/founded-campus',
+    name: 'founded-campus',
+    component: FoundedCampusView
+  },
+  {
+    path: '/humanities-campus',
+    name: 'humanities-campus',
+    component: HumanitiesCampusView
+  },
+  {
+    path: '/nature-campus',
+    name: 'nature-campus',
+    component: NatureCampusView
   },
   {
     path: '/vuex',
