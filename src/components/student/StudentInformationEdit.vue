@@ -32,7 +32,7 @@
           </div>
 
           <div class="row">
-            <select class="depart" v-model="user_data['department']" v-bind:placeholder="vuex_userdata['department']">
+            <select class="depart" v-model="user_data['department']">
               <option value="" disabled selected>소속학과를 선택해 주세요.</option>
               <option>AI컴퓨터정보과</option>
               <option>AI정보통신과</option>

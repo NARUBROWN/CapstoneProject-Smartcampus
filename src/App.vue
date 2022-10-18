@@ -156,7 +156,7 @@ footer > p {
   box-shadow: #c0bfbf 0 0 5px;
   font-size: 10pt;
   font-weight: normal;
-  margin-left: 272px;
+  margin-left: 68%;
 }
 
 .slide_card > div{

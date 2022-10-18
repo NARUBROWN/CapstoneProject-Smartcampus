@@ -13,7 +13,7 @@
     </div>
     <div class="underButtonsArea">
       <div class="underButtons">
-        <button type="submit">확인</button>
+        <button type="submit" v-if="sendButton">확인</button>
         <button @click="this.$router.push('/student-information-edit');">취소</button>
       </div>
     </div>
@@ -30,6 +30,7 @@ export default {
       fullLocationImg: '',
       selectedImg: '',
       fullFileName: '',
+      sendButton: false,
       user_data: {
         img: '',
         id: ''
@@ -64,6 +65,13 @@ export default {
 
       this.selectedImg = event.target.files[0];
       this.user_data.img = fileName + "." + fileExt;
+
+      // 파일이 없으면 업로드 버튼 비활성화
+      if (filePath !== "") {
+        this.sendButton = true
+      } else {
+        this.sendButton = false
+      }
     },
     updateProfile() {
       const formData = new FormData();
