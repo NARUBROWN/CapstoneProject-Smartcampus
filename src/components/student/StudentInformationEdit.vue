@@ -5,6 +5,7 @@
     </div>
   <form @submit.prevent="updateProfile">
     <div class="signUp_card">
+      <h1>정보 수정</h1>
       <div class="signUp_wrap">
         <router-link to="student-profile-img-edit">프로필 이미지 수정</router-link>
         <div class="row">
@@ -140,18 +141,28 @@ export default {
 
 <style scoped>
 
-.signUp_card{
+.signUp_card {
   margin: 10px auto;
-  border-radius: 10px; 
+  border-radius: 10px;
   width: 95.56%;
   padding: 20px 0 10px 0;
   background-color: var(--card);
+  color: var(--text-color);
 }
-.signUp_card > .signUp_wrap > .row{
+
+.signUp_card > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.signUp_card > .signUp_wrap > .row {
   margin: 10px 0;
   position: relative;
 }
-.signUp_card > .signUp_wrap > .row > .header{
+
+.signUp_card > .signUp_wrap > .row > .header {
   font-size: 11pt;
   font-weight: bold;
   color: #007AFF;
@@ -160,7 +171,8 @@ export default {
   top: 0;
   margin-left: 37px;
 }
-.signUp_card > .signUp_wrap > .row > .highLight{
+
+.signUp_card > .signUp_wrap > .row > .highLight {
   position: absolute;
   left: 0;
   bottom: 0;

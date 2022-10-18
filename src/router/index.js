@@ -19,7 +19,7 @@ import ArtCampusView from "@/views/community/ArtCampusView"
 import FoundedCampusView from "@/views/community/FoundedCampusView"
 import HumanitiesCampusView from "@/views/community/HumanitiesCampusView"
 import NatureCampusView from "@/views/community/NatureCampusView"
-import ImgEdit from "@/components/student/ImgEdit";
+import StudentImgEditView from "@/views/StudentImgEditView";
 
 const routes = [
   {
@@ -53,7 +53,7 @@ const routes = [
   {
     path: '/student-profile-img-edit',
     name: 'student-profile-img-edit',
-    component: ImgEdit
+    component: StudentImgEditView
   },
   {
     path: '/meal-information',

@@ -3,7 +3,6 @@
   <header>
     <div class="top">
       <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
-      <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
       <img class="logout" src="@/assets/student/Non_Profile.png"
            v-if="this.$store.state.user_data['login_state'] === false" alt="로그인 되지 않았습니다.">
       <img class="logout" v-bind:src="profile_img" @click="handler"
@@ -27,6 +26,7 @@
   <footer>
     <p>Copyright © 2022 김원정(NARUBROWN). All right reserved <br><br>
       JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
+      <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
   </footer>
 </template>
 
@@ -125,11 +125,11 @@ header {
   width: 15%;
 }
 
-.logout{
+.logout {
   width: 35px;
   height: 35px;
   border-radius: 35px;
-  margin-left:175px;
+  margin-left: 66%;
 }
 
 footer {

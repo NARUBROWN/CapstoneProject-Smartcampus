@@ -1,5 +1,5 @@
 <template>
-  <h1>학생정보</h1>
+  <h1>학생 정보</h1>
   <StudentInformation></StudentInformation>
 </template>
 

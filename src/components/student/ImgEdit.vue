@@ -5,6 +5,7 @@
   </div>
   <form @submit.prevent="updateProfile">
     <div class="signUp_card">
+      <h1>사진 선택</h1>
       <div class="signUp_wrap">
         <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
 
@@ -106,6 +107,14 @@ export default {
   width: 95.56%;
   padding: 20px 0 10px 0;
   background-color: var(--card);
+  color: var(--text-color);
+}
+
+.signUp_card > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
 }
 
 .signUp_card > .signUp_wrap > .row {

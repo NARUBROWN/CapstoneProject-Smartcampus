@@ -1,5 +1,5 @@
 <template>
-  <h1>학생정보수정</h1>
+  <h1>학생 정보 수정</h1>
   <StudentInformationEdit></StudentInformationEdit>
 </template>
 
