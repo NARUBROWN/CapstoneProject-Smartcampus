@@ -90,10 +90,12 @@ export default {
           position: 'bottom'
         });
         //로그아웃 및 메인화면 이동
-        this.$store.commit('logout')
-        //컴포넌트 다시 렌더링
-        this.$forceUpdate();
-        this.$router.push('/login');
+        //this.$store.commit('logout')
+
+        const stu_num = this.$store.state.user_data.stu_number;
+        const password = this.$store.state.user_data.password;
+        this.$store.dispatch('update', {stu_num, password});
+        this.$router.push("/");
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용

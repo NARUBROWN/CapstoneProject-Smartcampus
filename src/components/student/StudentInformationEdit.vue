@@ -3,6 +3,7 @@
       <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
       <br>
     </div>
+  {{ user_data }}
   <form @submit.prevent="updateProfile">
     <div class="signUp_card">
       <h1>정보 수정</h1>
@@ -84,7 +85,7 @@ export default {
   created() {
     this.user_data.id = this.$store.state.user_data['id'];
     this.user_data.name = this.$store.state.user_data['name'];
-    this.user_data.stu_num = this.$store.state.user_data['stu_num'];
+    this.user_data.stu_num = this.$store.state.user_data['stu_number'];
     this.user_data.department = this.$store.state.user_data['department'];
     this.user_data.password = this.$store.state.user_data['password'];
     this.user_data.stu_rank = this.$store.state.user_data['stu_rank'];
@@ -99,33 +100,31 @@ export default {
       this.passwordValidFlag = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password);
     },
     updateProfile() {
-      const formData = new FormData();
-      formData.append('id', this.user_data.id);
-      formData.append('name', this.user_data.name);
-      formData.append('stu_num', this.user_data.stu_num);
-      formData.append('department', this.user_data.department);
-      formData.append('password', this.user_data.password);
-      formData.append('rank', this.user_data.stu_rank);
-
       axios({
         method: "post", // 요청 방식
         url: process.env.VUE_APP_IP + "/post/profile_update", // 요청 주소
-        data: formData
+        data: {
+          'id': this.user_data.id,
+          'name': this.user_data.name,
+          'department': this.user_data.department,
+          'password': this.user_data.password,
+          'rank': this.user_data.stu_rank
+        }
       }).then((res) => {
         // 회원정보 수정
         console.log("수정 성공" + res.data[0]);
 
-        // 수정된 정보를 Vuex Store에 저장하기
-        //this.$store.commit('login', this.user_data)
+        this.$store.commit('login', this.user_data)
 
         this.$toast.success('계정을 성공적으로 수정했습니다.<br> 다시 로그인 해주세요', {
           position: 'bottom'
         });
-        //로그아웃 및 메인화면 이동
-        this.$store.commit('logout')
-        //컴포넌트 다시 렌더링
-        this.$forceUpdate();
-        this.$router.push('/login');
+
+        // 다시 로그인하여 정보를 가지고 옴
+        const stu_num = this.user_data.stu_num;
+        const password = this.user_data.password;
+        this.$store.dispatch('update', {stu_num, password});
+        this.$router.push("/");
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용

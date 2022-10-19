@@ -81,6 +81,36 @@ export const store = createStore({
             } catch (e) {
                 console.log("새로운 데이터를 불러오지 못했습니다. " + e);
             }
+        },
+        async update(context, payload) {
+            try {
+                // 백엔드에 요청된 데이터를 가져오기
+                let user = await axios({
+                    method: "post",
+                    url: process.env.VUE_APP_IP + "/post/login",
+                    data: {
+                        stu_num: payload.stu_num,
+                        password: payload.password
+                    }
+                })
+
+                // user.data를 state로 커밋
+                context.commit('login', user.data)
+
+                //로그인 로직 수행
+                if (context.state.user_data['code'] === 0) {
+                    // 아무것도 입력 안됨
+                } else if (context.state.user_data['code'] === 1) {
+                    // 학번 틀림
+                } else if (context.state.user_data['code'] === 2) {
+                    // 비밀번호 틀림
+                } else if (context.state.user_data['code'] === 3) {
+                    // 페이지 새로 고침
+                    location.reload();
+                }
+            } catch (e) {
+                console.log("새로운 데이터를 불러오지 못했습니다. " + e);
+            }
         }
 
     },
