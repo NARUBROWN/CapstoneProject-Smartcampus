@@ -109,7 +109,7 @@ h6 {
 
 .top > .jeiu {
   width: 50%;
-  padding-right: 0px;
+  padding-right: 0 p;
 }
 
 .top > img {
