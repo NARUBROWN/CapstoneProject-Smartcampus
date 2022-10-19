@@ -1,7 +1,7 @@
 <template>
   <div class="page-scroll">
     <ul>
-      <li @click="changeFocus(`campusCommunity`)">메인</li>
+      <li @click="changeFocus(`campusCommunity`)" id="main">메인</li>
       <li @click="changeFocus(`aiCampus`)">AI</li>
       <li @click="changeFocus(`humanitiesCampus`)">인문</li>
       <li @click="changeFocus(`natureCampus`)">자연</li>
@@ -65,6 +65,14 @@ export default {
   created() {
     this.pageFocus.campusCommunity = true
   },
+  mounted() {
+    // 템플릿이 render 된 직후 DOM 요소를 사용하여 클래스 부여
+    document.getElementById("main").className = "selected"
+  },
+  beforeUpdate() {
+    // 템플릿이 render 된 이후 액션이 발생하면 부여된 클래스를 삭제
+    document.getElementById("main").className = ""
+  },
   methods: {
 
     changeFocus(key) {
@@ -123,5 +131,9 @@ h1 {
 
 .page-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.selected {
+  border-bottom: 4px solid var(--blue-card);
 }
 </style>
