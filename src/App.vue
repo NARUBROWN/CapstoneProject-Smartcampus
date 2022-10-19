@@ -10,7 +10,7 @@
       <transition name="slide-fade">
         <div v-if="isShow" class="slide_card">
           <div @click="handler">
-            <router-link to="/">학생증</router-link>
+            <router-link to="/">모바일 학생증</router-link>
           </div>
           <div @click="handler">
             <router-link to="/">마이페이지</router-link>
@@ -18,6 +18,8 @@
           <div @click="logout">로그아웃</div>
         </div>
       </transition>
+      <div v-if="isShow" class="slide_back_left" @click="handler"></div>
+      <div v-if="isShow" class="slide_back_bottom" @click="handler"></div>
       <!-- @click="logout" v-if="this.$store.state.user_data['login_state']" -->
     </div>
   </header>
@@ -98,16 +100,45 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: var(--page-color);
-  font-family: "Apple SD Gothic Neo", sans-serif;
+  font-family: "NanumSquareNeo", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url("assets/fonts/NanumSquareNeoTTF-aLt.woff2");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url("assets/fonts/NanumSquareNeoTTF-bRg.woff2");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url("assets/fonts/NanumSquareNeoTTF-cBd.woff2");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url("assets/fonts/NanumSquareNeoTTF-dEb.woff2");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url("assets/fonts/NanumSquareNeoTTF-eHv.woff2");
+  font-weight: 900;
 }
 
 a {
   text-decoration: none;
   color: inherit;
 }
-
 
 header {
   width: 100%;
@@ -130,6 +161,28 @@ header {
   height: 35px;
   border-radius: 35px;
   margin-left: 66%;
+}
+
+.card {
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 95.56%;
+  padding: 10px 0 10px 0;
+  background-color: var(--card);
+  color: var(--text-color);
+}
+
+.card > h1 {
+  margin: 10px 0 10px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.card > .more {
+  font-size: 8pt;
+  margin: -26px 20px 20px 0;
+  float: right;
 }
 
 footer {
@@ -159,12 +212,32 @@ footer > p {
   margin-left: 68%;
 }
 
-.slide_card > div{
+.slide_back_left {
+  position: absolute;
+  border-radius: 10px;
+  width: 68.43%;
+  height: 116px;
+  font-size: 10pt;
+  font-weight: normal;
+  margin: 0 0 0 0;
+}
+
+.slide_back_bottom {
+  position: absolute;
+  border-radius: 10px;
+  width: 100%;
+  height: 700px;
+  font-size: 10pt;
+  font-weight: normal;
+  margin: 116px 0 0 0;
+}
+
+.slide_card > div {
   height: 33%;
   text-align: center;
 }
 
-.slide_card > div:first-of-type{
+.slide_card > div:first-of-type {
   margin-top: 9px;
 }
 

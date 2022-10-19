@@ -1,8 +1,8 @@
 <template>
-  <div class="card" v-if="serverState">
+  <div class="card">
     <h1>공지사항</h1>
     <router-link to="/notice" class="more">더보기 +</router-link>
-    <dl>
+    <dl v-if="serverState">
       <!-- JSON 객체를 받아와서 v-for 로 데이터를 씌워줌-->
       <div class="listDeco" v-for="notice in notices" v-bind:key="notice">
         <!-- v-bind 를 통해서 속성에도 값을 넣어줄 수 있음-->
@@ -13,9 +13,9 @@
         <dd>{{ notice.writeday }}</dd>
       </div>
     </dl>
-  </div>
-  <div class="errorCard" v-if="errorComponent">
-    <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
+    <div class="errorCard" v-if="errorComponent">
+      <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
+    </div>
   </div>
 
 </template>
@@ -85,24 +85,6 @@ export default {
 
 .card {
   margin: 0 auto;
-  border-radius: 10px;
-  width: 95.56%;
-  padding: 10px 0 10px 0;
-  background-color: var(--card);
-  color: var(--text-color);
-}
-
-.card > h1 {
-  margin: 10px 0 15px 0;
-  padding: 0 0 0 20px;
-  font-size: 10pt;
-  font-weight: bold;
-}
-
-.card > .more {
-  font-size: 8pt;
-  margin: -26px 20px 20px 0;
-  float: right;
 }
 
 .articleType {
@@ -139,7 +121,6 @@ export default {
 
 .card > dl > .listDeco > dt {
   width: 80%;
-  margin: 2px 0 0 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -151,8 +132,8 @@ export default {
 }
 
 .card > dl > .listDeco > dd {
-  margin: 1px 0 0 40px;
-  font-size: 9pt;
+  margin: 3px 0 0 40px;
+  font-size: 8pt;
 }
 
 .errorCard {

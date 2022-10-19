@@ -177,7 +177,6 @@ export default {
 
 .card > dl > .listDeco > dt {
   width: 80%;
-  margin: 2px 0 0 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -189,8 +188,8 @@ export default {
 }
 
 .card > dl > .listDeco > dd {
-  margin: 1px 0 0 40px;
-  font-size: 9pt;
+  margin: 3px 0 0 40px;
+  font-size: 8pt;
 }
 
 .underButtonsArea {

@@ -70,22 +70,6 @@ export default {
 
 <style scoped>
 
-.card {
-  margin: 10px auto;
-  border-radius: 10px;
-  width: 95.56%;
-  padding: 10px 0 10px 0;
-  background-color: var(--card);
-  color: var(--text-color);
-}
-
-.card > h1 {
-  margin: 10px 0 10px 0;
-  padding: 0 0 0 20px;
-  font-size: 10pt;
-  font-weight: bold;
-}
-
 .card > table {
   margin: 0 auto;
   width: 90%;
@@ -110,7 +94,7 @@ img {
 .allServiceName > h5 {
   margin: 0 0 10px 0;
   font-size: 8pt;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .list {
@@ -135,7 +119,7 @@ img {
 
 .shortCut > a > h2 {
   font-size: 10pt;
-  width: 100px;
+  width: 100%;
   padding-top: 6px;
 }
 

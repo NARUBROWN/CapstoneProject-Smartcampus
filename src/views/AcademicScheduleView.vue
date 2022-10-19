@@ -6,12 +6,12 @@
 </template>
   
   <script>
-import AcademicSchedule from "@/components/academic/AcademicSchedule";
-  
+  import AcademicSchedule from "@/components/academic/AcademicSchedule";
+
   export default {
     name: "AcademicScheduleView",
     components: {
-        AcademicSchedule
+      AcademicSchedule
     }
   }
   </script>
@@ -20,6 +20,6 @@ import AcademicSchedule from "@/components/academic/AcademicSchedule";
   h1 {
     margin: 15% 0 15% 0;
     text-align: center;
-    color: var(--text-color)
+    color: var(--text-color);
   }
   </style>
