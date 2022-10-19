@@ -91,14 +91,19 @@ export default {
     } else {
       console.log('loginLogic에 키 값이 없음')
     }
-  },
-  computed: {
-    userLogin() {
-      // 상태 데이터를 vuex에 저장
-      return this.$store.commit('login', this.user_data)
+
+    if (this.$store.state.user_data['code'] === 2) {
+      this.$toast.warning('비밀번호를 확인해주세요', {
+        position: 'bottom'
+      });
     }
   },
   methods: {
+    vuex_login() {
+      const stu_num = this.stu_num
+      const password = this.password
+      this.$store.dispatch('login', {stu_num, password});
+    },
     async sendPost() {
       try {
         // 백엔드에 요청된 데이터를 가져오기
@@ -108,6 +113,10 @@ export default {
           data: {
             stu_num: this.stu_num,
             password: this.password
+          }
+        }, {
+          headers: {
+            'Content-Type': 'application/json'
           }
         })
         this.user_data = user.data;
@@ -148,7 +157,7 @@ export default {
       } else if (this.user_data['code'] === 3) {
         // 로그인 성공
         // 로그인 정보를 Vuex에 저장하여 상태관리
-        this.userLogin
+        this.$store.commit('login', this.user_data)
         //페이지 프로필을 새로 고치기 위해서 로컬스토리지에 값을 주고 Create시에 그 값이 확인되면 메인 페이지로 로드
         // 1. 로컬스토리지에 키 저장
         localStorage.setItem('loginLogic', '1');

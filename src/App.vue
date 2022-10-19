@@ -2,7 +2,7 @@
   <!--헤더 부분-->
   <header>
     <div class="top">
-      <router-link to="/"><img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고"></router-link>
+      <img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고" @click="goHome">
       <img class="logout" src="@/assets/student/Non_Profile.png"
            v-if="this.$store.state.user_data['login_state'] === false" alt="로그인 되지 않았습니다.">
       <img class="logout" v-bind:src="profile_img" @click="handler"
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       isShow: false,
-      profile_img: null,
+      profile_img: null
     };
   },
   created() {
@@ -57,6 +57,9 @@ export default {
     },
     handler() {
       this.isShow = !this.isShow;
+    },
+    goHome() {
+      this.$router.push("/")
     }
   }
 }

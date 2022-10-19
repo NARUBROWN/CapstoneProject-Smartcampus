@@ -103,7 +103,10 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
+  scrollBehavior() {
+    return {top: 0}
+  },
   routes
 })
 
