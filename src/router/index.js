@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
+import {store} from "@/store";
 
 import HomeView from '../views/HomeView.vue'
 import NoticeView from "@/views/NoticeView";
@@ -15,20 +16,14 @@ import studentInformationEditView from "@/views/StudentInformationEditView";
 import CampusNavigatorView from "@/views/CampusNavigatorView";
 import CampusCommunityView from "@/views/CampusCommunityView";
 import StudentImgEditView from "@/views/StudentImgEditView";
+import ErrorView from "@/views/ErrorView";
+import WriteView from "@/views/WriteView";
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
     path: '/notice',
@@ -38,17 +33,47 @@ const routes = [
   {
     path: '/student-information',
     name: 'student-information',
-    component: StudentInformationView
+    component: StudentInformationView,
+    beforeEnter: (to, from, next) => {
+      // Vuex State 에서 로그인 상태 가지고 옴
+      if (store.state.user_data['login_state'] === true) {
+        // 로그인 되어으면, 정상 이동
+        next();
+      } else {
+        // 로그인 되어 있지 않으면, 에러페이지로 이동
+        next('/error');
+      }
+    }
   },
   {
     path: '/student-information-edit',
     name: 'student-information-edit',
-    component: studentInformationEditView
+    component: studentInformationEditView,
+    beforeEnter: (to, from, next) => {
+      // Vuex State 에서 로그인 상태 가지고 옴
+      if (store.getters.getUserLoginState === true) {
+        // 로그인 되어으면, 정상 이동
+        next();
+      } else {
+        // 로그인 되어 있지 않으면, 에러페이지로 이동
+        next('/error');
+      }
+    }
   },
   {
     path: '/student-profile-img-edit',
     name: 'student-profile-img-edit',
-    component: StudentImgEditView
+    component: StudentImgEditView,
+    beforeEnter: (to, from, next) => {
+      // Vuex State 에서 로그인 상태 가지고 옴
+      if (store.getters.getUserLoginState === true) {
+        // 로그인 되어으면, 정상 이동
+        next();
+      } else {
+        // 로그인 되어 있지 않으면, 에러페이지로 이동
+        next('/error');
+      }
+    }
   },
   {
     path: '/meal-information',
@@ -99,6 +124,26 @@ const routes = [
     path: '/vuex',
     name: 'vuex',
     component: VuexTest
+  },
+  {
+    path: '/write-contents',
+    name: 'write-contents',
+    component: WriteView,
+    beforeEnter: (to, from, next) => {
+      // Vuex State 에서 로그인 상태 가지고 옴
+      if (store.getters.getUserLoginState === true) {
+        // 로그인 되어으면, 정상 이동
+        next();
+      } else {
+        // 로그인 되어 있지 않으면, 에러페이지로 이동
+        next('/error');
+      }
+    }
+  },
+  {
+    path: '/error',
+    name: 'error',
+    component: ErrorView
   }
 ]
 

@@ -57,7 +57,7 @@
     margin: 5px 0 8px 0;
     padding: 0 0 0 12px;
     font-size: 14pt;
-    font-weight: 800;
+    font-weight: bold;
   }
   
   h6 {

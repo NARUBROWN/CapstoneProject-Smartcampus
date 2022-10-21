@@ -1,10 +1,4 @@
 <template>
-  {{ name }}
-  {{ stu_num }}
-  {{ department }}
-  {{ password }}
-  {{ passwordCheck }}
-  {{ rank }}
   <div class="signUp_card">
     <div class="signUp_wrap">
       <form @submit.prevent="sendPost">

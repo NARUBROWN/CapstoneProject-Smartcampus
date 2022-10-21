@@ -21,7 +21,14 @@ export const store = createStore({
             }
         }
     },
-    getters: {},
+    getters: {
+        getUserLoginState: state => {
+            return state.user_data.login_state
+        },
+        getUserStore: state => {
+            return state.user_data
+        }
+    },
     mutations: {
         login: function (state, user_info) {
             state.user_data["login_state"] = true
@@ -44,6 +51,20 @@ export const store = createStore({
             state.user_data["password"] = null
             state.user_data["img"] = null
             state.user_data["code"] = null
+        },
+        contents(state, content_info) {
+            state.contents = content_info
+        },
+        reset_contents(state) {
+            state.contents = [{
+                id: null,
+                title: null,
+                user: null,
+                date: null,
+                content: null,
+                image: null,
+                stu_id: null
+            }]
         }
     },
     actions: {
@@ -82,6 +103,12 @@ export const store = createStore({
                 console.log("새로운 데이터를 불러오지 못했습니다. " + e);
             }
         },
+        logout(context) {
+            // logout mutations 호출
+            context.commit('logout')
+
+            location.reload();
+        },
         async update(context, payload) {
             try {
                 // 백엔드에 요청된 데이터를 가져오기
@@ -112,7 +139,6 @@ export const store = createStore({
                 console.log("새로운 데이터를 불러오지 못했습니다. " + e);
             }
         }
-
     },
     plugins: [
         createPersistedState()

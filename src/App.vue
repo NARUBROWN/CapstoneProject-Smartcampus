@@ -1,5 +1,8 @@
 <template>
   <!--헤더 부분-->
+  <div v-if="isShow" class="slide_back_top" @click="handler"></div>
+  <div v-if="isShow" class="slide_back_left" @click="handler"></div>
+  <div v-if="isShow" class="slide_back_bottom" @click="handler"></div>
   <header>
     <div class="top">
       <img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고" @click="goHome">
@@ -18,8 +21,6 @@
           <div @click="logout">로그아웃</div>
         </div>
       </transition>
-      <div v-if="isShow" class="slide_back_left" @click="handler"></div>
-      <div v-if="isShow" class="slide_back_bottom" @click="handler"></div>
       <!-- @click="logout" v-if="this.$store.state.user_data['login_state']" -->
     </div>
   </header>
@@ -51,9 +52,9 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.commit('logout')
-      this.$router.push('/');
+      this.$store.dispatch('logout');
       this.isShow = !this.isShow;
+      this.$router.push('/');
     },
     handler() {
       this.isShow = !this.isShow;
@@ -147,6 +148,7 @@ header {
   width: 100%;
   height: 7.45%;
   background-color: var(--card);
+  z-index: 2;
 }
 
 .top {
@@ -215,11 +217,22 @@ footer > p {
   margin-left: 68%;
 }
 
+.slide_back_top {
+  position: absolute;
+  z-index: 1;
+  border-radius: 10px;
+  width: 100%;
+  height: 7.45%;
+  font-size: 10pt;
+  font-weight: normal;
+  margin: 0 0 0 0;
+}
+
 .slide_back_left {
   position: absolute;
   border-radius: 10px;
-  width: 68.43%;
-  height: 116px;
+  width: 100%;
+  height: 100%;
   font-size: 10pt;
   font-weight: normal;
   margin: 0 0 0 0;

@@ -66,7 +66,7 @@ export default {
     return {
       stu_num: "",
       password: "",
-      user_data: [{
+      user_data: {
         id: 0,
         department: '',
         name: '',
@@ -76,7 +76,7 @@ export default {
         password: "",
         code: 0,
         img: ""
-      }]
+      }
     }
   },
   created() {
@@ -98,6 +98,7 @@ export default {
       });
     }
   },
+  watch: {},
   methods: {
     vuex_login() {
       const stu_num = this.stu_num

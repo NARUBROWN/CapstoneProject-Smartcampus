@@ -1,6 +1,7 @@
 <template>
   <div class="card" v-if="serverState">
     <h1>{{ pageNumLocal }}번째 페이지</h1>
+    <div v-if="loading">로딩</div>
     <dl>
       <!-- JSON 객체를 받아와서 v-for 로 데이터를 씌워줌-->
       <div class="listDeco" v-for="notice in new_notices" v-bind:key="notice">
@@ -23,7 +24,6 @@
   <div class="errorCard" v-if="errorComponent">
     <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
   </div>
-
 </template>
 
 <script>
@@ -42,6 +42,7 @@ export default {
       pageNumLocal: 1,
       serverState: true,
       errorComponent: false,
+      loading: false
     };
   },
   created() {
@@ -98,6 +99,8 @@ export default {
     // 백엔드에 데이터 요청하는 메소드
     async req_data(number) {
       try {
+        // 로딩화면 보여주기
+        this.loading = true
         //parameter에 0이 들어오면 첫번째 데이터 화면을 보여줌
         if (number === 0) {
           try {
@@ -119,6 +122,8 @@ export default {
         this.serverState = false;
         this.errorComponent = true;
       }
+      // 로딩화면 끄기
+      this.loading = false
     }
 
   }

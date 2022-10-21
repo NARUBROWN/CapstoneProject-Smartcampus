@@ -29,7 +29,6 @@
       <FoundedCampus></FoundedCampus>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -59,7 +58,7 @@ export default {
         natureCampus: null,
         artCampus: null,
         foundedCampus: null
-      }
+      },
     }
   },
   created() {
@@ -76,7 +75,7 @@ export default {
   methods: {
 
     changeFocus(key) {
-      let changedObject = new Object();
+      let changedObject = {};
       const objectKeys = Object.keys(this.pageFocus)
 
       for (let i = 0; i < objectKeys.length; i++) {
@@ -123,6 +122,7 @@ h1 {
   width: 110px;
   line-height: 47px;
   text-align: center;
+  color: var(--text-color);
 }
 
 .page-scroll ul li:hover {
@@ -136,4 +136,5 @@ h1 {
 .selected {
   border-bottom: 4px solid var(--blue-card);
 }
+
 </style>

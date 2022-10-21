@@ -94,7 +94,7 @@ img {
 .allServiceName > h5 {
   margin: 0 0 10px 0;
   font-size: 8pt;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .list {
@@ -110,6 +110,10 @@ img {
   color: var(--text-color);
   display: flex;
   background: var(--notice-list-background);
+}
+
+.shortCut > a > h2 {
+  font-weight: normal;
 }
 
 .listImg {
