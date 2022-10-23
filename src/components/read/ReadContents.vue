@@ -1,28 +1,44 @@
 <template>
-  <div class="card" v-for="component in contents" v-bind:key="component">
-    <h1>{{ component.title }}</h1>
-    <div>
-      <h3>{{ component.view }}</h3>
-      <h3>{{ component.date }}</h3>
-    </div>
-    <dl>
-      <!-- component.fileLink 가 https://jeiu.ac.kr/undefined 일 경우 태그를 표시하지 않음 -->
-      <div class="listDeco" v-if="component.fileLink !== 'https://jeiu.ac.krundefined'">
-        <dt><a v-bind:href="component.fileLink">첨부파일 : {{ component.fileName }}</a></dt>
+  <div v-if="dataHide">
+    <div class="card" v-for="component in contents" v-bind:key="component">
+      <h1>{{ component.title }}</h1>
+      <div>
+        <h3>{{ component.view }}</h3>
+        <h3>{{ component.date }}</h3>
+        <h3>{{ component.user }}</h3>
       </div>
-    </dl>
-    <br>
-    <p>
-      {{ component.contents }}
-    </p>
-    <div class="imgBox">
-      <!-- component.img 가 https://jeiu.ac.kr/undefined 일 경우 태그를 표시하지 않음 -->
-      <img v-if="component.img !== 'https://jeiu.ac.krundefined'" v-bind:src="component.img" alt="본문 첨부 사진">
+      <dl>
+        <!-- component.fileLink 가 https://jeiu.ac.kr/undefined 일 경우 태그를 표시하지 않음 -->
+        <div class="listDeco" v-if="component.fileLink !== 'https://jeiu.ac.krundefined'">
+          <dt><a v-bind:href="component.fileLink">첨부파일 : {{ component.fileName }}</a></dt>
+        </div>
+      </dl>
+      <br>
+      <p>
+        {{ component.contents }}
+      </p>
+      <div class="imgBox">
+        <!-- component.img 가 https://jeiu.ac.kr/undefined 일 경우 태그를 표시하지 않음 -->
+        <img
+            v-if="component.img !== 'https://jeiu.ac.krundefined' && component.img !== 'http://192.168.0.6:3000/community_img/'"
+            v-bind:src="component.img" alt="본문 첨부 사진">
+      </div>
     </div>
+  </div>
+  <div class="loadingCard" v-if="loading">
+    <h1>서버에서 데이터를 불러오고 있습니다.</h1>
   </div>
   <div class="underButtonsArea">
     <div class="underButtons">
       <button @click="back()">뒤로가기</button>
+      <button
+          v-if="this.$store.state.user_data.stu_rank === `관리자` || this.$store.state.user_data.id === this.contents[0][`stu_id`]"
+          @click="back()">수정
+      </button>
+      <button
+          v-if="this.$store.state.user_data.stu_rank === `관리자` || this.$store.state.user_data.id === this.contents[0][`stu_id`]"
+          @click="contentsDelete()">삭제
+      </button>
     </div>
   </div>
 </template>
@@ -41,26 +57,57 @@ export default {
         date: "",
         fileName: "",
         contents: "",
-        img: ""
-      }]
+        img: "",
+        stu_id: 0,
+        user: ""
+      }],
+      loading: false,
+      dataHide: false,
+      userPermission: false
     };
   },
-  mounted: function () {
-    axios
-        // 이전 페이지에서 받아온 code Parameter 와 함께 Server 에 요청을 보냄
-        // Express 에는 이미 해당 url 이 정의되어있음
-        .get(process.env.VUE_APP_IP + "/" + this.$route.query.number + "/notice")
-        .then(res => {
-          // data 에 정의된 contents 객체에 data 를 대입
-          this.contents = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+  created() {
+    this.req_data();
   },
   methods: {
     back() {
       this.$router.go(-1)
+    },
+    async req_data() {
+      this.loading = true;
+      if (this.$route.query.type === "community") {
+        try {
+          let contents = await axios.get(process.env.VUE_APP_IP + "/community/read/" + this.$route.query.table + "/" + this.$route.query.number)
+          this.contents = contents.data;
+          this.contents[0].img = process.env.VUE_APP_IP + '/community_img/' + contents.data[0].img
+          console.log(contents.data[0].img);
+          this.dataHide = true;
+          this.serverState = true;
+          this.errorComponent = false;
+        } catch {
+          //
+        }
+      } else if (this.$route.query.type === "notice") {
+        try {
+          let contents = await axios.get(process.env.VUE_APP_IP + "/crawling/contents/" + this.$route.query.number)
+          this.contents = contents.data;
+          this.dataHide = true;
+          this.serverState = true;
+          this.errorComponent = false;
+        } catch {
+          //
+        }
+      }
+      // 로딩화면 끄기
+      this.loading = false
+    },
+    contentsDelete() {
+      try {
+        axios.get(process.env.VUE_APP_IP + "/community/delete/" + this.$route.query.table + "/" + this.$route.query.number)
+        this.$router.go(-1);
+      } catch {
+        //
+      }
     }
   }
 }
@@ -159,6 +206,22 @@ export default {
   background: var(--blue-card);
   font-weight: bolder;
   font-size: 13px;
+}
+
+.loadingCard {
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 95.56%;
+  padding: 10px 0 10px 0;
+  background-color: #FF9500;
+}
+
+.loadingCard > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: normal;
+  color: #ffffff;
 }
 
 </style>

@@ -97,7 +97,7 @@ export default {
 
         axios({
           method: "post", // 요청 방식
-          url: process.env.VUE_APP_IP + "/post/post_content", // 요청 주소
+          url: process.env.VUE_APP_IP + "/community/write", // 요청 주소
           data: formData
         }).then((res) => {
           console.log(res)

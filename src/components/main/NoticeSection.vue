@@ -16,6 +16,9 @@
     <div class="errorCard" v-if="errorComponent">
       <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
     </div>
+    <div class="loadingCard" v-if="loading">
+      <h1>서버에서 데이터를 불러오고 있습니다.</h1>
+    </div>
   </div>
 
 </template>
@@ -35,45 +38,31 @@ export default {
       }],
       number: 0,
       serverState: false,
-      errorComponent: true,
+      errorComponent: false,
+      loading: false
     };
   },
-  // 게시판 목록 데이터를 먼저 가지고 옴
-  mounted:
-      function () {
-        axios
-            .get(process.env.VUE_APP_IP + "/board")
-            .then(res => {
-              this.notices = res.data;
-              this.serverState = true;
-              this.errorComponent = false;
-            })
-            .catch(err => {
-              console.log(err + " 게시판 목록 불러오기 실패");
-              this.serverState = false;
-              this.errorComponent = true;
-            });
-      },
+  created() {
+    this.req_data();
+  },
   methods: {
     // inValues 함수를 정의 Parameter 로 code를 받아 게시판 code 정보를 가지고 옴
     inValues(a) {
-      // data 에 정의된 number 에 a를 대입
-      this.number = a;
-
-      // axios 를 통해 GET 요청을 보냄
-      // con 에 parameter 로 게시판 code 를 담아서 보냄
-      // 이제 express 에서 parameter 를 받아 사용자가 요청한 게시판을 크롤링해줌
-      axios.get(process.env.VUE_APP_IP + '/con/' + a)
-          .then(res => {
-            // 요청 성공 코드 출력
-            console.log(`status code: ${res.status}`);
-            // 요청 성공시 /read-contents 페이지로 Parameter 로 게시판 code 와 함께 이동시킴
-            this.$router.push('/read-contents?number=' + a);
-          })
-          .catch(err => {
-            // 오류 코드 출력
-            console.log(err + " main/noticeSection ");
-          })
+      this.$router.push('/read-contents?type=notice&number=' + a);
+    },
+    async req_data() {
+      this.loading = true
+      try {
+        let notice = await axios.get(process.env.VUE_APP_IP + '/crawling/notice-list/1');
+        this.notices = notice.data.splice(0, 5);
+        this.serverState = true;
+        this.errorComponent = false;
+      } catch {
+        this.serverState = false;
+        this.errorComponent = true;
+      }
+      // 로딩화면 끄기
+      this.loading = false
     }
   },
 }
@@ -152,4 +141,19 @@ export default {
   color: #ffffff;
 }
 
+.loadingCard {
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 95.56%;
+  padding: 10px 0 10px 0;
+  background-color: #FF9500;
+}
+
+.loadingCard > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: normal;
+  color: #ffffff;
+}
 </style>

@@ -7,7 +7,8 @@
     <div class="top">
       <img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고" @click="goHome">
       <img class="logout" src="@/assets/student/Non_Profile.png"
-           v-if="this.$store.state.user_data['login_state'] === false" alt="로그인 되지 않았습니다.">
+           v-if="this.$store.state.user_data['login_state'] === false" alt="로그인 되지 않았습니다."
+           @click="this.$router.push('/login')">
       <img class="logout" v-bind:src="profile_img" @click="handler"
            v-if="this.$store.state.user_data['login_state'] === true" alt="프로필 사진">
       <transition name="slide-fade">

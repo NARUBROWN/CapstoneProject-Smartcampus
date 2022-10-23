@@ -101,7 +101,7 @@ export default {
     updateProfile() {
       axios({
         method: "post", // 요청 방식
-        url: process.env.VUE_APP_IP + "/post/profile_update", // 요청 주소
+        url: process.env.VUE_APP_IP + "/user/information-update", // 요청 주소
         data: {
           'id': this.user_data.id,
           'name': this.user_data.name,
@@ -115,7 +115,7 @@ export default {
 
         this.$store.commit('login', this.user_data)
 
-        this.$toast.success('계정을 성공적으로 수정했습니다.<br> 다시 로그인 해주세요', {
+        this.$toast.success('계정을 성공적으로 수정했습니다.', {
           position: 'bottom'
         });
 

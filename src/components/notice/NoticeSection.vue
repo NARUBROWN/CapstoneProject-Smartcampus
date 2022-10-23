@@ -1,8 +1,7 @@
 <template>
   <div class="card" v-if="serverState">
     <h1>{{ pageNumLocal }}번째 페이지</h1>
-    <div v-if="loading">로딩</div>
-    <dl>
+    <dl v-if="dataHide">
       <!-- JSON 객체를 받아와서 v-for 로 데이터를 씌워줌-->
       <div class="listDeco" v-for="notice in new_notices" v-bind:key="notice">
         <!-- v-bind 를 통해서 속성에도 값을 넣어줄 수 있음-->
@@ -13,6 +12,12 @@
         <dd>{{ notice.writeday }}</dd>
       </div>
     </dl>
+    <div class="errorCard" v-if="errorComponent">
+      <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
+    </div>
+    <div class="loadingCard" v-if="loading">
+      <h1>서버에서 데이터를 불러오고 있습니다.</h1>
+    </div>
   </div>
   <div class="underButtonsArea" v-if="serverState">
     <div class="underButtons">
@@ -20,9 +25,6 @@
       <button @click="back()" v-if="pageNumLocal > 1">이전 페이지</button>
       <button @click="plus()">다음 페이지</button>
     </div>
-  </div>
-  <div class="errorCard" v-if="errorComponent">
-    <h1>연결을 확인해주세요. 서버와 통신할 수 없습니다.</h1>
   </div>
 </template>
 
@@ -42,7 +44,8 @@ export default {
       pageNumLocal: 1,
       serverState: true,
       errorComponent: false,
-      loading: false
+      loading: false,
+      dataHide: false
     };
   },
   created() {
@@ -52,24 +55,8 @@ export default {
     // 글 불러오는 기능
     // inValues 함수를 정의 Parameter 로 code를 받아 게시판 code 정보를 가지고 옴
     inValues(a) {
-      // data 에 정의된 number 에 a를 대입
-      this.number = a;
-      // axios 를 통해 GET 요청을 보냄
-      // con 에 parameter 로 게시판 code 를 담아서 보냄
-      // 이제 express 에서 parameter 를 받아 사용자가 요청한 게시판을 크롤링해줌
-      axios.get(process.env.VUE_APP_IP + '/con/' + a)
-          .then(res => {
-            // 요청 성공 코드 출력
-            console.log(`status code: ${res.status}`);
-            // 요청 성공시 /read-contents 페이지로 Parameter 로 게시판 code 와 함께 이동시킴
-            this.$router.push('/read-contents?number=' + a);
-          })
-          .catch(err => {
-            // 오류 코드 출력
-            console.log(err);
-          })
+      this.$router.push('/read-contents?type=notice&number=' + a);
     },
-
     // 액션시 새로운 페이지를 불러오는 기능
     plus() {
       // pageNum 에 더해진 값을 사용하기
@@ -100,23 +87,27 @@ export default {
     async req_data(number) {
       try {
         // 로딩화면 보여주기
-        this.loading = true
+        this.loading = true;
+        // 데이터 영역 숨기기
+        this.dataHide = false;
         //parameter에 0이 들어오면 첫번째 데이터 화면을 보여줌
         if (number === 0) {
           try {
-            let notice = await axios.get(process.env.VUE_APP_IP + '/all_board');
+            let notice = await axios.get(process.env.VUE_APP_IP + '/crawling/notice-list/1');
             this.new_notices = notice.data;
+            // 데이터 영역 다시 보여주기
+            this.dataHide = true;
           } catch {
             this.serverState = false;
             this.errorComponent = true;
           }
         } else {
           // 백엔드에 데이터 요청
-          let get = await axios.get(process.env.VUE_APP_IP + '/all_board/' + number);
-          // 백엔드에 요청된 데이터를 가져오기
-          let notice = await axios.get(process.env.VUE_APP_IP + "/all_board/" + number + "/board");
+          let get = await axios.get(process.env.VUE_APP_IP + '/crawling/notice-list/' + number);
           console.log('req_data : ' + number + '번째 페이지를 요청하였습니다 code:' + get.status);
-          this.new_notices = notice.data;
+          this.new_notices = get.data;
+          // 데이터 영역 다시 보여주기
+          this.dataHide = true;
         }
       } catch {
         this.serverState = false;
@@ -232,4 +223,19 @@ export default {
   color: #ffffff;
 }
 
+.loadingCard {
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 95.56%;
+  padding: 10px 0 10px 0;
+  background-color: #FF9500;
+}
+
+.loadingCard > h1 {
+  margin: 10px 0 15px 0;
+  padding: 0 0 0 20px;
+  font-size: 10pt;
+  font-weight: normal;
+  color: #ffffff;
+}
 </style>

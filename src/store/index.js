@@ -73,7 +73,8 @@ export const store = createStore({
                 // 백엔드에 요청된 데이터를 가져오기
                 let user = await axios({
                     method: "post",
-                    url: process.env.VUE_APP_IP + "/post/login",
+                    // 새로운 URL 테스트
+                    url: process.env.VUE_APP_IP + "/user/login",
                     data: {
                         stu_num: payload.stu_num,
                         password: payload.password
@@ -107,14 +108,14 @@ export const store = createStore({
             // logout mutations 호출
             context.commit('logout')
 
-            location.reload();
+            //location.reload();
         },
         async update(context, payload) {
             try {
                 // 백엔드에 요청된 데이터를 가져오기
                 let user = await axios({
                     method: "post",
-                    url: process.env.VUE_APP_IP + "/post/login",
+                    url: process.env.VUE_APP_IP + "/user/login",
                     data: {
                         stu_num: payload.stu_num,
                         password: payload.password

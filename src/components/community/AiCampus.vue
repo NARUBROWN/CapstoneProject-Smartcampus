@@ -1,5 +1,8 @@
 <template>
-  <h1>AI</h1>
+  <h1>AI학부</h1>
+  <div v-if="writePermission">
+    <WriteButton></WriteButton>
+  </div>
   <div class="card" v-if="serverState">
     <h1>{{ pageNumLocal }}번째 페이지</h1>
     <div v-if="loading">로딩</div>
@@ -9,7 +12,7 @@
         <!-- v-bind 를 통해서 속성에도 값을 넣어줄 수 있음-->
         <!--<div class="articleType" v-bind:style="notice.color"><a>{{ notice.tag }}</a></div>-->
         <dt>
-          <a>{{ key.title }}</a>
+          <a @click="inValues(key.id)">{{ key.title }}</a>
         </dt>
         <dd>{{ key.date }}</dd>
       </div>
@@ -29,9 +32,13 @@
     
   <script>
   import axios from "axios";
+  import WriteButton from "@/components/community/WriteButton";
 
   export default {
     name: "AiCampus",
+    components: {
+      WriteButton
+    },
     data() {
       return {
         table: 'CampusBoard_AI',
@@ -44,20 +51,30 @@
         pageNumLocal: 1,
         serverState: true,
         errorComponent: false,
-        loading: false
+        loading: false,
+        writePermission: false
       };
     },
     created() {
-      axios.get(process.env.VUE_APP_IP + "/get/content/" + this.table)
+      axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table)
           .then(res => {
             this.contents = res.data
           })
           .catch(err => {
             // 오류 코드 출력
             console.log(err);
-          })
+          });
+      // 권한 따라서 보이게 그 글 쓰기 버튼 보이게 하기
+      if (this.$store.getters.getUserStore.department === "AI컴퓨터정보과" || this.$store.getters.getUserStore.stu_rank === "관리자") {
+        this.writePermission = true;
+      } else {
+        this.writePermission = false;
+      }
     },
     methods: {
+      inValues(a) {
+        this.$router.push(`/read-contents?type=community&table=${this.table}&number=${a}`);
+      }
     }
   }
   </script>
@@ -71,7 +88,7 @@ h1 {
 
 
 .card {
-  margin: 10px auto;
+  margin: 0 auto;
   border-radius: 10px;
   width: 95.56%;
   padding: 10px 0 10px 0;

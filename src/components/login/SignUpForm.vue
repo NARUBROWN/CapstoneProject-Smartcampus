@@ -148,7 +148,7 @@ export default {
 
       axios({
         method: "post", // 요청 방식
-        url: process.env.VUE_APP_IP + "/post/signup", // 요청 주소
+        url: process.env.VUE_APP_IP + "/user/signup", // 요청 주소
         data: formData
       }).then((res) => {
         // 회원가입 성공

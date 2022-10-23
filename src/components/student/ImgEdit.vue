@@ -80,13 +80,13 @@ export default {
 
       axios({
         method: "post", // 요청 방식
-        url: process.env.VUE_APP_IP + "/post/profile_img_update", // 요청 주소
+        url: process.env.VUE_APP_IP + "/user/photo-update", // 요청 주소
         data: formData
       }).then((res) => {
         // 회원정보 수정
         console.log("수정 성공" + res.data[0]);
 
-        this.$toast.success('이미지를 성공적으로 교체하였습니다.<br> 다시 로그인 해주세요', {
+        this.$toast.success('이미지를 성공적으로 교체하였습니다.', {
           position: 'bottom'
         });
         //로그아웃 및 메인화면 이동

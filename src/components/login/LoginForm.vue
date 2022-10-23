@@ -1,7 +1,7 @@
 <template>
   <div class="login_card">
     <div class="login_wrap">
-      <form @submit.prevent="sendPost">
+      <form @submit.prevent="vuex_login">
         <div class="row">
           <input type="text"
                  v-model="stu_num"

@@ -70,7 +70,7 @@ export default {
     deleteProfile() {
       axios({
         method: "post", // 요청 방식
-        url: process.env.VUE_APP_IP + "/post/profile_delete", // 요청 주소
+        url: process.env.VUE_APP_IP + "/user/delete", // 요청 주소
         data: {
           id: this.$store.state.user_data['id']
         }

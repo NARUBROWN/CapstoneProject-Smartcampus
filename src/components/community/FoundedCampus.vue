@@ -1,5 +1,5 @@
 <template>
-  <h1>창업</h1>
+  <h1>창업학부</h1>
   <div class="card" v-if="serverState">
     <h1>{{ pageNumLocal }}번째 페이지</h1>
     <div v-if="loading">로딩</div>
@@ -49,7 +49,7 @@ export default {
     };
   },
   created() {
-    axios.get(process.env.VUE_APP_IP + "/get/content/" + this.table)
+    axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table)
         .then(res => {
           this.contents = res.data
         })
