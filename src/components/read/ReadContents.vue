@@ -33,7 +33,7 @@
       <button @click="back()">뒤로가기</button>
       <button
           v-if="this.$store.state.user_data.stu_rank === `관리자` || this.$store.state.user_data.id === this.contents[0][`stu_id`]"
-          @click="back()">수정
+          @click="editContents">수정
       </button>
       <button
           v-if="this.$store.state.user_data.stu_rank === `관리자` || this.$store.state.user_data.id === this.contents[0][`stu_id`]"
@@ -108,6 +108,9 @@ export default {
       } catch {
         //
       }
+    },
+    editContents() {
+      this.$router.push(`/edit-contents?table=${this.$route.query.table}&number=${this.$route.query.number}`)
     }
   }
 }

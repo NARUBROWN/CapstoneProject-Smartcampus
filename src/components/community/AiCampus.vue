@@ -15,6 +15,7 @@
           <a @click="inValues(key.id)">{{ key.title }}</a>
         </dt>
         <dd>{{ key.date }}</dd>
+        <dd>{{ key.user }}</dd>
       </div>
     </dl>
   </div>
