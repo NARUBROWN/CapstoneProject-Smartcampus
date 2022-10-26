@@ -3,9 +3,15 @@
     <div class="signUp_wrap">
       <form @submit.prevent="sendPost">
         <div class="filebox">
-          <input class="upload-name" value="프로필 사진을 제출해주세요." placeholder="프로필 사진을 제출해주세요.">
+          <!-- fileSelectMessage는 data()에 있는 값. 기본 값은 '사진을 선택해주세요'이고 v-on에 설정되어있는 fileSelect가 이벤트 처리되면
+           FileSelectMessage의 값이 변경되게 되어 있음. 밑의 fileSelectButton도 마찬가지.
+           값을 쓰고 싶다면 이렇게 하면 됨 태그 속성 안에선 <태그 v-bind:속성="접근할 데이터 이름", 태그 밖에선 {{ 접근할 데이터 이름 }}>
+           fileSelect 이벤트(함수)가 어떻게 동작하는지 확인하고 싶다면 하단 method를 확인해볼것
+           class upload-name 들어가있는 input 태그 label로 바꾸던가 해야 할 것 같은데. 아니면 입력이 안되게 하던지
+           조치 취해주길 바람... -->
+          <input class="upload-name" v-bind:value="fileSelectMessage">
           <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
-          <label class="profile_label" for="file">파일찾기</label>
+          <label class="profile_label" for="file">{{ fileSelectButton }}</label>
           <label class="header">프로필 사진</label>
           <div class="highLight"></div>
         </div>
@@ -97,7 +103,8 @@ export default {
       image: '',
       passwordValidFlag: true,
       passwordCheckFlag: true,
-      fullFileName: '',
+      fileSelectMessage: '사진 업로드하기',
+      fileSelectButton: '파일 선택'
     }
   },
   computed: {
@@ -122,25 +129,17 @@ export default {
       //파일 확장자 : .으로 나눈 뒷부분
       var fileExt = fileNameSplit[1];
 
-      this.secondActionArea = true
-      this.selectButton = false
-      this.fileSelectMessage = fileName.substr(0, 3) + "." + fileExt
+      // this.data()에 있는 fileSelectMessage에 선택된 이름의 파일이름을 자르고 확장명을 추가한 것을 대입
+      this.fileSelectMessage = fileName.substr(0, 7) + "." + fileExt
+      // 버튼 데이터를 다시 선택으로 변경
+      this.fileSelectButton = "다시 선택"
       this.image = event.target.files[0];
-      this.fullFileName = fileName + "." + fileExt
     },
     passwordValid() {
-      if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password)) {
-        this.passwordValidFlag = true
-      } else {
-        this.passwordValidFlag = false
-      }
+      this.passwordValidFlag = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$/.test(this.password);
     },
     passwordCheckValid() {
-      if (this.password === this.passwordCheck) {
-        this.passwordCheckFlag = true
-      } else {
-        this.passwordCheckFlag = false
-      }
+      this.passwordCheckFlag = this.password === this.passwordCheck;
     },
     sendPost() {
       const formData = new FormData();
@@ -242,8 +241,8 @@ export default {
   font-weight: normal;
 }
 .select {
-    padding: 35px 0px 10px 0px;
-    margin-left: 40px;
+  padding: 35px 0 10px 0;
+  margin-left: 40px;
 }
 .select input[type=radio]{
     display: none;
@@ -271,11 +270,11 @@ export default {
   background-color: #007AFF;
   color: #FFFFFF;
 }
-.pw{
+.pw {
   font-size: 9pt;
   color: #FF3B30;
   margin-left: 37px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 .pwCheck{
   font-size: 9pt;
