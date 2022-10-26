@@ -20,7 +20,7 @@
       <div class="imgBox">
         <!-- component.img 가 https://jeiu.ac.kr/undefined 일 경우 태그를 표시하지 않음 -->
         <img
-            v-if="component.img !== 'https://jeiu.ac.krundefined' && component.img !== 'http://192.168.0.6:3000/community_img/'"
+            v-if="component.img !== 'https://jeiu.ac.krundefined' && component.img.slice(-1) !== '/'"
             v-bind:src="component.img" alt="본문 첨부 사진">
       </div>
     </div>
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     back() {
-      this.$router.go(-1)
+      this.$router.push(`/campus-community?table=${this.$route.query.table}`)
     },
     async req_data() {
       this.loading = true;
@@ -80,7 +80,6 @@ export default {
           let contents = await axios.get(process.env.VUE_APP_IP + "/community/read/" + this.$route.query.table + "/" + this.$route.query.number)
           this.contents = contents.data;
           this.contents[0].img = process.env.VUE_APP_IP + '/community_img/' + contents.data[0].img
-          console.log(contents.data[0].img);
           this.dataHide = true;
           this.serverState = true;
           this.errorComponent = false;
@@ -110,7 +109,7 @@ export default {
       }
     },
     editContents() {
-      this.$router.push(`/edit-contents?table=${this.$route.query.table}&number=${this.$route.query.number}`)
+      this.$router.push(`/edit-contents?table=${this.$route.query.table}&number=${this.$route.query.number}`);
     }
   }
 }

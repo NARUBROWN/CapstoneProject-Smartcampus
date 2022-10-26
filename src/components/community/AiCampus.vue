@@ -66,7 +66,7 @@
             console.log(err);
           });
       // 권한 따라서 보이게 그 글 쓰기 버튼 보이게 하기
-      if (this.$store.getters.getUserStore.department === "AI컴퓨터정보과" || this.$store.getters.getUserStore.stu_rank === "관리자") {
+      if (this.$store.getters.getUserStore.department === "AI학부" || this.$store.getters.getUserStore.stu_rank === "관리자") {
         this.writePermission = true;
       } else {
         this.writePermission = false;

@@ -17,7 +17,8 @@ export const store = createStore({
                 stu_rank: null,
                 password: null,
                 img: null,
-                code: null
+                code: null,
+                table: null,
             }
         }
     },
@@ -40,6 +41,22 @@ export const store = createStore({
             state.user_data["password"] = user_info["password"]
             state.user_data["img"] = user_info["img"]
             state.user_data["code"] = user_info["code"]
+            /*            <option>AI학부</option>
+            <option>인문사회계열</option>
+            <option>자연과학계열</option>
+            <option>예술디자인계열</option>
+            <option>미래창업학부</option>*/
+            if (user_info['department'] === "AI학부") {
+                state.user_data["table"] = "CampusBoard_AI"
+            } else if (user_info['department'] === "인문사회계열") {
+                state.user_data["table"] = "CampusBoard_Human"
+            } else if (user_info['department'] === "자연과학계열") {
+                state.user_data["table"] = "CampusBoard_Nature"
+            } else if (user_info['department'] === "예술디자인계열") {
+                state.user_data["table"] = "CampusBoard_Art"
+            } else if (user_info['department'] === "미래창업학부") {
+                state.user_data["table"] = "CampusBoard_Founded"
+            }
         },
         logout(state) {
             state.user_data["login_state"] = false
