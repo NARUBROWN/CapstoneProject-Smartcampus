@@ -2,6 +2,13 @@
   <div class="signUp_card">
     <div class="signUp_wrap">
       <form @submit.prevent="sendPost">
+        <div class="filebox">
+          <input class="upload-name" value="프로필 사진을 제출해주세요." placeholder="프로필 사진을 제출해주세요.">
+          <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
+          <label class="profile_label" for="file">파일찾기</label>
+          <label class="header">프로필 사진</label>
+          <div class="highLight"></div>
+        </div>
         <div class="row">
           <input type="text"
                 v-model="name"
@@ -67,7 +74,6 @@
           </div>
           <label class="header">권한</label>
         </div>
-        <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
         <div class="row">
           <button type="submit">확인</button>
         </div>
@@ -173,8 +179,8 @@ export default {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  height: 490px;
-  padding: 20px 0 10px 0;
+  height: 100%;
+  padding: 0 0 10px 0;
   background-color: var(--card);
 }
 .signUp_card > .signUp_wrap > form > .row{
@@ -228,10 +234,10 @@ export default {
   background-color: #007AFF;
 }
 .depart{
-  width: 80%;
+  width: 81%;
   height: 45px;
   margin-top: 30px;
-  margin-left: 40px;
+  margin-left: 35px;
   border: none;
   border-bottom: 1px solid #A4A4A4;
   font-weight: normal;
@@ -257,7 +263,7 @@ export default {
   color: #ffffff;
 }
 .select input[type=radio]+label:first-of-type{
-    border-radius: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
 }
 .select input[type=radio]+label:nth-of-type(2){
   border-radius: 0 10px 10px 0;
@@ -276,11 +282,68 @@ export default {
   font-size: 9pt;
   color: #FF3B30;
   margin-left: 37px;
-  margin-top: -10px;
+  margin-top: -5px;
 }
 .pwValid{
   font-size: 9pt;
   margin-left: 37px;
-  margin-top: -10px;
+  margin-top: 3px;
 }
+.filebox{
+  position: relative;
+}
+.filebox .upload-name{
+  display: inline-block;
+  height: 40px;
+  vertical-align: middle;
+  border: none;
+  width: 50%;
+  font-family: inherit;
+  font-size: 11pt;
+  color: #A4A4A4;
+  margin-top: 50px;
+  margin-left: 35px;
+}
+.filebox .profile_label{
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff;
+  vertical-align: middle;
+  background-color: #007AFF;
+  cursor: pointer;
+  height: 20px;
+  font-size: 11pt;
+  margin: 53px 0 0 16px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.filebox input[type="file"]{
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  position: relative;
+}
+.filebox .highLight{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 100px;
+  height: 0.1em;
+  background: #D4D4D4;
+  width: 53%;
+  margin: 0 auto;
+}
+.filebox .header{
+  font-size: 11pt;
+  font-weight: bold;
+  color: #007AFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 37px;
+  margin-top: 37px;
+}
+
 </style>

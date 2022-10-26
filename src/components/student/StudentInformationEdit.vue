@@ -7,7 +7,9 @@
     <div class="signUp_card">
       <h1>정보 수정</h1>
       <div class="signUp_wrap">
-        <router-link to="student-profile-img-edit">프로필 이미지 수정</router-link>
+        <div class="profile_page">
+          <router-link to="student-profile-img-edit">프로필 이미지 수정</router-link>
+        </div>
         <div class="row">
           <input
               type="text"
@@ -213,10 +215,10 @@ export default {
 }
 
 .depart {
-  width: 80%;
+  width: 80.5%;
   height: 45px;
   margin-top: 30px;
-  margin-left: 40px;
+  margin-left: 35px;
   border: none;
   border-bottom: 1px solid #A4A4A4;
   font-weight: normal;
@@ -276,7 +278,19 @@ export default {
   color: var(--blue-card-text);
   background: var(--blue-card);
   font-weight: bolder;
-  font-size: 13px;
+  font-size: 10pt;
+  font-family: inherit;
 }
 
+.profile_page{
+  background: var(--blue-card);
+  color: var(--blue-card-text);
+  width: 81%;
+  line-height: 35px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 20px 0 20px 37px;
+}
 </style>
