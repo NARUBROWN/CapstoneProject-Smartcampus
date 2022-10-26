@@ -175,7 +175,7 @@ export default {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  height: 280px;
+  height: 100%;
   padding: 20px 0 10px 0;
   background-color: var(--card);
 }
@@ -231,7 +231,8 @@ export default {
 }
 .login_card > .login_wrap > form > .forget{
   font-size: 9pt;
-  margin-left: 270px;
+  margin-top: 10px;
+  margin-left: 260px;
   color: #A4A4A4;
 }
 .login_card > .login_wrap > form > .join{

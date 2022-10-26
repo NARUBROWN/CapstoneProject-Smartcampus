@@ -167,6 +167,7 @@ header {
   height: 35px;
   border-radius: 35px;
   margin-left: 66%;
+  background-size: contain;
 }
 
 .card {

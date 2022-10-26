@@ -183,6 +183,7 @@ export default {
   background: var(--blue-card);
   font-weight: bolder;
   font-size: 13px;
+  font-family: inherit;
 }
 
 </style>

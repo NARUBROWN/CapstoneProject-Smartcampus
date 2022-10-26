@@ -248,7 +248,7 @@ input[type="submit"] {
 
 .firstAction > form > label > h1 {
   float: left;
-  margin: 6px 0 0 0;
+  margin: 10px 0 0 0;
   padding: 0 5px 0 25px;
   font-size: 15pt;
   font-weight: bold;
@@ -276,7 +276,7 @@ input[type="submit"] {
 
 .secondAction > label > h1 {
   float: left;
-  margin: 6px 0 0 0;
+  margin: 10px 0 0 0;
   padding: 0 5px 0 25px;
   font-size: 15pt;
   font-weight: bold;
@@ -303,7 +303,7 @@ input[type="submit"] {
 
 .sendAction > label > h1 {
   float: left;
-  margin: 6px 0 0 0;
+  margin: 10px 0 0 0;
   padding: 0 5px 0 25px;
   font-size: 15pt;
   font-weight: bold;

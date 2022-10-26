@@ -7,8 +7,13 @@
     <div class="signUp_card">
       <h1>사진 선택</h1>
       <div class="signUp_wrap">
-        <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
-
+        <div class="filebox">
+          <input class="upload-name" value="프로필 사진을 제출해주세요." placeholder="프로필 사진을 제출해주세요.">
+          <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
+          <label class="profile_label" for="file">파일찾기</label>
+          <label class="header">프로필 사진</label>
+          <div class="highLight"></div>
+        </div>
       </div>
     </div>
     <div class="underButtonsArea">
@@ -115,7 +120,7 @@ export default {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  padding: 20px 0 10px 0;
+  padding: 20px 0 20px 0;
   background-color: var(--card);
   color: var(--text-color);
 }
@@ -125,111 +130,6 @@ export default {
   padding: 0 0 0 20px;
   font-size: 10pt;
   font-weight: bold;
-}
-
-.signUp_card > .signUp_wrap > .row {
-  margin: 10px 0;
-  position: relative;
-}
-
-.signUp_card > .signUp_wrap > .row > .header {
-  font-size: 11pt;
-  font-weight: bold;
-  color: #007AFF;
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin-left: 37px;
-}
-
-.signUp_card > .signUp_wrap > .row > .highLight {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 0.1em;
-  background: #D4D4D4;
-  width: 80%;
-  margin: 0 auto;
-}
-
-.signUp_card > .signUp_wrap > .row > input,
-.signUp_card > .signUp_wrap > .row > button {
-  width: 35%;
-  font: inherit;
-  padding: 12px 0;
-  font-weight: normal;
-  outline: none;
-  border: 0;
-  margin-left: 37px;
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
-
-.signUp_card > .signUp_wrap > .row > input {
-  font-size: 11pt;
-  background: var(--card);
-}
-
-.signUp_card > .signUp_wrap > .row > input::placeholder {
-  color: #A4A4A4;
-}
-
-.signUp_card > .signUp_wrap > .row > button {
-  border-radius: 10px;
-  border: none;
-  font-size: 14pt;
-  font-weight: bold;
-  color: #F4F4F4;
-  cursor: pointer;
-  background-color: #007AFF;
-}
-
-.depart {
-  width: 80%;
-  height: 45px;
-  margin-top: 30px;
-  margin-left: 40px;
-  border: none;
-  border-bottom: 1px solid #A4A4A4;
-  font-weight: normal;
-}
-
-.select {
-  padding: 35px 0 10px 0;
-  margin-left: 40px;
-}
-
-.select input[type=radio] {
-  display: none;
-}
-
-.select input[type=radio] + label {
-  display: inline-block;
-  cursor: pointer;
-  height: 35px;
-  width: 43.8%;
-  border: 1px solid #A4A4A4;
-  line-height: 24px;
-  text-align: center;
-  font-weight: normal;
-  font-size: 14px;
-  padding-top: 10px;
-  background-color: #3998FF;
-  color: #FFFFFF;
-}
-
-.select input[type=radio] + label:first-of-type {
-  border-radius: 10px 0 0 10px;
-}
-
-.select input[type=radio] + label:nth-of-type(2) {
-  border-radius: 0 10px 10px 0;
-}
-
-.select input[type=radio]:checked + label {
-  background-color: #007AFF;
-  color: #FFFFFF;
 }
 
 .underButtonsArea {
@@ -249,6 +149,63 @@ export default {
   background: var(--blue-card);
   font-weight: bolder;
   font-size: 13px;
+  font-family: inherit;
 }
 
+.filebox{
+  position: relative;
+}
+.filebox .upload-name{
+  display: inline-block;
+  height: 40px;
+  vertical-align: middle;
+  border: none;
+  width: 50%;
+  font-family: inherit;
+  font-size: 11pt;
+  color: #A4A4A4;
+  margin-top: 50px;
+  margin-left: 35px;
+}
+.filebox .profile_label{
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff;
+  vertical-align: middle;
+  background-color: #007AFF;
+  cursor: pointer;
+  height: 20px;
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 53px 0 0 16px;
+  border-radius: 10px;
+}
+.filebox input[type="file"]{
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  position: relative;
+}
+.filebox .highLight{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 100px;
+  height: 0.1em;
+  background: #D4D4D4;
+  width: 53%;
+  margin: 0 auto;
+}
+.filebox .header{
+  font-size: 11pt;
+  font-weight: bold;
+  color: #007AFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 37px;
+  margin-top: 37px;
+}
 </style>
