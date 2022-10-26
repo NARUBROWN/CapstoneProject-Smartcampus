@@ -1,12 +1,12 @@
 <template>
   <div class="page-scroll">
     <ul>
-      <li @click="changeFocus(`campusCommunity`)" id="main">메인</li>
-      <li @click="changeFocus(`aiCampus`)">AI</li>
-      <li @click="changeFocus(`humanitiesCampus`)">인문</li>
-      <li @click="changeFocus(`natureCampus`)">자연</li>
-      <li @click="changeFocus(`artCampus`)">예술</li>
-      <li @click="changeFocus(`foundedCampus`)">창업</li>
+      <li @click="changeFocus(`campusCommunity`)" id="campusCommunity">메인</li>
+      <li @click="changeFocus(`aiCampus`)" id="aiCampus" ref="aiCampus">AI</li>
+      <li @click="changeFocus(`humanitiesCampus`)" id="humanitiesCampus">인문</li>
+      <li @click="changeFocus(`natureCampus`)" id="natureCampus">자연</li>
+      <li @click="changeFocus(`artCampus`)" id="artCampus">예술</li>
+      <li @click="changeFocus(`foundedCampus`)" id="foundedCampus">창업</li>
     </ul>
   </div>
   <div>
@@ -58,22 +58,23 @@ export default {
         natureCampus: null,
         artCampus: null,
         foundedCampus: null
-      },
+      }
     }
   },
   created() {
-    this.pageFocus.campusCommunity = true
+    this.pageFocus.campusCommunity = true;
+    let key = this.$route.query.table;
+    this.loadContexts(key);
   },
   mounted() {
     // 템플릿이 render 된 직후 DOM 요소를 사용하여 클래스 부여
-    document.getElementById("main").className = "selected"
+    document.getElementById("campusCommunity").className = "selected"
   },
   beforeUpdate() {
     // 템플릿이 render 된 이후 액션이 발생하면 부여된 클래스를 삭제
-    document.getElementById("main").className = ""
+    document.getElementById("campusCommunity").className = ""
   },
   methods: {
-
     changeFocus(key) {
       let changedObject = {};
       const objectKeys = Object.keys(this.pageFocus)
@@ -89,6 +90,26 @@ export default {
       })
       changedObject[key] = true
       this.pageFocus = changedObject
+    },
+    loadContexts(key) {
+      if (key === "") {
+        //
+      } else if (key === "CampusBoard_AI") {
+        this.pageFocus.campusCommunity = false;
+        this.pageFocus.aiCampus = true;
+      } else if (key === "CampusBoard_Art") {
+        this.pageFocus.campusCommunity = false;
+        this.pageFocus.artCampus = true;
+      } else if (key === "CampusBoard_Founded") {
+        this.pageFocus.campusCommunity = false;
+        this.pageFocus.foundedCampus = true;
+      } else if (key === "CampusBoard_Human") {
+        this.pageFocus.campusCommunity = false;
+        this.pageFocus.humanitiesCampus = true;
+      } else if (key === "CampusBoard_Nature") {
+        this.pageFocus.campusCommunity = false;
+        this.pageFocus.natureCampus = true;
+      }
     }
   }
 }

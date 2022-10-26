@@ -50,15 +50,14 @@
         <div class="pwCheck" v-if="!passwordCheckFlag">비밀번호가 일치하지 않습니다.</div>
         <div class="row">
           <select class="depart" v-model="department">
-            <option value="" disabled selected>소속학과를 선택해 주세요.</option>
-            <option>AI컴퓨터정보과</option>
-            <option>AI정보통신과</option>
-            <option>유아교육과</option>
-            <option>사회복지과</option>
-            <option>실내건축과</option>
-            <option>간호학과</option>
+            <option value="" disabled selected>소속 학부를(계열을) 선택해 주세요.</option>
+            <option>AI학부</option>
+            <option>인문사회계열</option>
+            <option>자연과학계열</option>
+            <option>예술디자인계열</option>
+            <option>미래창업학부</option>
           </select>
-          <label class="header">소속 학과</label>
+          <label class="header">소속 학부(계열)</label>
         </div>
         <div class="row" v-if="this.$store.state.user_data['stu_rank'] === '관리자'">
           <div class="select">

@@ -43,7 +43,7 @@ export default {
     };
   },
   created() {
-    // 게시글 불러오기
+    // 1. 게시글 불러오기
     axios({
       method: "get", // 요청 방식
       url: process.env.VUE_APP_IP + "/community/read/" + this.$route.query.table + "/" + this.$route.query.number, // 요청 주소
@@ -53,6 +53,7 @@ export default {
         .catch(function (err) {
           console.log(err); // 에러 처리 내용
         });
+
   },
   methods: {
     sendPost() {
@@ -67,15 +68,15 @@ export default {
       } else {
         axios({
           method: "post", // 요청 방식
-          url: process.env.VUE_APP_IP + "/community/update", // 요청 주소
+          url: process.env.VUE_APP_IP + "/community/update-content", // 요청 주소
           data: {
             table: this.$route.query.table,
-            id: this.$route.query.id,
+            id: this.$route.query.number,
             title: this.contents.title,
-            content: this.contents.content
+            content: this.contents.contents
           }
         }).then((res) => {
-          console.log(res)
+          console.log(res);
         })
             .catch(function (err) {
               console.log(err); // 에러 처리 내용
@@ -83,7 +84,7 @@ export default {
       }
     },
     back() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     }
   }
 }

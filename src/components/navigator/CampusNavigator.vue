@@ -93,7 +93,7 @@ export default {
         } else {
           this.secondActionArea = true
           this.selectButton = false
-          this.fileSelectMessage = fileName.substr(0, 3) + "." + fileExt
+          this.fileSelectMessage = fileName.substr(0, 2) + "." + fileExt
           this.input.image = event.target.files[0];
         }
       }

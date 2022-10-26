@@ -1,6 +1,6 @@
 <template>
-  {{ this.contents }}
-  <form @submit.prevent="sendPost">
+  {{ contents }}
+  <form>
     <input type="text"
            v-model="contents.title"
            name="title"
@@ -15,7 +15,7 @@
     <div class="underButtonsArea">
       <div class="underButtons">
         <button @click="back()">뒤로가기</button>
-        <button type="submit">제출</button>
+        <button @click="sendPost">제출</button>
       </div>
     </div>
   </form>
@@ -26,7 +26,7 @@
 import axios from "axios";
 
 export default {
-  name: "ReadContents",
+  name: "WriteContents",
   data() {
     return {
       // axios 를 통해 res.data 받은 객체를 대입 받을 곳
@@ -37,22 +37,23 @@ export default {
         date: null,
         content: null,
         image: null,
-        table: "CampusBoard_Art"
+        table: null
       }
     };
   },
   created() {
-    this.contents.id = this.$store.getters.getUserStore.id
-    this.contents.user = this.$store.getters.getUserStore.name
-
     // 현재 시간 가져오기
     const date = new Date();
     this.contents.date = date.toLocaleDateString('ko-kr');
 
-    // 학생 학과에 따라서 테이블 부여
-    if (this.$store.getters.getUserStore.department === "AI컴퓨터정보과") {
-      this.contents.table = "CampusBoard_AI"
-    }
+    // 유저 아이디 부여
+    this.contents.id = this.$store.getters.getUserStore.id;
+
+    // 유저 이름 부여
+    this.contents.user = this.$store.getters.getUserStore.name;
+
+    // 테이블 부여
+    this.contents.table = this.$store.getters.getUserStore.table;
   },
   methods: {
     fileSelect(event) {
@@ -76,7 +77,6 @@ export default {
       this.fullFileName = fileName + "." + fileExt
     },
     sendPost() {
-
       if (this.contents.title === null || this.contents.title === "") {
         this.$toast.warning('글 제목을 입력해주세요.', {
           position: 'bottom'
@@ -108,7 +108,7 @@ export default {
       }
     },
     back() {
-      this.$router.go(-1)
+      this.$router.push(`/campus-community?table=`)
     }
   }
 }
