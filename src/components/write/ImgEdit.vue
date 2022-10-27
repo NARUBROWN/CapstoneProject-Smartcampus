@@ -2,7 +2,7 @@
   <div>
     <br>
   </div>
-  <form @submit.prevent="updateProfile">
+  <form>
     <div class="signUp_card">
       <h1>사진 선택</h1>
       <div class="signUp_wrap">
@@ -10,15 +10,15 @@
           <input class="upload-name" v-bind:value="fileSelectMessage">
           <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
           <label class="profile_label" for="file">{{ fileSelectButton }}</label>
-          <label class="header">프로필 사진</label>
+          <label class="header">게시글 사진 수정</label>
           <div class="highLight"></div>
         </div>
       </div>
     </div>
     <div class="underButtonsArea">
       <div class="underButtons">
-        <button type="submit" v-if="sendButton">확인</button>
-        <button @click="this.$router.push('/student-information-edit');">취소</button>
+        <button type="submit" v-if="sendButton" @submit="updateImage">확인</button>
+        <button @click="back()">취소</button>
       </div>
     </div>
   </form>
@@ -45,7 +45,7 @@ export default {
   },
   created() {
     // 이 아이디가 아니라 게시글 아이디여야 함. 게시글 아이디는 전 페이지에서 router 파라미터로 가져오자
-    this.user_data.id = this.$store.state.user_data['id'];
+    this.user_data.id = this.$route.query.number
   },
   computed: {
     vuex_userdata() {
@@ -84,15 +84,15 @@ export default {
         this.sendButton = false
       }
     },
-    updateProfile() {
+    updateImage() {
       const formData = new FormData();
-      formData.append('profile_img', this.selectedImg);
+      formData.append('community_image', this.selectedImg);
       formData.append('id', this.$store.getters.getUserStore.id);
       formData.append('table', this.$store.getters.getUserStore.table)
 
       axios({
         method: "post", // 요청 방식
-        url: process.env.VUE_APP_IP + "/community/update-photo", // 요청 주소
+        url: process.env.VUE_APP_IP + "/community/update-photo",
         data: formData
       }).then((res) => {
         // 회원정보 수정
@@ -111,6 +111,9 @@ export default {
               position: 'bottom'
             });
           });
+    },
+    back() {
+      this.$router.go(-1);
     }
   }
 }

@@ -1,8 +1,7 @@
 <template>
-  {{ this.contents }}
   <!-- 사진 수정하기 버튼 -->
   <div>
-    <a @click="$router.push('/edit-contents-img')">사진 수정하기</a>
+    <a @click="$router.push(`/edit-contents-img?number=${this.$route.query.number}`)">사진 수정하기</a>
   </div>
   <form @submit.prevent="sendPost">
     <input type="text"
