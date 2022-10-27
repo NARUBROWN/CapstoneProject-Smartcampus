@@ -1,10 +1,10 @@
 {
   "name": "재능e 스마트캠퍼스",
-  "short_name": "재능e",
-  "start_url": ".",
+  "short_name": "재능e 스마트캠퍼스",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#fff",
-  "theme_color": "#fff",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "description": "인천재능대학교 재능e 스마트캠퍼스 입니다.",
   "icons": [{
     "src": "icon/512.png",

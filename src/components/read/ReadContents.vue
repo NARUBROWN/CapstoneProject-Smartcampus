@@ -71,7 +71,12 @@ export default {
   },
   methods: {
     back() {
-      this.$router.push(`/campus-community?table=${this.$route.query.table}`)
+      if (this.$route.query.type === "community") {
+        this.$router.push(`/campus-community?table=${this.$route.query.table}`);
+      } else {
+        this.$router.go(-1);
+      }
+
     },
     async req_data() {
       this.loading = true;

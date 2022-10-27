@@ -9,13 +9,16 @@ module.exports = {
 } */
 
 module.exports = {
-  css : {
-      loaderOptions : {
-          sass : {
-              additionalData: `
+    devServer: {
+        disableHostCheck: true
+    },
+    css: {
+        loaderOptions: {
+            sass: {
+                additionalData: `
                 @import "@/assets/scss/reset.scss";
               `
-          }
-      }
-  }
+            }
+        }
+    }
 }
