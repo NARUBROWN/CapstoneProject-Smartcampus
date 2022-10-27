@@ -31,7 +31,7 @@
           <input class="upload-name" v-bind:value="fileSelectMessage" disabled>
           <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
           <label class="profile_label" for="file">{{ fileSelectButton }}</label>
-          <label class="header">프로필 사진</label>
+          <label class="header">게시글 사진</label>
           <div class="highLight"></div>
         </div>
       </form>
