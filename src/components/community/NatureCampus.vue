@@ -106,24 +106,6 @@ h1 {
   text-align: left;
 }
 
-.articleType {
-  float: left;
-  border-radius: 10px;
-  margin: 0 3% 0 3%;
-  padding: 5px 0 5px 0;
-  width: 30px;
-  height: 20px;
-  text-align: center;
-}
-
-.articleType > a {
-  width: 100%;
-  height: 100%;
-  font-size: 8pt;
-  color: var(--blue-card-text);
-  font-weight: bolder;
-}
-
 .card > dl {
   margin: 0 auto;
   width: 90%;
@@ -133,17 +115,28 @@ h1 {
 
 .card > dl > .listDeco {
   margin: 5px;
-  padding: 3% 0 3% 0;
+  padding: 3% 3% 3% 3%;
   border-radius: 10px;
   background: var(--notice-list-background);
 }
 
 .card > dl > .listDeco > dt {
-  width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 10pt;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card > dl > .listDeco > dt:first-of-type {
+  width: 49%;
+  font-size: 12pt;
+  margin-right: 5%;
+}
+
+.card > dl > .listDeco > dt:nth-of-type(2) {
+  margin-right: 10px;
 }
 
 .card > dl > .listDeco > dt > a {
@@ -162,7 +155,7 @@ h1 {
 }
 
 .underButtons > button {
-  margin: 10px 5px 0 5px;
+  margin: 20px 5px 0 5px;
   width: 27%;
   height: 30px;
   border: 0;

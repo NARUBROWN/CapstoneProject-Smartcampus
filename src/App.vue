@@ -265,7 +265,7 @@ footer > p {
 }
 
 .slide_card > div:first-of-type {
-  margin-top: 9px;
+  margin-top: 12px;
 }
 
 .slide-fade-enter-active {
