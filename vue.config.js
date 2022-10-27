@@ -1,6 +1,6 @@
-const { defineConfig } = require('@vue/cli-service')
+const {defineConfig} = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true
+    transpileDependencies: true
 })
 
 /* const path = require("path");
@@ -10,8 +10,11 @@ module.exports = {
 
 module.exports = {
     devServer: {
-        disableHostCheck: true
-    },
+        allowedHosts: "all"
+    }
+}
+
+module.exports = {
     css: {
         loaderOptions: {
             sass: {
