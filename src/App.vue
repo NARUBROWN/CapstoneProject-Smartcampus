@@ -6,11 +6,13 @@
   <header>
     <div class="top">
       <img class="logo" src="@/assets/main/logo.png" alt="재능대학교 로고" @click="goHome">
+      <div class="container">
       <img class="logout" src="@/assets/student/Non_Profile.png"
            v-if="this.$store.state.user_data['login_state'] === false" alt="로그인 되지 않았습니다."
            @click="this.$router.push('/login')">
-      <img class="logout" v-bind:src="profile_img" @click="handler"
-           v-if="this.$store.state.user_data['login_state'] === true" alt="프로필 사진">
+        <img class="logout" v-bind:src="profile_img" @click="handler"
+            v-if="this.$store.state.user_data['login_state'] === true" alt="프로필 사진">
+      </div>
       <transition name="slide-fade">
         <div v-if="isShow" class="slide_card">
           <div @click="handler">
@@ -162,12 +164,19 @@ header {
   width: 15%;
 }
 
-.logout {
+.container {
+  display: inline-block;
+  margin-left: 66%;
   width: 35px;
   height: 35px;
   border-radius: 35px;
-  margin-left: 66%;
-  background-size: contain;
+  overflow: hidden;
+}
+.logout {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .card {
