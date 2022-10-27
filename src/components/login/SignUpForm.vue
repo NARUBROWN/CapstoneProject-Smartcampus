@@ -9,7 +9,9 @@
            fileSelect 이벤트(함수)가 어떻게 동작하는지 확인하고 싶다면 하단 method를 확인해볼것
            class upload-name 들어가있는 input 태그 label로 바꾸던가 해야 할 것 같은데. 아니면 입력이 안되게 하던지
            조치 취해주길 바람... -->
-          <input class="upload-name" v-bind:value="fileSelectMessage">
+
+           <!-- disalbed = input태그 입력 비활성화 -->
+          <input class="upload-name" v-bind:value="fileSelectMessage" disabled>
           <input type="file" name="userfile" id="file" ref="user_img" v-on:change="fileSelect($event)">
           <label class="profile_label" for="file">{{ fileSelectButton }}</label>
           <label class="header">프로필 사진</label>
