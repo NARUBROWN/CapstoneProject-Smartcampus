@@ -1,5 +1,5 @@
 <template>
-  <h1>게시글 작성</h1>
+  <h1>게시글 수정</h1>
   <EditContents></EditContents>
 </template>
 

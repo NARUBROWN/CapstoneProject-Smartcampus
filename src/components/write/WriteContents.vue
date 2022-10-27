@@ -12,10 +12,10 @@
           <div class="highLight"></div>
         </div>
         <div class="row">
-          <textarea type="text"
-                v-model="contents.content"
-                name="content"
-                placeholder="내용을 입력해주세요."
+          <textarea
+              v-model="contents.content"
+              name="content"
+              placeholder="내용을 입력해주세요."
           ></textarea>
           <label class="header">내용</label>
         </div>
@@ -137,7 +137,7 @@ export default {
       }
     },
     back() {
-      this.$router.push(`/campus-community?table=`)
+      this.$router.push(`/campus-community?table=${this.$store.getters.getUserStore.table}`)
     }
   }
 }
@@ -206,10 +206,6 @@ export default {
 .card > .wrap > form > .row > input::placeholder,
 .card > .wrap > form > .row > textarea::placeholder{
   color: #A4A4A4;
-}
-
-.card > .wrap > form > .row > .write{
-  border: 0.1em solid #D4D4D4;
 }
 
 .filebox{

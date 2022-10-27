@@ -17,7 +17,7 @@
     </div>
     <div class="underButtonsArea">
       <div class="underButtons">
-        <button type="submit" v-if="sendButton" @submit="updateImage">확인</button>
+        <button type="submit" v-if="sendButton" @click="updateImage">확인</button>
         <button @click="back()">취소</button>
       </div>
     </div>
@@ -44,7 +44,7 @@ export default {
     };
   },
   created() {
-    // 이 아이디가 아니라 게시글 아이디여야 함. 게시글 아이디는 전 페이지에서 router 파라미터로 가져오자
+    // 게시글 아이디를 받아옴
     this.user_data.id = this.$route.query.number
   },
   computed: {
@@ -78,16 +78,12 @@ export default {
       this.user_data.img = fileName + "." + fileExt;
 
       // 파일이 없으면 업로드 버튼 비활성화
-      if (filePath !== "") {
-        this.sendButton = true
-      } else {
-        this.sendButton = false
-      }
+      this.sendButton = filePath !== "";
     },
     updateImage() {
       const formData = new FormData();
       formData.append('community_image', this.selectedImg);
-      formData.append('id', this.$store.getters.getUserStore.id);
+      formData.append('id', this.$route.query.number);
       formData.append('table', this.$store.getters.getUserStore.table)
 
       axios({
@@ -113,7 +109,7 @@ export default {
           });
     },
     back() {
-      this.$router.go(-1);
+      this.$router.push(`/edit-contents?table=${this.$store.getters.getUserStore.table}&number=${this.$route.query.number}`);
     }
   }
 }

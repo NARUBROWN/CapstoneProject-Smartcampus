@@ -12,10 +12,10 @@
           <div class="highLight"></div>
         </div>
         <div class="row">
-          <textarea type="text"
-                v-model="contents.contents"
-                name="title"
-                placeholder="내용을 입력해주세요."
+          <textarea
+              v-model="contents.contents"
+              name="title"
+              placeholder="내용을 입력해주세요."
           ></textarea>
           <label class="header">내용</label>
         </div>
@@ -28,7 +28,7 @@
   <div class="underButtonsArea">
     <div class="underButtons">
       <button @click="back()">뒤로가기</button>
-      <button type="submit">제출</button>
+      <button type="submit" @click="sendPost">제출</button>
     </div>
   </div>
 </template>
@@ -78,6 +78,7 @@ export default {
         this.$toast.warning('글 내용을 입력해주세요.', {
           position: 'bottom'
         });
+
       } else {
         axios({
           method: "post", // 요청 방식
@@ -97,7 +98,7 @@ export default {
       }
     },
     back() {
-      this.$router.go(-1);
+      this.$router.push(`/read-contents?type=community&table=${this.$store.getters.getUserStore.table}&number=${this.$route.query.number}`);
     }
   }
 }
@@ -166,10 +167,6 @@ export default {
 .card > .wrap > form > .row > input::placeholder,
 .card > .wrap > form > .row > textarea::placeholder{
   color: #A4A4A4;
-}
-
-.card > .wrap > form > .row > .write{
-  border: 0.1em solid #D4D4D4;
 }
 
 .img_change {
