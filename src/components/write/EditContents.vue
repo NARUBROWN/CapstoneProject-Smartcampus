@@ -1,26 +1,36 @@
 <template>
-  <!-- 사진 수정하기 버튼 -->
-  <div>
-    <a @click="$router.push(`/edit-contents-img?number=${this.$route.query.number}`)">사진 수정하기</a>
-  </div>
-  <form @submit.prevent="sendPost">
-    <input type="text"
-           v-model="contents.title"
-           name="title"
-           placeholder="제목을 입력해주세요."
-    />
-    <input type="text"
-           v-model="contents.contents"
-           name="title"
-           placeholder="내용을 입력해주세요."
-    />
-    <div class="underButtonsArea">
-      <div class="underButtons">
-        <button @click="back()">뒤로가기</button>
-        <button type="submit">제출</button>
-      </div>
+  <div class="card">
+    <div class="wrap">
+      <form @submit.prevent="sendPost">
+        <div class="row">
+          <input type="text"
+                v-model="contents.title"
+                name="title"
+                placeholder="제목을 입력해주세요."
+          />
+          <label class="header">제목</label>
+          <div class="highLight"></div>
+        </div>
+        <div class="row">
+          <textarea type="text"
+                v-model="contents.contents"
+                name="title"
+                placeholder="내용을 입력해주세요."
+          ></textarea>
+          <label class="header">내용</label>
+        </div>
+        <div class="img_change">
+          <a @click="$router.push(`/edit-contents-img?number=${this.$route.query.number}`)">사진 수정하기</a>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
+  <div class="underButtonsArea">
+    <div class="underButtons">
+      <button @click="back()">뒤로가기</button>
+      <button type="submit">제출</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -94,79 +104,84 @@ export default {
 </script>
 
 <style scoped>
-.card {
+.card > .wrap {
   margin: 10px auto;
   border-radius: 10px;
   width: 95.56%;
-  padding: 10px 0 10px 0;
-  background-color: var(--card);
-  color: var(--text-color);
-}
-
-.card > h1 {
-  margin: 10px 0 0 0;
-  padding: 0 0 0 20px;
-  font-size: 16pt;
-  font-weight: bold;
-}
-
-.card > div > h3 {
-  margin: 5px 0 5px 0;
-  padding: 0 0 0 20px;
-  font-size: 9pt;
-}
-
-.card > p {
-  margin: 0 auto;
-  width: 90%;
-  padding: 0 0 3% 0;
-  white-space: pre-line;
-}
-
-.articleType > a {
-  width: 100%;
   height: 100%;
-  font-size: 8pt;
-  color: var(--blue-card-text);
+  padding: 5px 0 10px 0;
+  background-color: var(--card);
+}
+
+.card > .wrap > form > .row{
+  margin: 10px 0;
+  position: relative;
+}
+
+.card > .wrap > form > .row > .header{
+  font-size: 11pt;
   font-weight: bold;
+  color: #007AFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 37px;
 }
 
-.card > dl {
-  margin: 0 auto;
-  width: 90%;
-  text-decoration-color: #454545;
-  font-weight: normal;
-}
-
-.card > dl > .listDeco {
-  margin: 5px;
-  padding: 3% 0 3% 0;
-  border-radius: 10px;
-  background: var(--notice-list-background);
-}
-
-.card > dl > .listDeco > dt {
+.card > .wrap > form > .row > .highLight{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 0.1em;
+  background: #D4D4D4;
   width: 80%;
-  margin: 2px 0 0 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 10pt;
-  padding: 0 0 0 15px;
-}
-
-.card > dl > .listDeco > dd {
-  margin: 1px 0 0 40px;
-  font-size: 9pt;
-}
-
-.imgBox {
   margin: 0 auto;
-  text-align: center;
 }
 
-.imgBox > img {
-  width: 90%;
+.card > .wrap > form > .row > input,
+.card > .wrap > form > .row > textarea{
+  width: 80%;
+  font: inherit;
+  padding: 12px 0;
+  font-weight: normal;
+  outline: none;
+  border: 0;
+  margin-left: 37px;
+  margin-top: 15px;
+  font-size: 11pt;
+  background: var(--card);
+  border-radius: 10px;
+}
+
+.card > .wrap > form > .row > textarea{
+  width: 73%;
+  height: 100px;
+  border: 0.1em solid #D4D4D4;
+  margin-top: 30px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.card > .wrap > form > .row > input::placeholder,
+.card > .wrap > form > .row > textarea::placeholder{
+  color: #A4A4A4;
+}
+
+.card > .wrap > form > .row > .write{
+  border: 0.1em solid #D4D4D4;
+}
+
+.img_change {
+  background: var(--blue-card);
+  color: var(--blue-card-text);
+  width: 81%;
+  line-height: 35px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 20px 0 0 37px;
 }
 
 .underButtonsArea {

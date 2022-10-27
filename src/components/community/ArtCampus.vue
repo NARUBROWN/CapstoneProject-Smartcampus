@@ -98,7 +98,7 @@ h1 {
 
 .card > h1 {
   margin: 10px 0 15px 0;
-  padding: 0 0 0 20px;
+  padding: 0px;
   font-size: 10pt;
   font-weight: bold;
 }
