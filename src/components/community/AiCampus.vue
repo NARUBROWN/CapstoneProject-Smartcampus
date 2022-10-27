@@ -103,25 +103,6 @@ h1 {
   text-align: left;
 }
 
-.articleType {
-  float: left;
-  border-radius: 10px;
-  margin: 2% 4% 0 1%;
-  padding: 7px 2px 7px 2px;
-  width: 30px;
-  height: 20px;
-  text-align: center;
-  background: #FF3B30;
-}
-
-.articleType > a {
-  width: 100%;
-  height: 100%;
-  font-size: 8pt;
-  color: var(--blue-card-text);
-  font-weight: bolder;
-}
-
 .card > dl {
   margin: 0 auto;
   width: 90%;
@@ -146,8 +127,9 @@ h1 {
 }
 
 .card > dl > .listDeco > dt:first-of-type {
-  width: 55%;
+  width: 49%;
   font-size: 12pt;
+  margin-right: 5%;
 }
 
 .card > dl > .listDeco > dt:nth-of-type(2) {
@@ -170,7 +152,7 @@ h1 {
 }
 
 .underButtons > button {
-  margin: 10px 5px 0 5px;
+  margin: 20px 5px 0 5px;
   width: 27%;
   height: 30px;
   border: 0;
