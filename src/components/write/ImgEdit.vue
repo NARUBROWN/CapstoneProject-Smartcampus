@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <br>
-  </div>
-  <form>
+  <form @submit.prevent="updateProfile">
     <div class="signUp_card">
       <h1>사진 선택</h1>
       <div class="signUp_wrap">

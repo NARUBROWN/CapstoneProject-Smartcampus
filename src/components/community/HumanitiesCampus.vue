@@ -14,7 +14,8 @@
         <dt>
           <a @click="inValues(key.id)">{{ key.title }}</a>
         </dt>
-        <dd>{{ key.date }}</dd>
+          <dt>{{ key.user }}</dt>
+          <dt>{{ key.date }}</dt>
       </div>
     </dl>
   </div>
@@ -99,9 +100,10 @@ h1 {
 
 .card > h1 {
   margin: 10px 0 15px 0;
-  padding: 0px;
+  padding: 0 0 0 20px;
   font-size: 10pt;
   font-weight: bold;
+  text-align: left;
 }
 
 .articleType {
