@@ -16,7 +16,7 @@
       <transition name="slide-fade">
         <div v-if="isShow" class="slide_card">
           <div @click="handler">
-            <router-link to="/">모바일 학생증</router-link>
+            <router-link to="/student-information">모바일 학생증</router-link>
           </div>
           <div @click="handler">
             <router-link to="/">마이페이지</router-link>

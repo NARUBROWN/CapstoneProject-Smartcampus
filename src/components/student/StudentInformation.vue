@@ -11,8 +11,8 @@
     <a><img class="stuImg" src="@/assets/main/student/student.png" alt="학생증 아이콘"></a>
     <h3>학생카드</h3>
     <div>
-      <!-- <img class="barcode" src="@/assets/student/barcode.png" alt="바코드"> -->
-      <h3>{{ veux_userdata['stu_number"'] }}</h3>
+        <VueBarcode v-bind:value="stu_number.toString()"
+                    :options="{ height: 50, width: 2.5, background: `#0A84FF`, lineColor: `#FFFFFF`, fontSize: 20}"></VueBarcode>
     </div>
     <div>
       <div class="blackBox">
@@ -32,12 +32,17 @@
 
 <script>
 import axios from "axios";
+import VueBarcode from '@chenfengyuan/vue-barcode';
 
 export default {
   name: "StudentInformation",
+  components: {
+    VueBarcode
+  },
   data() {
     return {
-      img: ""
+      img: "",
+      stu_number: null
       /*user_data: [{
         name: "",
         rank: "",
@@ -53,6 +58,9 @@ export default {
   },
   created() {
     this.img = process.env.VUE_APP_IP + '/profile_img/' + this.$store.state.user_data['img']
+    this.stu_number = this.$store.getters.getUserStore.stu_number
+  },
+  mounted() {
   },
   methods: {
     /*// 백엔드에 데이터 요청하는 메소드

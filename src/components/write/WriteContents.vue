@@ -102,7 +102,7 @@ export default {
       this.fileSelectMessage = fileName.substr(0, 7) + "." + fileExt
       // 버튼 데이터를 다시 선택으로 변경
       this.fileSelectButton = "다시 선택"
-      this.image = event.target.files[0];
+      this.contents.image = event.target.files[0];
     },
     sendPost() {
       if (this.contents.title === null || this.contents.title === "") {
@@ -114,14 +114,15 @@ export default {
           position: 'bottom'
         });
       } else {
+
         const formData = new FormData();
         formData.append('table', this.contents.table);
         formData.append('title', this.contents.title);
-        formData.append('stu_id', this.contents.id)
-        formData.append('user', this.contents.user)
-        formData.append('date', this.contents.date)
-        formData.append('content', this.contents.content)
-        formData.append('community_image', this.contents.image)
+        formData.append('stu_id', this.contents.id);
+        formData.append('user', this.contents.user);
+        formData.append('date', this.contents.date);
+        formData.append('content', this.contents.content);
+        formData.append('community_image', this.contents.image);
 
         axios({
           method: "post", // 요청 방식

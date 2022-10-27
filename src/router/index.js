@@ -19,6 +19,7 @@ import StudentImgEditView from "@/views/StudentImgEditView";
 import ErrorView from "@/views/ErrorView";
 import WriteView from "@/views/WriteView";
 import EditView from "@/views/EditView";
+import CommunityContentsImgEditView from "@/views/CommunityContentsImgEditView";
 
 const routes = [
   {
@@ -145,6 +146,21 @@ const routes = [
     path: '/edit-contents',
     name: 'edit-contents',
     component: EditView,
+    beforeEnter: (to, from, next) => {
+      // Vuex State 에서 로그인 상태 가지고 옴
+      if (store.getters.getUserLoginState === true) {
+        // 로그인 되어으면, 정상 이동
+        next();
+      } else {
+        // 로그인 되어 있지 않으면, 에러페이지로 이동
+        next('/error');
+      }
+    }
+  },
+  {
+    path: '/edit-contents-img',
+    name: 'edit-contents-img',
+    component: CommunityContentsImgEditView,
     beforeEnter: (to, from, next) => {
       // Vuex State 에서 로그인 상태 가지고 옴
       if (store.getters.getUserLoginState === true) {

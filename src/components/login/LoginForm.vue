@@ -80,7 +80,7 @@ export default {
     }
   },
   created() {
-    this.user_data['code'] = 0
+    this.user_data['code'] = 0;
 
     // 3. 로컬 스토리지에 있는 값 확인
     if (localStorage.getItem('loginLogic') === '1') {
@@ -98,7 +98,6 @@ export default {
       });
     }
   },
-  watch: {},
   methods: {
     vuex_login() {
       const stu_num = this.stu_num

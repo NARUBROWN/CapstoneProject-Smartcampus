@@ -41,11 +41,8 @@ export const store = createStore({
             state.user_data["password"] = user_info["password"]
             state.user_data["img"] = user_info["img"]
             state.user_data["code"] = user_info["code"]
-            /*            <option>AI학부</option>
-            <option>인문사회계열</option>
-            <option>자연과학계열</option>
-            <option>예술디자인계열</option>
-            <option>미래창업학부</option>*/
+
+            // 학부에 따라서 테이블 부여 *이 테이블은 글 작성시 사용됨
             if (user_info['department'] === "AI학부") {
                 state.user_data["table"] = "CampusBoard_AI"
             } else if (user_info['department'] === "인문사회계열") {
@@ -68,6 +65,7 @@ export const store = createStore({
             state.user_data["password"] = null
             state.user_data["img"] = null
             state.user_data["code"] = null
+            state.user_data["table"] = null
         },
         contents(state, content_info) {
             state.contents = content_info
@@ -98,24 +96,22 @@ export const store = createStore({
                     }
                 })
 
-                // user.data를 state로 커밋
-                context.commit('login', user.data)
-
                 //로그인 로직 수행
-                if (context.state.user_data['code'] === 0) {
-                    this.$toast.warning('아무것도 입력되지 않았습니다.', {
-                        position: 'bottom'
-                    });
-                } else if (context.state.user_data['code'] === 1) {
-                    // 학번 틀림
-                } else if (context.state.user_data['code'] === 2) {
-                    // 비밀번호 틀림
-                } else if (context.state.user_data['code'] === 3) {
+                if (user['data']['code'] === 0) {
+                    console.log("아무것도 입력 안됨");
+                } else if (user['data']['code'] === 1) {
+                    console.log("학번 틀림");
+                } else if (user['data']['code'] === 2) {
+                    console.log("비밀번호 틀림");
+                } else if (user['data']['code'] === 3) {
+                    // user.data를 state로 커밋
+                    context.commit('login', user.data);
                     // 페이지 프로필을 새로 고치기 위해서 로컬스토리지에 값을 주고 Create시에 그 값이 확인되면 메인 페이지로 로드
                     // 1. 로컬스토리지에 키 저장
                     localStorage.setItem('loginLogic', '1');
                     // 2. 페이지 새로고침
                     location.reload();
+                    this.$router.push('/');
                 }
             } catch (e) {
                 console.log("새로운 데이터를 불러오지 못했습니다. " + e);
@@ -123,9 +119,7 @@ export const store = createStore({
         },
         logout(context) {
             // logout mutations 호출
-            context.commit('logout')
-
-            //location.reload();
+            context.commit('logout');
         },
         async update(context, payload) {
             try {
@@ -139,20 +133,20 @@ export const store = createStore({
                     }
                 })
 
-                // user.data를 state로 커밋
-                context.commit('login', user.data)
-
                 //로그인 로직 수행
-                if (context.state.user_data['code'] === 0) {
-                    // 아무것도 입력 안됨
-                } else if (context.state.user_data['code'] === 1) {
-                    // 학번 틀림
-                } else if (context.state.user_data['code'] === 2) {
-                    // 비밀번호 틀림
-                } else if (context.state.user_data['code'] === 3) {
+                if (user['data']['code'] === 0) {
+                    console.log("아무것도 입력 안됨");
+                } else if (user['data']['code'] === 1) {
+                    console.log("학번 틀림");
+                } else if (user['data']['code'] === 2) {
+                    console.log("비밀번호 틀림");
+                } else if (user['data']['code'] === 3) {
+                    // user.data를 state로 커밋
+                    context.commit('login', user.data);
                     // 페이지 새로 고침
                     location.reload();
                 }
+
             } catch (e) {
                 console.log("새로운 데이터를 불러오지 못했습니다. " + e);
             }
