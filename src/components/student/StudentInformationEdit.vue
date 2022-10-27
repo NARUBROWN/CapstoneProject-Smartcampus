@@ -1,8 +1,4 @@
 <template>
-    <div>
-      <!-- <img class="profilePhoto" src="@/assets/student/profile.png" alt="프로필"> -->
-      <br>
-    </div>
   <form @submit.prevent="updateProfile">
     <div class="signUp_card">
       <h1>정보 수정</h1>

@@ -15,9 +15,9 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  margin: 15% 0 15% 0;
-  text-align: center;
-  color: var(--text-color)
-}
+  h1 {
+    margin: 15% 0 15% 0;
+    text-align: center;
+    color: var(--text-color)
+  }
 </style>

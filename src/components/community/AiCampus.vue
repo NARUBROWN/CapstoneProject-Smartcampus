@@ -10,12 +10,10 @@
       <!-- JSON 객체를 받아와서 v-for 로 데이터를 씌워줌-->
       <div class="listDeco" v-for="key in contents" v-bind:key="key">
         <!-- v-bind 를 통해서 속성에도 값을 넣어줄 수 있음-->
-        <!--<div class="articleType" v-bind:style="notice.color"><a>{{ notice.tag }}</a></div>-->
-        <dt>
-          <a @click="inValues(key.id)">{{ key.title }}</a>
-        </dt>
-        <dd>{{ key.date }}</dd>
-        <dd>{{ key.user }}</dd>
+        <!-- <div class="articleType"><a>AI</a></div> -->
+        <dt><a @click="inValues(key.id)">{{ key.title }}</a></dt>
+        <dt>{{ key.user }}</dt>
+        <dt>{{ key.date }}</dt>
       </div>
     </dl>
   </div>
@@ -99,19 +97,21 @@ h1 {
 
 .card > h1 {
   margin: 10px 0 15px 0;
-  padding: 0px;
+  padding: 0 0 0 20px;
   font-size: 10pt;
   font-weight: bold;
+  text-align: left;
 }
 
 .articleType {
   float: left;
   border-radius: 10px;
-  margin: 0 3% 0 3%;
-  padding: 5px 0 5px 0;
+  margin: 2% 4% 0 1%;
+  padding: 7px 2px 7px 2px;
   width: 30px;
   height: 20px;
   text-align: center;
+  background: #FF3B30;
 }
 
 .articleType > a {
@@ -131,17 +131,27 @@ h1 {
 
 .card > dl > .listDeco {
   margin: 5px;
-  padding: 3% 0 3% 0;
+  padding: 3% 3% 3% 3%;
   border-radius: 10px;
   background: var(--notice-list-background);
 }
 
 .card > dl > .listDeco > dt {
-  width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 10pt;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card > dl > .listDeco > dt:first-of-type {
+  width: 55%;
+  font-size: 12pt;
+}
+
+.card > dl > .listDeco > dt:nth-of-type(2) {
+  margin-right: 10px;
 }
 
 .card > dl > .listDeco > dt > a {

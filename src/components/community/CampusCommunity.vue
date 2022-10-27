@@ -34,9 +34,10 @@ h1 {
 
 .card > h1 {
   margin: 10px 0 15px 0;
-  padding: 0px;
+  padding: 0 0 0 20px;
   font-size: 10pt;
   font-weight: bold;
+  text-align: left;
 }
 
 .articleType {
