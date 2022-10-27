@@ -20,7 +20,7 @@
           <label class="header">내용</label>
         </div>
         <div class="img_change">
-          <a @click="$router.push('/edit-contents-img')">사진 수정하기</a>
+          <a @click="$router.push(`/edit-contents-img?number=${this.$route.query.number}`)">사진 수정하기</a>
         </div>
       </form>
     </div>
