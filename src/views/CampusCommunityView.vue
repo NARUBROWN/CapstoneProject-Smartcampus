@@ -68,11 +68,35 @@ export default {
   },
   mounted() {
     // 템플릿이 render 된 직후 DOM 요소를 사용하여 클래스 부여
-    document.getElementById("campusCommunity").className = "selected"
+    if (this.$route.query.table === undefined) {
+      document.getElementById("campusCommunity").className = "selected"
+    } else if (this.$route.query.table === "CampusBoard_AI") {
+      document.getElementById("aiCampus").className = "selected"
+    } else if (this.$route.query.table === "CampusBoard_Art") {
+      document.getElementById("artCampus").className = "selected"
+    } else if (this.$route.query.table === "CampusBoard_Founded") {
+      document.getElementById("foundedCampus").className = "selected"
+    } else if (this.$route.query.table === "CampusBoard_Human") {
+      document.getElementById("humanitiesCampus").className = "selected"
+    } else if (this.$route.query.table === "CampusBoard_Nature") {
+      document.getElementById("natureCampus").className = "selected"
+    }
   },
   beforeUpdate() {
     // 템플릿이 render 된 이후 액션이 발생하면 부여된 클래스를 삭제
-    document.getElementById("campusCommunity").className = ""
+    if (this.$route.query.table === undefined) {
+      document.getElementById("campusCommunity").className = ""
+    } else if (this.$route.query.table === "CampusBoard_AI") {
+      document.getElementById("aiCampus").className = ""
+    } else if (this.$route.query.table === "CampusBoard_Art") {
+      document.getElementById("artCampus").className = ""
+    } else if (this.$route.query.table === "CampusBoard_Founded") {
+      document.getElementById("foundedCampus").className = ""
+    } else if (this.$route.query.table === "CampusBoard_Human") {
+      document.getElementById("humanitiesCampus").className = ""
+    } else if (this.$route.query.table === "CampusBoard_Nature") {
+      document.getElementById("natureCampus").className = ""
+    }
   },
   methods: {
     changeFocus(key) {
@@ -93,22 +117,22 @@ export default {
     },
     loadContexts(key) {
       if (key === "") {
-        //
+        /* <li @click="changeFocus(`campusCommunity`)" id="campusCommunity">메인</li>
+      <li @click="changeFocus(`aiCampus`)" id="aiCampus" ref="aiCampus">AI</li>
+      <li @click="changeFocus(`humanitiesCampus`)" id="humanitiesCampus">인문</li>
+      <li @click="changeFocus(`natureCampus`)" id="natureCampus">자연</li>
+      <li @click="changeFocus(`artCampus`)" id="artCampus">예술</li>
+      <li @click="changeFocus(`foundedCampus`)" id="foundedCampus">창업</li>*/
       } else if (key === "CampusBoard_AI") {
-        this.pageFocus.campusCommunity = false;
-        this.pageFocus.aiCampus = true;
+        this.changeFocus('aiCampus');
       } else if (key === "CampusBoard_Art") {
-        this.pageFocus.campusCommunity = false;
-        this.pageFocus.artCampus = true;
+        this.changeFocus('artCampus');
       } else if (key === "CampusBoard_Founded") {
-        this.pageFocus.campusCommunity = false;
-        this.pageFocus.foundedCampus = true;
+        this.changeFocus('foundedCampus');
       } else if (key === "CampusBoard_Human") {
-        this.pageFocus.campusCommunity = false;
-        this.pageFocus.humanitiesCampus = true;
+        this.changeFocus('humanitiesCampus');
       } else if (key === "CampusBoard_Nature") {
-        this.pageFocus.campusCommunity = false;
-        this.pageFocus.natureCampus = true;
+        this.changeFocus('natureCampus');
       }
     }
   }

@@ -91,6 +91,7 @@ export default {
           }
         }).then((res) => {
           console.log(res);
+          this.$router.push(`/read-contents?type=community&table=${this.$store.getters.getUserStore.table}&number=${this.$route.query.number}`);
         })
             .catch(function (err) {
               console.log(err); // 에러 처리 내용

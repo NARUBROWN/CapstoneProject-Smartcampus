@@ -129,7 +129,8 @@ export default {
           url: process.env.VUE_APP_IP + "/community/write", // 요청 주소
           data: formData
         }).then((res) => {
-          console.log(res)
+          console.log(res);
+          this.$router.push(`/campus-community?table=${this.$store.getters.getUserStore.table}`);
         })
             .catch(function (err) {
               console.log(err); // 에러 처리 내용
@@ -137,7 +138,7 @@ export default {
       }
     },
     back() {
-      this.$router.push(`/campus-community?table=${this.$store.getters.getUserStore.table}`)
+      this.$router.push(`/campus-community?table=${this.$store.getters.getUserStore.table}`);
     }
   }
 }

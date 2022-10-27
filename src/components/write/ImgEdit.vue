@@ -85,20 +85,11 @@ export default {
       formData.append('community_image', this.selectedImg);
       formData.append('id', this.$route.query.number);
       formData.append('table', this.$store.getters.getUserStore.table)
-
       axios({
         method: "post", // 요청 방식
         url: process.env.VUE_APP_IP + "/community/update-photo",
         data: formData
-      }).then((res) => {
-        // 회원정보 수정
-        console.log("수정 성공" + res.data[0]);
-
-        this.$toast.success('이미지를 성공적으로 교체하였습니다.', {
-          position: 'bottom'
-        });
-
-        this.$router.go(-1);
+      }).then(() => {
       })
           .catch((err) => {
             console.log(err); // 에러 처리 내용
@@ -107,6 +98,7 @@ export default {
               position: 'bottom'
             });
           });
+      this.$router.push(`/read-contents?type=community&table=${this.$store.getters.getUserStore.table}&number=${this.$route.query.number}&request=reset`);
     },
     back() {
       this.$router.push(`/edit-contents?table=${this.$store.getters.getUserStore.table}&number=${this.$route.query.number}`);

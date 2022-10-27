@@ -75,6 +75,7 @@ export default {
     },
     async req_data() {
       this.loading = true;
+
       if (this.$route.query.type === "community") {
         try {
           let contents = await axios.get(process.env.VUE_APP_IP + "/community/read/" + this.$route.query.table + "/" + this.$route.query.number)
