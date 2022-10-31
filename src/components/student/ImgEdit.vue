@@ -168,7 +168,7 @@ export default {
   padding: 10px 20px;
   color: #ffffff;
   vertical-align: middle;
-  background-color: #007AFF;
+  background-color: #0A84FF;
   cursor: pointer;
   height: 20px;
   font-size: 11pt;
@@ -197,7 +197,7 @@ export default {
 .filebox .header{
   font-size: 11pt;
   font-weight: bold;
-  color: #007AFF;
+  color: #0A84FF;
   position: absolute;
   left: 0;
   top: 0;

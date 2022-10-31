@@ -164,7 +164,7 @@ export default {
   padding: 10px 20px;
   color: #ffffff;
   vertical-align: middle;
-  background-color: #007AFF;
+  background: var(--blue-card);
   cursor: pointer;
   height: 20px;
   font-size: 11pt;
