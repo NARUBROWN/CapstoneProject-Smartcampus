@@ -88,6 +88,7 @@ export default {
   font-weight: bolder;
   font-size: 16px;
   margin-bottom: 10px;
+  font-family: inherit;
 }
 
 .mealAlert{

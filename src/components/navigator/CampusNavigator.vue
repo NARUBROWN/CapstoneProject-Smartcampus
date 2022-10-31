@@ -257,9 +257,9 @@ input[type="submit"] {
 
 .firstAction > img {
   float: right;
-  margin: 5px 25px 0 0;
+  margin: 5px 20px 0 0;
   padding: 0;
-  width: 9%;
+  width: 8%;
   filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
 
 }
@@ -285,7 +285,7 @@ input[type="submit"] {
 
 .secondAction > img {
   float: right;
-  margin: 5px 25px 0 0;
+  margin: 5px 20px 0 0;
   padding: 0;
   width: 18%;
   filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);

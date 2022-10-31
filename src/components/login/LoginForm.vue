@@ -231,7 +231,7 @@ export default {
 .login_card > .login_wrap > form > .forget{
   font-size: 9pt;
   margin-top: 10px;
-  margin-left: 260px;
+  margin-left: 70%;
   color: #A4A4A4;
 }
 .login_card > .login_wrap > form > .join{
