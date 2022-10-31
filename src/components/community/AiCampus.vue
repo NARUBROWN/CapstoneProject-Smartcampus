@@ -4,7 +4,7 @@
     <WriteButton></WriteButton>
   </div>
   <div class="card" v-if="serverState">
-    <h1>{{ pageNumLocal }}번째 페이지</h1>
+    <h1>{{ pageNumLocal + 1 }}번째 페이지</h1>
     <div v-if="loading">로딩</div>
     <dl>
       <!-- JSON 객체를 받아와서 v-for 로 데이터를 씌워줌-->
@@ -19,8 +19,8 @@
   </div>
   <div class="underButtonsArea" v-if="serverState">
     <div class="underButtons">
-      <button @click="page_rest" v-if="pageNumLocal > 1">첫 페이지</button>
-      <button @click="back()" v-if="pageNumLocal > 1">이전 페이지</button>
+      <button @click="page_rest" v-if="pageNumLocal > 0">첫 페이지</button>
+      <button @click="back" v-if="pageNumLocal > 0">이전 페이지</button>
       <button @click="plus()">다음 페이지</button>
     </div>
   </div>
@@ -47,22 +47,15 @@
           user: null,
           date: null
         }],
-        pageNumLocal: 1,
+        pageNumLocal: 0,
         serverState: true,
         errorComponent: false,
         loading: false,
-        writePermission: false
+        writePermission: false,
       };
     },
     created() {
-      axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table)
-          .then(res => {
-            this.contents = res.data
-          })
-          .catch(err => {
-            // 오류 코드 출력
-            console.log(err);
-          });
+      this.getPage();
       // 권한 따라서 보이게 그 글 쓰기 버튼 보이게 하기
       if (this.$store.getters.getUserStore.department === "AI학부" || this.$store.getters.getUserStore.stu_rank === "관리자") {
         this.writePermission = true;
@@ -73,6 +66,26 @@
     methods: {
       inValues(a) {
         this.$router.push(`/read-contents?type=community&table=${this.table}&number=${a}`);
+      },
+      plus() {
+        this.pageNumLocal += 1;
+        this.getPage();
+      },
+      async getPage() {
+        try {
+          let page = await axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table + "/" + this.pageNumLocal);
+          this.contents = page.data
+        } catch {
+          //
+        }
+      },
+      page_rest() {
+        this.pageNumLocal = 0;
+        this.getPage();
+      },
+      back() {
+        this.pageNumLocal -= 1;
+        this.getPage();
       }
     }
   }

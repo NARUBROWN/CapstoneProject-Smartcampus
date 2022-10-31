@@ -21,8 +21,8 @@
   </div>
   <div class="underButtonsArea" v-if="serverState">
     <div class="underButtons">
-      <button @click="page_rest" v-if="pageNumLocal > 1">첫 페이지</button>
-      <button @click="back()" v-if="pageNumLocal > 1">이전 페이지</button>
+      <button @click="page_rest" v-if="pageNumLocal > 0">첫 페이지</button>
+      <button @click="back()" v-if="pageNumLocal > 0">이전 페이지</button>
       <button @click="plus()">다음 페이지</button>
     </div>
   </div>
@@ -58,14 +58,7 @@ export default {
     };
   },
   created() {
-    axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table)
-        .then(res => {
-          this.contents = res.data
-        })
-        .catch(err => {
-          // 오류 코드 출력
-          console.log(err);
-        });
+    this.getPage();
     // 권한 따라서 보이게 글 쓰기 버튼 보이게 하기
     if (this.$store.getters.getUserStore.department === "인문사회계열" || this.$store.getters.getUserStore.stu_rank === "관리자") {
       this.writePermission = true;
@@ -76,6 +69,26 @@ export default {
   methods: {
     inValues(a) {
       this.$router.push(`/read-contents?type=community&table=${this.table}&number=${a}`);
+    },
+    plus() {
+      this.pageNumLocal += 1;
+      this.getPage();
+    },
+    async getPage() {
+      try {
+        let page = await axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table + "/" + this.pageNumLocal);
+        this.contents = page.data
+      } catch {
+        //
+      }
+    },
+    page_rest() {
+      this.pageNumLocal = 0;
+      this.getPage();
+    },
+    back() {
+      this.pageNumLocal -= 1;
+      this.getPage();
     }
   }
 }
