@@ -19,6 +19,7 @@ export const store = createStore({
                 img: null,
                 code: null,
                 table: null,
+                massage: null
             }
         }
     },
@@ -54,6 +55,11 @@ export const store = createStore({
             } else if (user_info['department'] === "미래창업학부") {
                 state.user_data["table"] = "CampusBoard_Founded"
             }
+        },
+        login_fail: function (state, user_info) {
+            state.user_data["login_state"] = false
+            state.user_data["massage"] = user_info["massage"]
+            state.user_data["code"] = user_info["code"]
         },
         logout(state) {
             state.user_data["login_state"] = false
@@ -98,11 +104,14 @@ export const store = createStore({
 
                 //로그인 로직 수행
                 if (user['data']['code'] === 0) {
-                    console.log("아무것도 입력 안됨");
+                    console.log(user.data);
+                    context.commit('login_fail', user.data);
                 } else if (user['data']['code'] === 1) {
-                    console.log("학번 틀림");
+                    console.log(user.data);
+                    context.commit('login_fail', user.data);
                 } else if (user['data']['code'] === 2) {
-                    console.log("비밀번호 틀림");
+                    console.log(user.data);
+                    context.commit('login_fail', user.data);
                 } else if (user['data']['code'] === 3) {
                     // user.data를 state로 커밋
                     context.commit('login', user.data);
