@@ -17,7 +17,7 @@ export const store = createStore({
                 stu_rank: null,
                 password: null,
                 img: null,
-                code: null,
+                code: 0,
                 table: null,
                 massage: null
             }

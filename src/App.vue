@@ -32,11 +32,12 @@
   </header>
   <!--라우트 되는 부분-->
   <router-view/>
-  <footer>
-    <p>Copyright © 2022 김원정(NARUBROWN). All right reserved <br><br>
-      JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
-      <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
-  </footer>
+  <!-- <footer>
+     <p>Copyright © 2022 김원정(NARUBROWN). All right reserved <br><br>
+       JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
+       <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
+   </footer>-->
+  <div class="test"></div>
 </template>
 
 <script>
@@ -283,5 +284,9 @@ footer > p {
 .slide-fade-leave-to {
   transform: translateY(20px);
   opacity: 0;
+}
+
+.test {
+  height: 50px;
 }
 </style>

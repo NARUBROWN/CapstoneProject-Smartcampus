@@ -21,9 +21,12 @@
   </div>
   <div class="underButtonsArea" v-if="serverState">
     <div class="underButtons">
+      <div v-for="page in contentPage" v-bind:key="page">
+        <div @click="getPage(page)">{{ page }}</div>
+      </div>
       <button @click="page_rest" v-if="pageNumLocal > 0">첫 페이지</button>
       <button @click="back()" v-if="pageNumLocal > 0">이전 페이지</button>
-      <button @click="plus()">다음 페이지</button>
+      <button @click="plus()" v-if="pageNumLocal <= contentPage">다음 페이지</button>
     </div>
   </div>
   <div class="errorCard" v-if="errorComponent">
@@ -49,7 +52,9 @@ export default {
         user: null,
         date: null
       }],
-      pageNumLocal: 1,
+      contentRow: null,
+      contentPage: null,
+      pageNumLocal: 0,
       serverState: true,
       errorComponent: false,
       loading: false,
@@ -59,22 +64,42 @@ export default {
   created() {
     this.getPage();
     // 권한 따라서 보이게 글 쓰기 버튼 보이게 하기
-    if (this.$store.getters.getUserStore.department === "예술디자인계열" || this.$store.getters.getUserStore.stu_rank === "관리자") {
-      this.writePermission = true;
-    } else {
-      this.writePermission = false;
-    }
+    this.writePermission = this.$store.getters.getUserStore.department === "예술디자인계열" || this.$store.getters.getUserStore.stu_rank === "관리자";
   },
   methods: {
     inValues(a) {
       this.$router.push(`/read-contents?type=community&table=${this.table}&number=${a}`);
     },
-    async getPage() {
-      try {
-        let page = await axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table + "/" + this.pageNumLocal);
-        this.contents = page.data
-      } catch {
-        //
+    plus() {
+      this.pageNumLocal += 1;
+      this.getPage();
+    },
+    async getPage(e) {
+      // parameter가 입력되지 않으면, 첫번째 페이지 로드
+      if (e === undefined) {
+        try {
+          let page = await axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table + "/" + this.pageNumLocal);
+          // 11번째에 배열에 있는 정보를 가져온다. (페이징을 위한 정보)
+          this.contentRow = page.data.slice(-1)[0].contentRow;
+          this.contentPage = page.data.slice(-1)[0].contentPage;
+          // 11번째 배열을 삭제한다.
+          page.data.pop();
+          this.contents = page.data;
+        } catch {
+          //
+        }
+      } else {
+        let pageNum = e - 1;
+        try {
+          let page = await axios.get(process.env.VUE_APP_IP + "/community/list/" + this.table + "/" + pageNum);
+          // 11번째 배열을 삭제한다.
+          page.data.pop();
+          this.contents = page.data;
+        } catch {
+          //
+        }
+        // pageNumLocal에  파라미터 값 입력
+        this.pageNumLocal = pageNum;
       }
     },
     page_rest() {
