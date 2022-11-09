@@ -139,6 +139,11 @@ h1 {
   margin-right: 10px;
 }
 
+.card > dl > .listDeco > dt:nth-of-type(3) {
+  margin-top: 1px;
+  float: right;
+}
+
 .card > dl > .listDeco > dt > a {
   font-weight: bold;
 }
