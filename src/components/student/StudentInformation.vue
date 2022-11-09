@@ -12,7 +12,7 @@
     <h3>학생카드</h3>
     <div>
         <VueBarcode v-bind:value="stu_number.toString()"
-                    :options="{ height: 50, width: 2.5, background: `#0A84FF`, lineColor: `#FFFFFF`, fontSize: 20}"></VueBarcode>
+                    :options="{ height: 50, width: 2.5, background: `#0A84FF`, lineColor: `#FFFFFF`, fontSize: 18, font: 'NanumSquareNeo', fontOptions: 'bold', textMargin: 15}"></VueBarcode>
     </div>
     <div>
       <div class="blackBox">
@@ -190,12 +190,6 @@ export default {
 
 .stuCard > div > .blackBox > .jeiuLogo {
   width: 17%;
-}
-
-.stuCard > div > .blackBox > .barcode {
-  width: 70%;
-  margin: 10px;
-  border-radius: 5px;
 }
 
 .underButtonsArea {

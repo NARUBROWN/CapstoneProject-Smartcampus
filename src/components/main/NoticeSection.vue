@@ -55,7 +55,6 @@ export default {
 
       try {
         let notice = await axios.get(process.env.VUE_APP_IP + '/crawling/notice-list/1');
-        console.log(notice.data);
         this.notices = notice.data.splice(0, 5);
         this.serverState = true;
         this.errorComponent = false;
