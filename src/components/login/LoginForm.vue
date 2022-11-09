@@ -91,18 +91,28 @@ export default {
     } else {
       console.log('loginLogic에 키 값이 없음')
     }
-
-    if (this.$store.state.user_data['code'] === 2) {
-      this.$toast.warning('비밀번호를 확인해주세요', {
-        position: 'bottom'
-      });
-    }
   },
   methods: {
     vuex_login() {
       const stu_num = this.stu_num
       const password = this.password
       this.$store.dispatch('login', {stu_num, password});
+      this.user_data.code = this.$store.getters.getUserStore.code;
+      this.user_data.massage = this.$store.getters.getUserStore.massage;
+
+      if (this.$store.getters.getUserStore.code === 0) {
+        this.$toast.warning(this.$store.getters.getUserStore.massage, {
+          position: 'bottom'
+        });
+      } else if (this.$store.getters.getUserStore.code === 1) {
+        this.$toast.warning(this.$store.getters.getUserStore.massage, {
+          position: 'bottom'
+        });
+      } else if (this.$store.getters.getUserStore.code === 2) {
+        this.$toast.warning(this.$store.getters.getUserStore.massage, {
+          position: 'bottom'
+        });
+      }
     },
     async sendPost() {
       try {
