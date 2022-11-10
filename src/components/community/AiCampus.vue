@@ -24,7 +24,7 @@
       </div>
       <button @click="page_rest" v-if="pageNumLocal > 0">첫 페이지</button>
       <button @click="back" v-if="pageNumLocal > 0">이전 페이지</button>
-      <button @click="plus()" v-if="pageNumLocal <= contentPage">다음 페이지</button>
+      <button @click="plus()" v-if="pageNumLocal < contentPage - 1">다음 페이지</button>
     </div>
   </div>
   <div class="errorCard" v-if="errorComponent">

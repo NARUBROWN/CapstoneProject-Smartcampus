@@ -25,6 +25,32 @@
       </div>
     </div>
   </div>
+  <!-- 댓글 영역 -->
+  <div v-if="comment !== []">
+    <div class="card" v-for="comment in comment" v-bind:key="comment">
+      <div>
+        <h3>{{ comment.user }}</h3>
+      </div>
+      <a @click="deleteComment(comment.id)">삭제</a>
+      <p>
+        {{ comment.content }}
+      </p>
+    </div>
+  </div>
+  <!-- 댓글 작성 영역 -->
+  <div class="card">
+    <form @submit.prevent="sendPost">
+      <div class="row">
+          <textarea
+              v-model="new_comment.content"
+              name="title"
+              placeholder="내용을 입력해주세요."
+          ></textarea>
+        <label class="header">내용</label>
+      </div>
+      <button type="submit">제출</button>
+    </form>
+  </div>
   <div class="loadingCard" v-if="loading">
     <h1>서버에서 데이터를 불러오고 있습니다.</h1>
   </div>
@@ -41,6 +67,7 @@
       </button>
     </div>
   </div>
+  {{ comment }}
 </template>
 
 <script>
@@ -61,6 +88,18 @@ export default {
         stu_id: 0,
         user: ""
       }],
+      comment: [{
+        id: null,
+        content: null,
+        stu_id: null,
+        user: null
+      }],
+      new_comment: {
+        id: null,
+        content: null,
+        stu_id: null,
+        user: null
+      },
       loading: false,
       dataHide: false,
       userPermission: false
@@ -83,9 +122,14 @@ export default {
 
       if (this.$route.query.type === "community") {
         try {
-          let contents = await axios.get(process.env.VUE_APP_IP + "/community/read/" + this.$route.query.table + "/" + this.$route.query.number)
+          // 게시글 읽어오기
+          let contents = await axios.get(process.env.VUE_APP_IP + "/community/read/" + this.$route.query.table + "/" + this.$route.query.number);
           this.contents = contents.data;
-          this.contents[0].img = process.env.VUE_APP_IP + '/community_img/' + contents.data[0].img
+          this.contents[0].img = process.env.VUE_APP_IP + '/community_img/' + contents.data[0].img;
+          // 게시글 댓글 읽어오기
+          let comment = await axios.get(process.env.VUE_APP_IP + "/community/read-comment/" + this.$route.query.table + "/" + this.$route.query.number);
+          this.comment = comment.data;
+
           this.dataHide = true;
           this.serverState = true;
           this.errorComponent = false;
@@ -116,6 +160,39 @@ export default {
     },
     editContents() {
       this.$router.push(`/edit-contents?table=${this.$route.query.table}&number=${this.$route.query.number}`);
+    },
+    async deleteComment(e) {
+      try {
+        let comment = await axios.get(process.env.VUE_APP_IP + "/community/delete-comment/" + this.$route.query.table + "/" + e + "/" + this.$route.query.number);
+        this.comment = comment.data;
+      } catch {
+        //
+      }
+    },
+    sendPost() {
+      axios({
+        method: "post", // 요청 방식
+        url: process.env.VUE_APP_IP + "/community/write-comment", // 요청 주소
+        data: {
+          table: this.$route.query.table,
+          content: this.new_comment.content,
+          stu_id: this.$store.getters.getUserStore.id,
+          user: this.$store.getters.getUserStore.name,
+          page_id: this.$route.query.number,
+        }
+      }).then((res) => {
+        this.comment = res.data;
+        // 입력창 초기화
+        this.new_comment = {
+          id: null,
+          content: null,
+          stu_id: null,
+          user: null
+        }
+      })
+          .catch(function (err) {
+            console.log(err); // 에러 처리 내용
+          });
     }
   }
 }
