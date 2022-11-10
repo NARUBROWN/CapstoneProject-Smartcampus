@@ -168,6 +168,12 @@ h1 {
 
 .card > dl > .listDeco > dt:nth-of-type(2) {
   margin-right: 10px;
+  text-align: right;
+}
+
+.card > dl > .listDeco > dt:nth-of-type(3) {
+  margin-top: 1px;
+  float: right;
 }
 
 .card > dl > .listDeco > dt:nth-of-type(3) {
