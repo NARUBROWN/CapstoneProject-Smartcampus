@@ -26,30 +26,33 @@
     </div>
   </div>
   <!-- 댓글 영역 -->
-  <div v-if="comment !== []">
-    <div class="card" v-for="comment in comment" v-bind:key="comment">
-      <div>
-        <h3>{{ comment.user }}</h3>
+  <div v-if="comment_state">
+    <div v-if="comment !== []">
+      <div class="card" v-for="comment in comment" v-bind:key="comment">
+        <div>
+          <h3>{{ comment.user }}</h3>
+        </div>
+        <a v-if="comment.stu_id === this.$store.getters.getUserStore.id.toString() || this.$store.getters.getUserStore.stu_rank === `관리자`"
+           @click="deleteComment(comment.id)">삭제</a>
+        <p>
+          {{ comment.content }}
+        </p>
       </div>
-      <a @click="deleteComment(comment.id)">삭제</a>
-      <p>
-        {{ comment.content }}
-      </p>
     </div>
-  </div>
-  <!-- 댓글 작성 영역 -->
-  <div class="card">
-    <form @submit.prevent="sendPost">
-      <div class="row">
+    <!-- 댓글 작성 영역 -->
+    <div class="card" v-if="this.$store.getters.getUserStore.login_state">
+      <form @submit.prevent="sendPost">
+        <div class="row">
           <textarea
               v-model="new_comment.content"
               name="title"
               placeholder="내용을 입력해주세요."
           ></textarea>
-        <label class="header">내용</label>
-      </div>
-      <button type="submit">제출</button>
-    </form>
+          <label class="header">내용</label>
+        </div>
+        <button type="submit">제출</button>
+      </form>
+    </div>
   </div>
   <div class="loadingCard" v-if="loading">
     <h1>서버에서 데이터를 불러오고 있습니다.</h1>
@@ -67,7 +70,6 @@
       </button>
     </div>
   </div>
-  {{ comment }}
 </template>
 
 <script>
@@ -102,7 +104,8 @@ export default {
       },
       loading: false,
       dataHide: false,
-      userPermission: false
+      userPermission: false,
+      comment_state: null
     };
   },
   created() {
@@ -130,6 +133,8 @@ export default {
           let comment = await axios.get(process.env.VUE_APP_IP + "/community/read-comment/" + this.$route.query.table + "/" + this.$route.query.number);
           this.comment = comment.data;
 
+          // 댓글 보이게 하기
+          this.comment_state = true
           this.dataHide = true;
           this.serverState = true;
           this.errorComponent = false;

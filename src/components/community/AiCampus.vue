@@ -21,9 +21,6 @@
     <div class="numberBtn" v-for="page in contentPage" v-bind:key="page">
         <a @click="getPage(page)">{{ page }}</a>
       </div>
-        <a class="test">2</a>
-        <a class="test">3</a>
-        <a class="test">4</a>
     <div class="underButtons">
       <button @click="page_rest" v-if="pageNumLocal > 0">첫 페이지</button>
       <button @click="back" v-if="pageNumLocal > 0">이전 페이지</button>
