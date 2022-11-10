@@ -21,9 +21,6 @@
           <div @click="handler">
             <router-link to="/student-information">모바일 학생증</router-link>
           </div>
-          <div @click="handler">
-            <router-link to="/">마이페이지</router-link>
-          </div>
           <div @click="logout">로그아웃</div>
         </div>
       </transition>
@@ -225,7 +222,7 @@ footer > p {
   background: #FFFFFF;
   border-radius: 10px;
   width: 110px;
-  height: 116px;
+  height: 71px;
   box-shadow: #c0bfbf 0 0 5px;
   font-size: 10pt;
   font-weight: normal;
@@ -264,7 +261,7 @@ footer > p {
 }
 
 .slide_card > div {
-  height: 33%;
+  height: 45%;
   text-align: center;
 }
 
