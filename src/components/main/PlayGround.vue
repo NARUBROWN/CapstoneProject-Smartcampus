@@ -41,16 +41,18 @@
     border-radius: 10px;
     width: 50%;
     height: 90px;
-    background: #FF9500;
     color: var(--blue-card-text);
+    background: url(../../assets/main/shortcut/bg/6.png);
+    background-size: cover;
   }
   
   .playGround2 {
     border-radius: 10px;
     width: 50%;
     height: 90px;
-    background: #34C759;
     color: var(--blue-card-text);
+    background: url(../../assets/main/shortcut/bg/5.png);
+    background-size: cover;
   }
   
   h2 {
@@ -70,8 +72,9 @@
     padding-top: 2px;
     text-align: right;
   }
+  
   .top > .jeiu {
-  width: 10%;
-  padding: 3px 10px 0 0;
-}
+    width: 10%;
+    padding: 3px 10px 0 0;
+  }
   </style>

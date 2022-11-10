@@ -261,7 +261,6 @@ input[type="submit"] {
   padding: 0;
   width: 8%;
   filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
-
 }
 
 .secondAction {

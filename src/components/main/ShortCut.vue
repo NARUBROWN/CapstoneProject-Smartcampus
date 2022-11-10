@@ -11,7 +11,7 @@
         </td>
         <td class="shortCut2">
           <div class="top">
-            <img src="@/assets/main/shortcut/icon/2.png">
+            <img class="shortIcon" src="@/assets/main/shortcut/icon/meal.svg">
           </div>
           <router-link to="/meal-information"><h2>교내식당</h2><h6>Cafeteria</h6></router-link>
         </td>
@@ -19,13 +19,13 @@
       <tr>
         <td class="shortCut3">
           <div class="top">
-            <img src="@/assets/main/shortcut/icon/3.png">
+            <img class="shortIcon" src="@/assets/main/shortcut/icon/calendar.svg">
           </div>
           <router-link to="/academic-schedule"><h2>학사 일정</h2><h6>Academic Schedule</h6></router-link>
         </td>
         <td class="shortCut4">
           <div class="top">
-            <img src="@/assets/main/shortcut/icon/4.png">
+            <img class="shortIcon" src="@/assets/main/shortcut/icon/bus.svg">
           </div>
           <router-link to="/bus-schedule"><h2>버스 시간표</h2><h6>Bus Schedule</h6></router-link>
         </td>
@@ -103,19 +103,24 @@ h6 {
 }
 
 .top {
+  position: relative;
   padding-top: 2px;
-  text-align: right;
+  height: 53px;
 }
 
 .top > .jeiu {
+  position: absolute;
   width: 50%;
-  padding-right: 0;
+  right: 0;
 }
 
-.top > img {
-  padding-right: 3px;
-  width: 30%;
+.top > .shortIcon {
+  position: absolute;
+  padding-top: 5px;
+  width: 21%;
+  right: 6%;
+  fill: white;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
 }
-
 
 </style>
