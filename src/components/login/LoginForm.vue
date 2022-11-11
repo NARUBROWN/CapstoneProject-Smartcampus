@@ -1,7 +1,7 @@
 <template>
   <div class="login_card">
     <div class="login_wrap">
-      <form @submit.prevent="vuex_login">
+      <form @submit.prevent="sendPost">
         <div class="row">
           <input type="text"
                  v-model="stu_num"
@@ -119,7 +119,7 @@ export default {
         // 백엔드에 요청된 데이터를 가져오기
         let user = await axios({
           method: "post",
-          url: process.env.VUE_APP_IP + "/post/login",
+          url: process.env.VUE_APP_IP + "/user/login",
           data: {
             stu_num: this.stu_num,
             password: this.password
