@@ -229,6 +229,10 @@ export default {
   font-size: 9pt;
 }
 
+.card > div > h3:last-of-type {
+  padding: 5px 20px 5px 20px;
+}
+
 .card > p {
   margin: 0 auto;
   width: 90%;
@@ -386,6 +390,8 @@ export default {
 
 .card > .commentShow a img {
   width: 20px;
+  margin: 5px 0;
+  padding-top: 2.5px;
 }
 
 .card > .commentShow a:hover {
@@ -393,6 +399,6 @@ export default {
 }
 
 .card > .commentComment {
-  margin-top: 10px;
+  margin-bottom: 5px;
 }
 </style>
