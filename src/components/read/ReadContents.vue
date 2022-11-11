@@ -25,20 +25,22 @@
       </div>
     </div>
   </div>
+
   <!-- 댓글 영역 -->
   <div v-if="comment_state">
     <div v-if="comment !== []">
       <div class="card" v-for="comment in comment" v-bind:key="comment">
-        <div>
-          <h3>{{ comment.user }}</h3>
+        <div class="commentShow">
+          <h3>{{ comment.user }}</h3>  
+          <a v-if="comment.stu_id === this.$store.getters.getUserStore.id.toString() || this.$store.getters.getUserStore.stu_rank === `관리자`"
+            @click="deleteComment(comment.id)"><img src="../../assets/community/clear.svg"></a>
         </div>
-        <a v-if="comment.stu_id === this.$store.getters.getUserStore.id.toString() || this.$store.getters.getUserStore.stu_rank === `관리자`"
-           @click="deleteComment(comment.id)">삭제</a>
-        <p>
-          {{ comment.content }}
-        </p>
+          <p class="commentComment">
+            {{ comment.content }}
+          </p>
       </div>
     </div>
+
     <!-- 댓글 작성 영역 -->
     <div class="card" v-if="this.$store.getters.getUserStore.login_state">
       <form @submit.prevent="sendPost">
@@ -46,14 +48,15 @@
           <textarea
               v-model="new_comment.content"
               name="title"
-              placeholder="내용을 입력해주세요."
+              placeholder="댓글을 입력해주세요."
           ></textarea>
-          <label class="header">내용</label>
+          <!-- <label class="header">댓글</label> -->
+          <button class="commentBtn" type="submit">작성</button>
         </div>
-        <button type="submit">제출</button>
       </form>
     </div>
   </div>
+
   <div class="loadingCard" v-if="loading">
     <h1>서버에서 데이터를 불러오고 있습니다.</h1>
   </div>
@@ -229,7 +232,6 @@ export default {
 .card > p {
   margin: 0 auto;
   width: 90%;
-  padding: 0 0 3% 0;
   white-space: pre-line;
 }
 
@@ -273,6 +275,8 @@ export default {
 .imgBox {
   margin: 0 auto;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .imgBox > img {
@@ -315,4 +319,80 @@ export default {
   color: #ffffff;
 }
 
+.card > form > .row{
+  margin-top: 4px;
+  position: relative;
+}
+
+/* .card > form > .row > .header{
+  font-size: 11pt;
+  font-weight: bold;
+  color: #007AFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 37px;
+} */
+
+.card > form > .row > textarea{
+  width: 65%;
+  font: inherit;
+  padding: 12px;
+  font-weight: normal;
+  outline: none;
+  border: 0;
+  margin-left: 15px;
+  margin-top: 0;
+  font-size: 11pt;
+  background: var(--card);
+  border-radius: 10px;
+  height: 18px;
+  border: 0.1em solid #D4D4D4;
+  resize: none;
+}
+
+.card > form > .row > textarea::placeholder{
+  color: #A4A4A4;
+}
+
+.commentBtnArea {
+  text-align: right;
+  width: 80%;
+}
+
+.commentBtn{
+  position: absolute;
+  margin-left: 10px;
+  width: 17%;
+  height: 45px;
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  color: var(--blue-card-text);
+  background: var(--blue-card);
+  font-weight: bolder;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.card > .commentShow {
+  display: flex;
+}
+
+.card > .commentShow a {
+  margin-left: 71.3%;
+  filter: invert(25%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
+}
+
+.card > .commentShow a img {
+  width: 20px;
+}
+
+.card > .commentShow a:hover {
+  border-bottom: 1px solid #454545;
+}
+
+.card > .commentComment {
+  margin-top: 10px;
+}
 </style>

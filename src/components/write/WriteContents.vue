@@ -202,6 +202,7 @@ export default {
   margin-top: 30px;
   padding-left: 12px;
   padding-right: 12px;
+  resize: none;
 }
 
 .card > .wrap > form > .row > input::placeholder,
