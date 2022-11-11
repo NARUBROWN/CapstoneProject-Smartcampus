@@ -8,7 +8,7 @@
     <h2>{{ veux_userdata['stu_rank'] }}</h2>
     <hr>
     <p>{{ veux_userdata['department'] }}</p>
-    <a><img class="stuImg" src="@/assets/main/student/student.png" alt="학생증 아이콘"></a>
+    <a><img class="stuImg" src="@/assets/main/student/card.svg" alt="학생증 아이콘"></a>
     <h3>학생카드</h3>
     <div>
         <VueBarcode v-bind:value="stu_number.toString()"
@@ -157,9 +157,10 @@ export default {
 
 .stuCard > a > .stuImg {
   float: right;
-  margin: -69px 23px 0 0;
+  margin: -75px 28px 0 0;
   padding: 0;
-  width: 15%;
+  width: 13%;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
 }
 
 .stuCard > h3 {

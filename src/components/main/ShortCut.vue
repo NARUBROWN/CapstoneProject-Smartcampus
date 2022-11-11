@@ -119,7 +119,6 @@ h6 {
   padding-top: 5px;
   width: 21%;
   right: 6%;
-  fill: white;
   filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
 }
 

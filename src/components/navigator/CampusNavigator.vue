@@ -148,7 +148,7 @@ export default {
         building: '강의동',
         department: 'AI학부',
         name: '로비',
-        description: '정수기와 화장실, 계단이 있는 공간입니다.',
+        description: '강의실과 학과사무실, 컨퍼런스룸이 연결되어 있는 공간입니다.',
         img: 'ThirdFloor_Lobby'
       }
       this.result.img = require(`../../assets/campus_navigator/ThirdFloor_Lobby.png`);
@@ -226,6 +226,7 @@ input[type="submit"] {
 }
 
 .result > p {
+  width: 292.68px;
   font-size: 11pt;
   font-weight: bold;
   color: var(--line);
