@@ -227,6 +227,7 @@ footer > p {
   font-size: 10pt;
   font-weight: normal;
   margin-left: 68%;
+  z-index: 1;
 }
 
 .slide_back_top {
