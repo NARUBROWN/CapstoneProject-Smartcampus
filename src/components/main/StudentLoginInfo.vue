@@ -3,14 +3,14 @@
     <div class="loginInfo">
       <h1>{{ veux_userdata['name'] }}</h1>
       <h2>{{ veux_userdata['stu_rank'] }}</h2>
-      <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
+      <img src="@/assets/main/student/card.svg" alt="학생증 아이콘">
     </div>
   </router-link>
   <router-link to="/login" v-if="!veux_userdata['login_state']">
     <div class="loginInfo">
       <h1>JEIUe에</h1>
       <h2>로그인 하기</h2>
-      <img src="@/assets/main/student/student.png" alt="학생증 아이콘">
+      <img src="@/assets/main/student/card.svg" alt="학생증 아이콘">
     </div>
   </router-link>
 </template>
@@ -93,8 +93,9 @@ export default {
 
 .loginInfo > img {
   float: right;
-  margin: -36px 25px 0 0;
-  width: 13%;
+  margin: -33.5px 25px 0 10px;
+  width: 9%;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(181deg) brightness(104%) contrast(102%);
 }
 
 .loginInfo > h3 {

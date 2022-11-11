@@ -20,12 +20,12 @@
     </dl>
   </div>
   <div class="underButtonsArea" v-if="serverState">
-    <div class="underButtons">
-      <div v-for="page in contentPage" v-bind:key="page">
-        <div @click="getPage(page)">{{ page }}</div>
+    <div class="numberBtn" v-for="page in contentPage" v-bind:key="page">
+        <a @click="getPage(page)">{{ page }}</a>
       </div>
+    <div class="underButtons">
       <button @click="page_rest" v-if="pageNumLocal > 0">첫 페이지</button>
-      <button @click="back()" v-if="pageNumLocal > 0">이전 페이지</button>
+      <button @click="back" v-if="pageNumLocal > 0">이전 페이지</button>
       <button @click="plus()" v-if="pageNumLocal < contentPage - 1">다음 페이지</button>
     </div>
   </div>
@@ -219,5 +219,26 @@ h1 {
   font-size: 10pt;
   font-weight: bold;
   color: #ffffff;
+}
+
+.numberBtn {
+  display: inline-block;
+  width: 4%;
+  padding: 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  background: var(--blue-card);
+  margin: 20px 15px 0 15px;
+  transition-duration: 0.3s;
+}
+
+.numberBtn:active {
+  margin-left: 10px;
+  margin-top: 10px;
+  box-shadow: none;
+}
+
+.numberBtn a:first-of-type {
+  color: var(--blue-card-text);
 }
 </style>
