@@ -18,3 +18,8 @@
 ![웹 1920 – 2](https://user-images.githubusercontent.com/38902021/205929761-4b5d785f-4ee2-407a-889b-45f382ec1f60.png)
 ![웹 1920 – 3](https://user-images.githubusercontent.com/38902021/205929777-fc49a7ed-c7f6-4b7c-9f65-fbd6601f5605.png)
 ![웹 1920 – 4](https://user-images.githubusercontent.com/38902021/205929783-25cffbb2-fe11-4fa0-b52a-c660aa078c7d.png)
+
+
+<h2>프로젝트 구성</h2>
+
+![구성도](https://user-images.githubusercontent.com/38902021/205934417-512de25c-abb0-4648-b93d-c1b93bf97ad8.png)
