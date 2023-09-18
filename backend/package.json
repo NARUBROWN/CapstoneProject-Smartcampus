@@ -1,8 +1,8 @@
 {
-  "name": "node_jeiu",
+  "name": "capstoneproject-smartcampus-backend",
   "version": "1.0.0",
-  "description": "jeiu web application",
-  "main": "example/index.js",
+  "description": "Capstone web application",
+  "main": "app.js",
   "scripts": {
     "test": "echo \\\\\\\"Error: no test_code/banner.js specified\\\\\\\" && exit 1"
   },

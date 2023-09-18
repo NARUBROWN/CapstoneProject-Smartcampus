@@ -10,7 +10,7 @@ require("dotenv").config();
 //사용할 IP설정
 const ip = process.env.MAIN_HOST
 
-const whitelist = ['http://localhost:8080', `http://${process.env.MAIN_HOST}:8080`, `http://${process.env.PUBLIC_HOST}:8080`]
+const whitelist = ['http://localhost:3000', `http://${process.env.MAIN_HOST}:3000`, `http://${process.env.PUBLIC_HOST}:3000`]
 
 let corsOption = {
     origin: function (origin, callback) {
@@ -45,6 +45,6 @@ console.log("///////////////////////////////////////////////////////");
 console.log("// SmartCampus Backend Server가 시작되었습니다.//");
 console.log("///////////////////////////////////////////////////////");
 console.log("[SERVER] 알림: 내부(메인) IP가 " + ip + ":8080로 할당되었습니다.");
-console.log("[SERVER] 알림: 외부(공개) IP가 " + process.env.PUBLIC_HOST + ":3000로 할당되었습니다.");
+console.log("[SERVER] 알림: 외부(공개) IP가 " + process.env.PUBLIC_HOST + ":8080로 할당되었습니다.");
 
 module.exports = app; /* use at app.spec.js */

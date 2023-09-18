@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import ArtCampus from "@/components/community/ArtCampus.vue";
 import CampusCommunity from "@/components/community/CampusCommunity.vue";
 import AiCampus from "@/components/community/AiCampus";
 import HumanitiesCampus from "@/components/community/HumanitiesCampus";
@@ -45,7 +46,8 @@ export default {
     AiCampus,
     HumanitiesCampus,
     NatureCampus,
-    FoundedCampus
+    FoundedCampus,
+    ArtCampus
   },
   data() {
     return {
