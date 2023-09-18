@@ -1,4 +1,5 @@
 <template>
+  <StudentLoginInfo></StudentLoginInfo>
   <NoticeSection></NoticeSection>
   <PlayGround></PlayGround>
   <ShortCut></ShortCut>
@@ -6,6 +7,7 @@
 </template>
 
 <script>
+import StudentLoginInfo from "@/components/main/StudentLoginInfo.vue";
 import NoticeSection from "@/components/main/NoticeSection";
 import PlayGround from "@/components/main/PlayGround.vue";
 import ShortCut from "@/components/main/ShortCut";
@@ -14,6 +16,7 @@ import AllServiceList from "@/components/main/AllServiceList";
 export default {
   name: 'HomeView',
   components: {
+    StudentLoginInfo,
     NoticeSection,
     ShortCut,
     AllServiceList,

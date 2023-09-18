@@ -5,7 +5,7 @@
   <div v-if="isShow" class="slide_back_bottom" @click="handler"></div>
   <header>
     <div class="top">
-      <img class="logo" src="" alt="로고" @click="goHome">
+      <img class="logo" src="@/assets/main/logo.png" alt="로고" @click="goHome">
       <div class="container">
         <img class="logout" src="@/assets/student/Non_Profile.png"
              v-if="this.$store.getters.getUserStore['login_state'] === false" alt="로그인 되지 않았습니다."
