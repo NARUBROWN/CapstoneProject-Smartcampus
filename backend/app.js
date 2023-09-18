@@ -38,13 +38,13 @@ app.use('/user', user_router);
 // 커뮤니티 관련 요청은 커뮤니티 라우터로 이동
 app.use('/community', community_router);
 
-app.listen(3000, ip, () => {
+app.listen(8080, ip, () => {
 });
 
 console.log("///////////////////////////////////////////////////////");
-console.log("// JEIUe SmartCampus Backend Server가 시작되었습니다.//");
+console.log("// SmartCampus Backend Server가 시작되었습니다.//");
 console.log("///////////////////////////////////////////////////////");
-console.log("[SERVER] 알림: 내부(메인) IP가 " + ip + ":3000로 할당되었습니다.");
+console.log("[SERVER] 알림: 내부(메인) IP가 " + ip + ":8080로 할당되었습니다.");
 console.log("[SERVER] 알림: 외부(공개) IP가 " + process.env.PUBLIC_HOST + ":3000로 할당되었습니다.");
 
 module.exports = app; /* use at app.spec.js */
