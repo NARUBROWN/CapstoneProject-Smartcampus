@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const community = require('../controller/community_control');
+const community = require('../controller/community_service');
 const multer = require("multer");
 
 // 사진 중복 방지를 위해 랜덤한 숫자 생성

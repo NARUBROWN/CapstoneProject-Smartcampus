@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const crawling_router = require('./router/crawling_router.js');
-const user_router = require('./router/user_router.js');
-const community_router = require('./router/community_router');
+const crawling_router = require('./controller/crawling_controller.js');
+const user_router = require('./controller/user_controller.js');
+const community_router = require('./controller/community_controller');
 const cors = require("cors");
 require("dotenv").config();
 

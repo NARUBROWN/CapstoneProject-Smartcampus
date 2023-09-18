@@ -29,12 +29,6 @@
   </header>
   <!--라우트 되는 부분-->
   <router-view/>
-  <!--<footer>
-    <p>Copyright © 2022 김원정(NARUBROWN). All right reserved <br><br>
-      JEIU is a trademark is registered trademark of JEI University in Republic of Korea</p>
-    <router-link to="/vuex"><a>Vuex 저장소</a></router-link>
-  </footer>-->
-  <div class="test"></div>
 </template>
 
 <script>
@@ -162,11 +156,12 @@ header {
 
 .logo {
   margin: 13px 0 7px 22px;
-  width: 15%;
+  width: 10%;
 }
 
 .container {
   display: inline-block;
+  margin-bottom: 2%;
   margin-left: 66%;
   width: 35px;
   height: 35px;
@@ -178,7 +173,6 @@ header {
   max-width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
 }
 
 .card {

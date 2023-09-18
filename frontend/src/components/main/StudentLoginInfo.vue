@@ -8,7 +8,7 @@
   </router-link>
   <router-link to="/login" v-if="!veux_userdata['login_state']">
     <div class="loginInfo">
-      <h1>JEIUe에</h1>
+      <h1>스마트캠퍼스에</h1>
       <h2>로그인 하기</h2>
       <img src="@/assets/main/student/card.svg" alt="학생증 아이콘">
     </div>
