@@ -36,7 +36,6 @@ import CampusCommunity from "@/components/community/CampusCommunity.vue";
 import AiCampus from "@/components/community/AiCampus";
 import HumanitiesCampus from "@/components/community/HumanitiesCampus";
 import NatureCampus from "@/components/community/NatureCampus";
-import ArtCampus from "@/components/community/ArtCampus";
 import FoundedCampus from "@/components/community/FoundedCampus";
 
 export default {
@@ -46,7 +45,6 @@ export default {
     AiCampus,
     HumanitiesCampus,
     NatureCampus,
-    ArtCampus,
     FoundedCampus
   },
   data() {

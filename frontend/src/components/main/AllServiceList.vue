@@ -55,7 +55,7 @@
         <router-link to="/"><h2>장학제도</h2></router-link>
       </div>
       <div class="shortCut">
-        <img class="listImg" src="@/assets/main/service_icon/guideMap.png" alt="오시는 길">
+        <img class="listImg" src="" alt="오시는 길">
         <router-link to="/"><h2>오시는 길</h2></router-link>
       </div>
     </div>
